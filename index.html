@@ -118,6 +118,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .mob-toggle{display:block}
 
   .legend{top:88px;left:12px;width:150px;padding:5px 4px;border-radius:12px;max-height:50vh;overflow-y:auto}
+  .legend,.tl,.info{transition:max-height .3s,padding .3s,opacity .3s}
   .legend.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
   .leg-item{padding:3px 8px;font-size:11px;gap:4px}
   .leg-chk{width:12px;height:12px;font-size:8px}
@@ -760,7 +761,9 @@ function bindEvents(){
   renderer.domElement.addEventListener('pointerup',e=>{
     const dist=Math.abs(e.clientX-pStartX)+Math.abs(e.clientY-pStartY);
     const isMobile=window.innerWidth<=768;
-    const isClick=dist<(isMobile?20:10); // wider threshold on mobile
+    const isClick=dist<(isMobile?25:10);
+    // On mobile, re-raycast at tap position (pointermove may not fire)
+    if(isClick) hovered=doRaycast(e);
     if(isClick&&hovered){
       if(lastClickEvent&&lastClickEvent.shiftKey){
         // Multi-select toggle with Shift
@@ -853,7 +856,8 @@ function bindEvents(){
     document.getElementById('tl-container').classList.toggle('collapsed',!mobOpen);
     document.querySelector('.info').classList.toggle('collapsed',!mobOpen);
     mobToggle.textContent=mobOpen?'☰ Filters':'☰ Show';
-    if(!mobOpen) layoutSidebar();
+    // Recalculate positions after toggle animation
+    setTimeout(layoutSidebar, 50);
   });
   // Auto-collapse on mobile
   if(window.innerWidth<=768){
