@@ -1,0 +1,2285 @@
+{
+  "papers": [
+    {
+      "id": "1706.03762",
+      "rank": 1,
+      "alias": "Transformer",
+      "title": "Attention Is All You Need",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "year": 2017,
+      "score": 100,
+      "categories": [
+        "Transformer",
+        "Architecture"
+      ],
+      "cluster": "infra",
+      "reason": "현대 AI의 기반. Transformer 아키텍처를 제안하여 NLP, CV, 멀티모달 전 분야를 재정의",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1810.04805",
+      "rank": 2,
+      "alias": "BERT",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+      "url": "https://arxiv.org/abs/1810.04805",
+      "year": 2018,
+      "score": 98,
+      "categories": [
+        "LLM",
+        "NLP",
+        "PreTraining"
+      ],
+      "cluster": "llm",
+      "reason": "양방향 사전학습으로 NLP 벤치마크 전면 갱신. Fine-tuning 패러다임의 시작",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2005.14165",
+      "rank": 3,
+      "alias": "GPT-3",
+      "title": "Language Models are Few-Shot Learners (GPT-3)",
+      "url": "https://arxiv.org/abs/2005.14165",
+      "year": 2020,
+      "score": 99,
+      "categories": [
+        "LLM",
+        "FewShot",
+        "Scaling"
+      ],
+      "cluster": "llm",
+      "reason": "175B 파라미터로 few-shot 능력 입증. LLM 스케일링 법칙과 in-context learning의 시대 개막",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2010.11929",
+      "rank": 4,
+      "alias": "ViT",
+      "title": "An Image is Worth 16x16 Words (ViT)",
+      "url": "https://arxiv.org/abs/2010.11929",
+      "year": 2020,
+      "score": 96,
+      "categories": [
+        "VisionTransformer",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "CNN 없이 이미지를 패치 토큰으로 처리. CV에 Transformer 도입의 전환점",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1512.03385",
+      "rank": 5,
+      "alias": "ResNet",
+      "title": "Deep Residual Learning (ResNet)",
+      "url": "https://arxiv.org/abs/1512.03385",
+      "year": 2015,
+      "score": 97,
+      "categories": [
+        "CV",
+        "Architecture",
+        "DeepLearning"
+      ],
+      "cluster": "vision",
+      "reason": "Skip connection으로 수백 층 학습 가능. ImageNet 우승 + 거의 모든 CV 모델의 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2006.11239",
+      "rank": 6,
+      "alias": "DDPM",
+      "title": "Denoising Diffusion Probabilistic Models (DDPM)",
+      "url": "https://arxiv.org/abs/2006.11239",
+      "year": 2020,
+      "score": 95,
+      "categories": [
+        "Diffusion",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "Diffusion 모델의 실용적 구현. Stable Diffusion, DALL-E의 이론적 기초",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2103.00020",
+      "rank": 7,
+      "alias": "CLIP",
+      "title": "Learning Transferable Visual Models (CLIP)",
+      "url": "https://arxiv.org/abs/2103.00020",
+      "year": 2021,
+      "score": 96,
+      "categories": [
+        "VLM",
+        "Multimodal",
+        "ZeroShot"
+      ],
+      "cluster": "multimodal",
+      "reason": "이미지-텍스트 대조학습으로 zero-shot 전이. 멀티모달 AI의 초석",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2203.02155",
+      "rank": 8,
+      "alias": "InstructGPT",
+      "title": "Training language models to follow instructions (InstructGPT)",
+      "url": "https://arxiv.org/abs/2203.02155",
+      "year": 2022,
+      "score": 97,
+      "categories": [
+        "RLHF",
+        "Alignment",
+        "LLM"
+      ],
+      "cluster": "alignment",
+      "reason": "RLHF로 LLM을 인간 의도에 정렬. ChatGPT의 직접적 선행 연구",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2302.13971",
+      "rank": 9,
+      "alias": "LLaMA",
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "url": "https://arxiv.org/abs/2302.13971",
+      "year": 2023,
+      "score": 95,
+      "categories": [
+        "LLM",
+        "OpenSource",
+        "Efficient"
+      ],
+      "cluster": "llm",
+      "reason": "오픈소스 LLM 생태계의 기폭제. 7B~65B 모델을 공개하여 민주화 촉진",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1406.2661",
+      "rank": 10,
+      "alias": "GAN",
+      "title": "Generative Adversarial Networks (GAN)",
+      "url": "https://arxiv.org/abs/1406.2661",
+      "year": 2014,
+      "score": 96,
+      "categories": [
+        "GAN",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "Generator-Discriminator 적대적 학습. 이미지 생성 분야를 개척",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1412.6980",
+      "rank": 11,
+      "alias": "Adam",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "year": 2014,
+      "score": 95,
+      "categories": [
+        "Optimization",
+        "Training"
+      ],
+      "cluster": "infra",
+      "reason": "거의 모든 딥러닝 학습에 사용되는 옵티마이저. 적응형 학습률의 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1502.03167",
+      "rank": 12,
+      "alias": "BatchNorm",
+      "title": "Batch Normalization",
+      "url": "https://arxiv.org/abs/1502.03167",
+      "year": 2015,
+      "score": 93,
+      "categories": [
+        "Training",
+        "Normalization"
+      ],
+      "cluster": "infra",
+      "reason": "학습 안정화 + 수렴 가속. 현대 딥러닝 파이프라인의 필수 구성요소",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1207.0580",
+      "rank": 13,
+      "alias": "Dropout",
+      "title": "Dropout: A Simple Way to Prevent Overfitting",
+      "url": "https://arxiv.org/abs/1207.0580",
+      "year": 2012,
+      "score": 91,
+      "categories": [
+        "Regularization",
+        "Training"
+      ],
+      "cluster": "infra",
+      "reason": "가장 단순하면서 효과적인 정규화. 20만+ 인용",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2001.08361",
+      "rank": 14,
+      "alias": "Scaling Laws",
+      "title": "Scaling Laws for Neural Language Models",
+      "url": "https://arxiv.org/abs/2001.08361",
+      "year": 2020,
+      "score": 94,
+      "categories": [
+        "Scaling",
+        "LLM"
+      ],
+      "cluster": "llm",
+      "reason": "모델 크기/데이터/컴퓨트의 power law 관계 규명. LLM 스케일업 전략의 이론적 근거",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2201.11903",
+      "rank": 15,
+      "alias": "CoT",
+      "title": "Chain-of-Thought Prompting",
+      "url": "https://arxiv.org/abs/2201.11903",
+      "year": 2022,
+      "score": 94,
+      "categories": [
+        "Reasoning",
+        "Prompting",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "\"Let's think step by step\"으로 추론 능력 도약. 프롬프트 엔지니어링의 핵심 기법",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2005.11401",
+      "rank": 16,
+      "alias": "RAG",
+      "title": "Retrieval-Augmented Generation (RAG)",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "year": 2020,
+      "score": 93,
+      "categories": [
+        "RAG",
+        "Retrieval",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "LLM + 검색 결합으로 환각 감소. 현업 LLM 시스템의 표준 아키텍처",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2106.09685",
+      "rank": 17,
+      "alias": "LoRA",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "url": "https://arxiv.org/abs/2106.09685",
+      "year": 2021,
+      "score": 95,
+      "categories": [
+        "FineTuning",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "파라미터 효율적 파인튜닝의 사실상 표준. 전체 학습 대비 0.1% 파라미터로 유사 성능",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2205.14135",
+      "rank": 18,
+      "alias": "FlashAttention",
+      "title": "FlashAttention: Fast and Memory-Efficient Attention",
+      "url": "https://arxiv.org/abs/2205.14135",
+      "year": 2022,
+      "score": 94,
+      "categories": [
+        "Optimization",
+        "Attention",
+        "Efficient"
+      ],
+      "cluster": "infra",
+      "reason": "IO-aware attention으로 2-4x 속도 향상. 긴 컨텍스트 LLM의 실용화 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2304.02643",
+      "rank": 19,
+      "alias": "SAM",
+      "title": "Segment Anything (SAM)",
+      "url": "https://arxiv.org/abs/2304.02643",
+      "year": 2023,
+      "score": 93,
+      "categories": [
+        "Segmentation",
+        "Foundation",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "프롬프트 기반 범용 세그멘테이션. CV Foundation Model의 대표 사례",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2204.06125",
+      "rank": 20,
+      "alias": "DALL-E 2",
+      "title": "DALL-E 2: Hierarchical Text-Conditional Image Generation",
+      "url": "https://arxiv.org/abs/2204.06125",
+      "year": 2022,
+      "score": 92,
+      "categories": [
+        "Generation",
+        "TextToImage",
+        "Diffusion"
+      ],
+      "cluster": "generation",
+      "reason": "CLIP + Diffusion 결합으로 텍스트→이미지 생성의 실용화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2112.10752",
+      "rank": 21,
+      "alias": "Stable Diffusion",
+      "title": "High-Resolution Image Synthesis with Latent Diffusion (Stable Diffusion)",
+      "url": "https://arxiv.org/abs/2112.10752",
+      "year": 2021,
+      "score": 95,
+      "categories": [
+        "Diffusion",
+        "Generation",
+        "OpenSource"
+      ],
+      "cluster": "generation",
+      "reason": "Latent space diffusion으로 효율적 고해상도 생성. 오픈소스 이미지 생성의 혁명",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2303.08774",
+      "rank": 22,
+      "alias": "GPT-4",
+      "title": "GPT-4 Technical Report",
+      "url": "https://arxiv.org/abs/2303.08774",
+      "year": 2023,
+      "score": 96,
+      "categories": [
+        "LLM",
+        "Multimodal",
+        "Reasoning"
+      ],
+      "cluster": "llm",
+      "reason": "멀티모달 입력 + 전문가 수준 추론. 상용 LLM의 최고 벤치마크",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2307.09288",
+      "rank": 23,
+      "alias": "Llama 2",
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "url": "https://arxiv.org/abs/2307.09288",
+      "year": 2023,
+      "score": 93,
+      "categories": [
+        "LLM",
+        "OpenSource",
+        "Chat"
+      ],
+      "cluster": "llm",
+      "reason": "상용 수준 오픈소스 Chat LLM. 안전성 학습(RLHF) 방법론 공개",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2101.03961",
+      "rank": 24,
+      "alias": "Switch Transformer",
+      "title": "Mixture of Experts (Switch Transformer)",
+      "url": "https://arxiv.org/abs/2101.03961",
+      "year": 2021,
+      "score": 92,
+      "categories": [
+        "MoE",
+        "Scaling",
+        "Efficient"
+      ],
+      "cluster": "infra",
+      "reason": "조건부 계산으로 파라미터 효율적 스케일링. GPT-4, Mixtral의 핵심 아키텍처",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2305.18290",
+      "rank": 25,
+      "alias": "DPO",
+      "title": "DPO: Direct Preference Optimization",
+      "url": "https://arxiv.org/abs/2305.18290",
+      "year": 2023,
+      "score": 93,
+      "categories": [
+        "Alignment",
+        "RLHF",
+        "LLM"
+      ],
+      "cluster": "alignment",
+      "reason": "RL 없이 선호도 학습. RLHF 대비 단순하면서 동등 성능. 현업 정렬 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2212.08073",
+      "rank": 26,
+      "alias": "CAI",
+      "title": "Constitutional AI (CAI)",
+      "url": "https://arxiv.org/abs/2212.08073",
+      "year": 2022,
+      "score": 91,
+      "categories": [
+        "Safety",
+        "Alignment",
+        "LLM"
+      ],
+      "cluster": "alignment",
+      "reason": "AI가 AI를 감독하는 자기 개선 정렬. Anthropic Claude의 핵심 기술",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2312.00752",
+      "rank": 27,
+      "alias": "Mamba",
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "url": "https://arxiv.org/abs/2312.00752",
+      "year": 2023,
+      "score": 92,
+      "categories": [
+        "SSM",
+        "Architecture",
+        "Efficient"
+      ],
+      "cluster": "infra",
+      "reason": "Transformer 대안으로 선형 시간 시퀀스 모델링. O(n) 복잡도로 긴 시퀀스 처리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1503.02531",
+      "rank": 28,
+      "alias": "KD",
+      "title": "Distilling the Knowledge in a Neural Network",
+      "url": "https://arxiv.org/abs/1503.02531",
+      "year": 2015,
+      "score": 92,
+      "categories": [
+        "Distillation",
+        "Compression"
+      ],
+      "cluster": "efficient",
+      "reason": "Knowledge Distillation 개념 정립. 대형→소형 모델 전이의 표준 기법",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1505.04597",
+      "rank": 29,
+      "alias": "U-Net",
+      "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+      "url": "https://arxiv.org/abs/1505.04597",
+      "year": 2015,
+      "score": 92,
+      "categories": [
+        "Segmentation",
+        "Architecture",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "인코더-디코더 + Skip connection. 의료영상 + Diffusion 모델의 핵심 구조",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1506.02640",
+      "rank": 30,
+      "alias": "YOLO",
+      "title": "YOLO: You Only Look Once",
+      "url": "https://arxiv.org/abs/1506.02640",
+      "year": 2015,
+      "score": 93,
+      "categories": [
+        "ObjectDetection",
+        "RealTime",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "실시간 객체 탐지의 시작. 산업 현장 배포의 사실상 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1301.3781",
+      "rank": 31,
+      "alias": "Word2Vec",
+      "title": "Word2Vec: Efficient Estimation of Word Representations",
+      "url": "https://arxiv.org/abs/1301.3781",
+      "year": 2013,
+      "score": 91,
+      "categories": [
+        "Embedding",
+        "NLP"
+      ],
+      "cluster": "llm",
+      "reason": "단어 임베딩의 혁명. \"king - man + woman = queen\". 모든 NLP의 시작점",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1409.3215",
+      "rank": 32,
+      "alias": "Seq2Seq",
+      "title": "Sequence to Sequence Learning with Neural Networks",
+      "url": "https://arxiv.org/abs/1409.3215",
+      "year": 2014,
+      "score": 91,
+      "categories": [
+        "Seq2Seq",
+        "NLP",
+        "Translation"
+      ],
+      "cluster": "llm",
+      "reason": "인코더-디코더 아키텍처 제안. 기계번역에서 챗봇까지 시퀀스 모델링의 기본 틀",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1409.0473",
+      "rank": 33,
+      "alias": "Attention",
+      "title": "Neural Machine Translation by Jointly Learning to Align and Translate (Attention)",
+      "url": "https://arxiv.org/abs/1409.0473",
+      "year": 2014,
+      "score": 93,
+      "categories": [
+        "Attention",
+        "NLP"
+      ],
+      "cluster": "efficient",
+      "reason": "Attention 메커니즘의 최초 제안. Transformer의 직접적 선조",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2005.12872",
+      "rank": 34,
+      "alias": "DETR",
+      "title": "DETR: End-to-End Object Detection with Transformers",
+      "url": "https://arxiv.org/abs/2005.12872",
+      "year": 2020,
+      "score": 90,
+      "categories": [
+        "ObjectDetection",
+        "Transformer",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "NMS/Anchor 없는 Transformer 기반 탐지. CV에서 Transformer 활용의 전환점",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2111.06377",
+      "rank": 35,
+      "alias": "MAE",
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "url": "https://arxiv.org/abs/2111.06377",
+      "year": 2021,
+      "score": 91,
+      "categories": [
+        "SelfSupervised",
+        "CV",
+        "PreTraining"
+      ],
+      "cluster": "vision",
+      "reason": "이미지 75% 마스킹 후 복원으로 자기지도 학습. BERT의 CV 버전",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2104.14294",
+      "rank": 36,
+      "alias": "DINO",
+      "title": "DINO: Emerging Properties in Self-Supervised Vision Transformers",
+      "url": "https://arxiv.org/abs/2104.14294",
+      "year": 2021,
+      "score": 90,
+      "categories": [
+        "SelfSupervised",
+        "VisionTransformer"
+      ],
+      "cluster": "vision",
+      "reason": "레이블 없이 의미적 특징 학습. Self-supervised ViT의 대표 연구",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2302.04761",
+      "rank": 37,
+      "alias": "Toolformer",
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "url": "https://arxiv.org/abs/2302.04761",
+      "year": 2023,
+      "score": 90,
+      "categories": [
+        "ToolUse",
+        "Agent",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "LLM이 스스로 도구 사용법을 학습. AI Agent의 이론적 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2210.03629",
+      "rank": 38,
+      "alias": "ReAct",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "url": "https://arxiv.org/abs/2210.03629",
+      "year": 2022,
+      "score": 92,
+      "categories": [
+        "Agent",
+        "Reasoning",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "추론+행동 교차 실행 패턴. LLM Agent 프레임워크의 핵심 아키텍처",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2305.10601",
+      "rank": 39,
+      "alias": "ToT",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with LLMs",
+      "url": "https://arxiv.org/abs/2305.10601",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "Reasoning",
+        "Prompting",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "트리 탐색 기반 추론으로 CoT를 넘어선 문제 해결 능력",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2305.14314",
+      "rank": 40,
+      "alias": "QLoRA",
+      "title": "QLoRA: Efficient Finetuning of Quantized Language Models",
+      "url": "https://arxiv.org/abs/2305.14314",
+      "year": 2023,
+      "score": 92,
+      "categories": [
+        "Quantization",
+        "FineTuning",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "4bit 양자화 + LoRA로 48GB GPU 하나에서 65B 모델 파인튜닝",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2103.14030",
+      "rank": 41,
+      "alias": "Swin",
+      "title": "Swin Transformer: Hierarchical Vision Transformer",
+      "url": "https://arxiv.org/abs/2103.14030",
+      "year": 2021,
+      "score": 91,
+      "categories": [
+        "VisionTransformer",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "윈도우 기반 계층적 ViT. 탐지/세그멘테이션에서 CNN 대체",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2003.08934",
+      "rank": 42,
+      "alias": "NeRF",
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields",
+      "url": "https://arxiv.org/abs/2003.08934",
+      "year": 2020,
+      "score": 91,
+      "categories": [
+        "3D",
+        "NeuralRendering"
+      ],
+      "cluster": "vision",
+      "reason": "2D 이미지들로 3D 장면 재구성. Novel view synthesis의 혁명",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2308.14737",
+      "rank": 43,
+      "alias": "3DGS",
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "url": "https://arxiv.org/abs/2308.14737",
+      "year": 2023,
+      "score": 90,
+      "categories": [
+        "3D",
+        "RealTime",
+        "Rendering"
+      ],
+      "cluster": "vision",
+      "reason": "NeRF 대비 100x 빠른 실시간 렌더링. 3D 재구성의 실용화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2212.04356",
+      "rank": 44,
+      "alias": "Whisper",
+      "title": "Whisper: Robust Speech Recognition via Large-Scale Weak Supervision",
+      "url": "https://arxiv.org/abs/2212.04356",
+      "year": 2022,
+      "score": 90,
+      "categories": [
+        "Speech",
+        "ASR",
+        "Foundation"
+      ],
+      "cluster": "multimodal",
+      "reason": "68만 시간 데이터로 범용 음성인식. 다국어 ASR의 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2304.08485",
+      "rank": 45,
+      "alias": "LLaVA",
+      "title": "LLaVA: Visual Instruction Tuning",
+      "url": "https://arxiv.org/abs/2304.08485",
+      "year": 2023,
+      "score": 91,
+      "categories": [
+        "VLM",
+        "Multimodal",
+        "InstructionTuning"
+      ],
+      "cluster": "multimodal",
+      "reason": "시각적 instruction tuning으로 오픈소스 멀티모달 LLM 개척",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2203.15556",
+      "rank": 46,
+      "alias": "Chinchilla",
+      "title": "Chinchilla: Training Compute-Optimal Large Language Models",
+      "url": "https://arxiv.org/abs/2203.15556",
+      "year": 2022,
+      "score": 93,
+      "categories": [
+        "Scaling",
+        "LLM",
+        "Training"
+      ],
+      "cluster": "llm",
+      "reason": "모델 크기보다 데이터가 중요. \"모델 2배 키우려면 데이터도 2배\" 법칙 정립",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1707.06347",
+      "rank": 47,
+      "alias": "PPO",
+      "title": "Proximal Policy Optimization (PPO)",
+      "url": "https://arxiv.org/abs/1707.06347",
+      "year": 2017,
+      "score": 92,
+      "categories": [
+        "RL",
+        "Optimization"
+      ],
+      "cluster": "alignment",
+      "reason": "RLHF의 핵심 알고리즘. 안정적인 정책 경사법으로 ChatGPT 학습에 직접 사용",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2305.13245",
+      "rank": 48,
+      "alias": "GQA",
+      "title": "GQA: Training Generalized Multi-Query Attention",
+      "url": "https://arxiv.org/abs/2305.13245",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "Attention",
+        "Efficient",
+        "Inference"
+      ],
+      "cluster": "efficient",
+      "reason": "Grouped-Query Attention으로 추론 속도 향상. Llama 2/3의 핵심 최적화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2211.17192",
+      "rank": 49,
+      "alias": "Spec Decoding",
+      "title": "Speculative Decoding",
+      "url": "https://arxiv.org/abs/2211.17192",
+      "year": 2022,
+      "score": 88,
+      "categories": [
+        "Inference",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "작은 모델로 초안 → 큰 모델로 검증. 품질 손실 없이 2-3x 추론 가속",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2412.19437",
+      "rank": 50,
+      "alias": "DeepSeek-V3",
+      "title": "DeepSeek-V3 Technical Report",
+      "url": "https://arxiv.org/abs/2412.19437",
+      "year": 2024,
+      "score": 90,
+      "categories": [
+        "LLM",
+        "MoE",
+        "OpenSource"
+      ],
+      "cluster": "llm",
+      "reason": "MoE + FP8 학습으로 $5.5M에 GPT-4급 성능. 효율적 LLM 학습의 새 기준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1312.6114",
+      "rank": 51,
+      "alias": "VAE",
+      "title": "Variational Autoencoders (VAE)",
+      "url": "https://arxiv.org/abs/1312.6114",
+      "year": 2013,
+      "score": 91,
+      "categories": [
+        "Generation",
+        "Latent"
+      ],
+      "cluster": "generation",
+      "reason": "잠재 공간 생성 모델의 기초. Diffusion, VQ-VAE 등 후속 연구의 이론적 뿌리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "paper-52",
+      "rank": 52,
+      "alias": "AlexNet",
+      "title": "ImageNet Classification with Deep CNNs (AlexNet)",
+      "url": "https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+      "year": 2012,
+      "score": 94,
+      "categories": [
+        "CV",
+        "DeepLearning",
+        "Architecture"
+      ],
+      "cluster": "vision",
+      "reason": "딥러닝 혁명의 시작점. GPU 학습 + ReLU + Dropout으로 ImageNet 대폭 갱신",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1409.1556",
+      "rank": 53,
+      "alias": "VGGNet",
+      "title": "Very Deep Convolutional Networks (VGGNet)",
+      "url": "https://arxiv.org/abs/1409.1556",
+      "year": 2014,
+      "score": 88,
+      "categories": [
+        "CV",
+        "Architecture"
+      ],
+      "cluster": "vision",
+      "reason": "3x3 필터 반복으로 깊이의 힘 입증. 특징 추출 백본으로 널리 사용",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1409.4842",
+      "rank": 54,
+      "alias": "Inception",
+      "title": "Going Deeper with Convolutions (GoogLeNet/Inception)",
+      "url": "https://arxiv.org/abs/1409.4842",
+      "year": 2014,
+      "score": 88,
+      "categories": [
+        "CV",
+        "Architecture",
+        "Efficient"
+      ],
+      "cluster": "vision",
+      "reason": "Inception 모듈로 다중 스케일 특징 추출. 효율적 CNN 설계의 선구자",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1612.03144",
+      "rank": 55,
+      "alias": "FPN",
+      "title": "Feature Pyramid Networks for Object Detection (FPN)",
+      "url": "https://arxiv.org/abs/1612.03144",
+      "year": 2016,
+      "score": 89,
+      "categories": [
+        "ObjectDetection",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "다중 스케일 특징 피라미드. 거의 모든 객체 탐지 모델의 기본 구조",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1708.02002",
+      "rank": 56,
+      "alias": "RetinaNet",
+      "title": "Focal Loss for Dense Object Detection (RetinaNet)",
+      "url": "https://arxiv.org/abs/1708.02002",
+      "year": 2017,
+      "score": 89,
+      "categories": [
+        "ObjectDetection",
+        "Loss"
+      ],
+      "cluster": "vision",
+      "reason": "클래스 불균형 해결. One-stage 탐지가 Two-stage를 넘어선 전환점",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1905.11946",
+      "rank": 57,
+      "alias": "EfficientNet",
+      "title": "EfficientNet: Rethinking Model Scaling",
+      "url": "https://arxiv.org/abs/1905.11946",
+      "year": 2019,
+      "score": 89,
+      "categories": [
+        "Efficient",
+        "CV",
+        "Scaling"
+      ],
+      "cluster": "efficient",
+      "reason": "폭/깊이/해상도 복합 스케일링. 적은 파라미터로 SOTA 달성",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1704.04861",
+      "rank": 58,
+      "alias": "MobileNet",
+      "title": "MobileNets: Efficient CNNs for Mobile Vision",
+      "url": "https://arxiv.org/abs/1704.04861",
+      "year": 2017,
+      "score": 88,
+      "categories": [
+        "Efficient",
+        "Mobile",
+        "CV"
+      ],
+      "cluster": "efficient",
+      "reason": "Depthwise separable convolution으로 모바일 배포 가능한 경량 모델",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1506.01497",
+      "rank": 59,
+      "alias": "Faster R-CNN",
+      "title": "Faster R-CNN: Towards Real-Time Object Detection",
+      "url": "https://arxiv.org/abs/1506.01497",
+      "year": 2015,
+      "score": 91,
+      "categories": [
+        "ObjectDetection",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "Region Proposal Network 도입. Two-stage 탐지의 완성형",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1703.06870",
+      "rank": 60,
+      "alias": "Mask R-CNN",
+      "title": "Mask R-CNN",
+      "url": "https://arxiv.org/abs/1703.06870",
+      "year": 2017,
+      "score": 90,
+      "categories": [
+        "Segmentation",
+        "ObjectDetection",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "탐지 + 인스턴스 세그멘테이션 통합. 다중 태스크 학습의 모범",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2002.05709",
+      "rank": 61,
+      "alias": "SimCLR",
+      "title": "Contrastive Learning of Visual Representations (SimCLR)",
+      "url": "https://arxiv.org/abs/2002.05709",
+      "year": 2020,
+      "score": 90,
+      "categories": [
+        "SelfSupervised",
+        "ContrastiveLearning"
+      ],
+      "cluster": "vision",
+      "reason": "단순한 대조학습 프레임워크로 자기지도 학습 대중화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2006.07733",
+      "rank": 62,
+      "alias": "BYOL",
+      "title": "BYOL: Bootstrap Your Own Latent",
+      "url": "https://arxiv.org/abs/2006.07733",
+      "year": 2020,
+      "score": 88,
+      "categories": [
+        "SelfSupervised",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "네거티브 샘플 없는 자기지도 학습. 대조학습의 패러다임 전환",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2106.08254",
+      "rank": 63,
+      "alias": "BEiT",
+      "title": "BEiT: BERT Pre-Training of Image Transformers",
+      "url": "https://arxiv.org/abs/2106.08254",
+      "year": 2021,
+      "score": 87,
+      "categories": [
+        "SelfSupervised",
+        "VisionTransformer"
+      ],
+      "cluster": "vision",
+      "reason": "이미지 토큰 마스킹으로 ViT 사전학습. NLP 기법의 CV 이전",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2012.12877",
+      "rank": 64,
+      "alias": "DeiT",
+      "title": "DeiT: Training Data-Efficient Image Transformers",
+      "url": "https://arxiv.org/abs/2012.12877",
+      "year": 2020,
+      "score": 88,
+      "categories": [
+        "VisionTransformer",
+        "Distillation"
+      ],
+      "cluster": "vision",
+      "reason": "ImageNet만으로 ViT 학습 가능 입증. 토큰 기반 증류 제안",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2107.03374",
+      "rank": 65,
+      "alias": "Codex",
+      "title": "Codex: Evaluating Large Language Models on Code",
+      "url": "https://arxiv.org/abs/2107.03374",
+      "year": 2021,
+      "score": 90,
+      "categories": [
+        "CodeGeneration",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "GPT 기반 코드 생성. GitHub Copilot의 기반 기술",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2204.02311",
+      "rank": 66,
+      "alias": "PaLM",
+      "title": "PaLM: Scaling Language Modeling with Pathways",
+      "url": "https://arxiv.org/abs/2204.02311",
+      "year": 2022,
+      "score": 90,
+      "categories": [
+        "LLM",
+        "Scaling"
+      ],
+      "cluster": "llm",
+      "reason": "540B 파라미터로 breakthrough 추론 능력. 대규모 분산 학습 방법론",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2312.11805",
+      "rank": 67,
+      "alias": "Gemini",
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "url": "https://arxiv.org/abs/2312.11805",
+      "year": 2023,
+      "score": 91,
+      "categories": [
+        "Multimodal",
+        "LLM",
+        "Foundation"
+      ],
+      "cluster": "multimodal",
+      "reason": "네이티브 멀티모달 학습. 텍스트/이미지/오디오/비디오 통합 처리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2310.06825",
+      "rank": 68,
+      "alias": "Mistral 7B",
+      "title": "Mistral 7B",
+      "url": "https://arxiv.org/abs/2310.06825",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "LLM",
+        "Efficient",
+        "OpenSource"
+      ],
+      "cluster": "llm",
+      "reason": "7B로 13B 성능 달성. Sliding Window Attention + GQA로 효율 극대화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2309.05463",
+      "rank": 69,
+      "alias": "Phi-2",
+      "title": "Phi-2: The Surprising Power of Small Language Models",
+      "url": "https://arxiv.org/abs/2309.05463",
+      "year": 2023,
+      "score": 88,
+      "categories": [
+        "SmallLLM",
+        "DataQuality"
+      ],
+      "cluster": "llm",
+      "reason": "2.7B로 13B급 성능. \"데이터 품질이 모델 크기보다 중요\" 입증",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2306.11644",
+      "rank": 70,
+      "alias": "Textbooks",
+      "title": "Textbooks Are All You Need",
+      "url": "https://arxiv.org/abs/2306.11644",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "DataQuality",
+        "SmallLLM",
+        "Code"
+      ],
+      "cluster": "llm",
+      "reason": "교과서 수준 데이터로 소형 모델 대폭 향상. 데이터 큐레이션의 중요성",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2301.12597",
+      "rank": 71,
+      "alias": "BLIP-2",
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training",
+      "url": "https://arxiv.org/abs/2301.12597",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "VLM",
+        "Multimodal"
+      ],
+      "cluster": "multimodal",
+      "reason": "Q-Former로 frozen LLM + frozen 이미지 인코더 연결. 효율적 멀티모달",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2204.14198",
+      "rank": 72,
+      "alias": "Flamingo",
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "url": "https://arxiv.org/abs/2204.14198",
+      "year": 2022,
+      "score": 89,
+      "categories": [
+        "VLM",
+        "FewShot",
+        "Multimodal"
+      ],
+      "cluster": "multimodal",
+      "reason": "인터리브된 이미지-텍스트 few-shot 학습. 멀티모달 in-context learning",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2303.05499",
+      "rank": 73,
+      "alias": "Grounding DINO",
+      "title": "Grounding DINO: Open-Set Object Detection",
+      "url": "https://arxiv.org/abs/2303.05499",
+      "year": 2023,
+      "score": 88,
+      "categories": [
+        "ObjectDetection",
+        "OpenVocabulary",
+        "Grounding"
+      ],
+      "cluster": "vision",
+      "reason": "텍스트 프롬프트로 임의 객체 탐지. 오픈 어휘 탐지의 대표 모델",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2401.10891",
+      "rank": 74,
+      "alias": "Depth Anything",
+      "title": "Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data",
+      "url": "https://arxiv.org/abs/2401.10891",
+      "year": 2024,
+      "score": 87,
+      "categories": [
+        "DepthEstimation",
+        "Foundation",
+        "CV"
+      ],
+      "cluster": "vision",
+      "reason": "레이블 없는 대량 데이터로 범용 깊이 추정. Monocular depth의 SOTA",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "paper-75",
+      "rank": 75,
+      "alias": "Sora",
+      "title": "Video Generation Models as World Simulators (Sora)",
+      "url": "https://openai.com/index/video-generation-models-as-world-simulators/",
+      "year": 2024,
+      "score": 91,
+      "categories": [
+        "VideoGeneration",
+        "WorldModel"
+      ],
+      "cluster": "generation",
+      "reason": "비디오 생성을 세계 시뮬레이터로 정의. 물리 법칙 이해 가능성 제시",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2207.12598",
+      "rank": 76,
+      "alias": "CFG",
+      "title": "Classifier-Free Diffusion Guidance",
+      "url": "https://arxiv.org/abs/2207.12598",
+      "year": 2022,
+      "score": 90,
+      "categories": [
+        "Diffusion",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "분류기 없이 조건부 생성 품질 향상. 모든 조건부 diffusion 모델의 핵심 기법",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2011.13456",
+      "rank": 77,
+      "alias": "Score SDE",
+      "title": "Score-Based Generative Modeling (SDE)",
+      "url": "https://arxiv.org/abs/2011.13456",
+      "year": 2020,
+      "score": 89,
+      "categories": [
+        "Diffusion",
+        "Theory"
+      ],
+      "cluster": "generation",
+      "reason": "Diffusion을 SDE로 통합 해석. 이론적 기반 정립",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2210.02747",
+      "rank": 78,
+      "alias": "Flow Matching",
+      "title": "Flow Matching for Generative Modeling",
+      "url": "https://arxiv.org/abs/2210.02747",
+      "year": 2022,
+      "score": 88,
+      "categories": [
+        "FlowMatching",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "Diffusion 대안으로 직선 경로 학습. Stable Diffusion 3, Flux의 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2101.05278",
+      "rank": 79,
+      "alias": "GAN Inversion",
+      "title": "GAN Inversion: A Survey",
+      "url": "https://arxiv.org/abs/2101.05278",
+      "year": 2021,
+      "score": 85,
+      "categories": [
+        "GAN",
+        "Editing",
+        "Survey"
+      ],
+      "cluster": "generation",
+      "reason": "실제 이미지를 GAN 잠재 공간에 투영. 이미지 편집의 핵심 기술 서베이",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2307.06304",
+      "rank": 80,
+      "alias": "NaViT",
+      "title": "Patch n' Pack: NaViT",
+      "url": "https://arxiv.org/abs/2307.06304",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "VisionTransformer",
+        "Efficient"
+      ],
+      "cluster": "vision",
+      "reason": "가변 해상도 패치 패킹으로 ViT 학습 효율 40% 향상",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2104.09864",
+      "rank": 81,
+      "alias": "RoPE",
+      "title": "RoPE: Rotary Position Embedding",
+      "url": "https://arxiv.org/abs/2104.09864",
+      "year": 2021,
+      "score": 90,
+      "categories": [
+        "PositionEncoding",
+        "LLM"
+      ],
+      "cluster": "infra",
+      "reason": "회전 위치 인코딩으로 상대 위치 표현. Llama, Mistral 등 대부분 LLM의 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2407.13164",
+      "rank": 82,
+      "alias": "KV Cache",
+      "title": "KV Cache Compression: A Survey",
+      "url": "https://arxiv.org/abs/2407.13164",
+      "year": 2024,
+      "score": 86,
+      "categories": [
+        "Inference",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "KV 캐시 압축 기법 총정리. 긴 컨텍스트 LLM 배포의 핵심 과제",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2210.10760",
+      "rank": 83,
+      "alias": "Goodhart RLHF",
+      "title": "Reward Model Overoptimization (Goodhart's Law for RLHF)",
+      "url": "https://arxiv.org/abs/2210.10760",
+      "year": 2022,
+      "score": 87,
+      "categories": [
+        "RLHF",
+        "Alignment",
+        "Safety"
+      ],
+      "cluster": "alignment",
+      "reason": "보상 모델 과최적화 문제 규명. RLHF의 근본적 한계와 해결 방향",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2309.00267",
+      "rank": 84,
+      "alias": "RLAIF",
+      "title": "Constitutional AI: Harmlessness from AI Feedback (RLAIF)",
+      "url": "https://arxiv.org/abs/2309.00267",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Alignment",
+        "Safety",
+        "LLM"
+      ],
+      "cluster": "alignment",
+      "reason": "AI 피드백으로 인간 피드백 대체. 정렬 비용 대폭 절감",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2407.04295",
+      "rank": 85,
+      "alias": "Jailbreak Survey",
+      "title": "Jailbreaking LLMs: A Comprehensive Survey",
+      "url": "https://arxiv.org/abs/2407.04295",
+      "year": 2024,
+      "score": 86,
+      "categories": [
+        "Safety",
+        "Adversarial",
+        "LLM"
+      ],
+      "cluster": "alignment",
+      "reason": "LLM 탈옥 공격/방어 종합 서베이. AI 안전의 현주소 파악 필수",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2212.10560",
+      "rank": 86,
+      "alias": "Self-Instruct",
+      "title": "Self-Instruct: Aligning LMs with Self-Generated Instructions",
+      "url": "https://arxiv.org/abs/2212.10560",
+      "year": 2022,
+      "score": 88,
+      "categories": [
+        "DataGeneration",
+        "LLM",
+        "Alignment"
+      ],
+      "cluster": "alignment",
+      "reason": "LLM이 스스로 학습 데이터 생성. Alpaca, Vicuna 등 후속 연구의 씨앗",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2304.12244",
+      "rank": 87,
+      "alias": "WizardLM",
+      "title": "WizardLM: Empowering LLMs to Follow Complex Instructions",
+      "url": "https://arxiv.org/abs/2304.12244",
+      "year": 2023,
+      "score": 86,
+      "categories": [
+        "InstructionTuning",
+        "LLM"
+      ],
+      "cluster": "multimodal",
+      "reason": "Evol-Instruct로 점진적 난이도 학습 데이터 생성. 복잡 지시 수행 능력 향상",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "paper-88",
+      "rank": 88,
+      "alias": "Alpaca",
+      "title": "Alpaca: A Strong, Replicable Instruction-Following Model",
+      "url": "https://crfm.stanford.edu/2023/03/13/alpaca.html",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "InstructionTuning",
+        "OpenSource",
+        "LLM"
+      ],
+      "cluster": "multimodal",
+      "reason": "$600으로 GPT-3.5급 모델 학습. 오픈소스 instruction tuning 붐의 시작",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2404.16130",
+      "rank": 89,
+      "alias": "GraphRAG",
+      "title": "GraphRAG: Graph-Based Retrieval-Augmented Generation",
+      "url": "https://arxiv.org/abs/2404.16130",
+      "year": 2024,
+      "score": 87,
+      "categories": [
+        "RAG",
+        "GraphDB",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "지식 그래프 + RAG 결합. 복잡한 다중 홉 질의에서 기존 RAG 대비 우수",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2305.16291",
+      "rank": 90,
+      "alias": "Voyager",
+      "title": "Voyager: An Open-Ended Embodied Agent with LLMs",
+      "url": "https://arxiv.org/abs/2305.16291",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Agent",
+        "Embodied",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "Minecraft에서 LLM 에이전트가 자율 탐험. 코드 생성 + 스킬 라이브러리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2308.08155",
+      "rank": 91,
+      "alias": "AutoGen",
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "url": "https://arxiv.org/abs/2308.08155",
+      "year": 2023,
+      "score": 88,
+      "categories": [
+        "MultiAgent",
+        "Framework",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "다중 에이전트 대화 프레임워크. 복잡한 태스크를 에이전트 협업으로 해결",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2304.03442",
+      "rank": 92,
+      "alias": "Generative Agents",
+      "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+      "url": "https://arxiv.org/abs/2304.03442",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "Agent",
+        "Simulation",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "25개 LLM 에이전트가 가상 마을에서 자율 생활. 사회 시뮬레이션의 가능성",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1607.06450",
+      "rank": 93,
+      "alias": "LayerNorm",
+      "title": "LayerNorm: Layer Normalization",
+      "url": "https://arxiv.org/abs/1607.06450",
+      "year": 2016,
+      "score": 88,
+      "categories": [
+        "Normalization",
+        "Training"
+      ],
+      "cluster": "infra",
+      "reason": "Transformer의 핵심 구성요소. BatchNorm과 달리 시퀀스 길이에 독립적",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1803.08494",
+      "rank": 94,
+      "alias": "GroupNorm",
+      "title": "Group Normalization",
+      "url": "https://arxiv.org/abs/1803.08494",
+      "year": 2018,
+      "score": 85,
+      "categories": [
+        "Normalization",
+        "CV"
+      ],
+      "cluster": "infra",
+      "reason": "배치 크기에 독립적인 정규화. 소배치 학습과 탐지/세그멘테이션에 유리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "1906.02629",
+      "rank": 95,
+      "alias": "Label Smoothing",
+      "title": "Label Smoothing: When Does It Help?",
+      "url": "https://arxiv.org/abs/1906.02629",
+      "year": 2019,
+      "score": 84,
+      "categories": [
+        "Regularization",
+        "Training"
+      ],
+      "cluster": "infra",
+      "reason": "라벨 스무딩의 효과 분석. 과신 방지 + 캘리브레이션 향상",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2212.02624",
+      "rank": 96,
+      "alias": "Data Aug Survey",
+      "title": "Data Augmentation: A Comprehensive Survey",
+      "url": "https://arxiv.org/abs/2212.02624",
+      "year": 2022,
+      "score": 84,
+      "categories": [
+        "DataAugmentation",
+        "Training",
+        "Survey"
+      ],
+      "cluster": "infra",
+      "reason": "데이터 증강 기법 총정리. Mixup, CutMix, AutoAugment 등",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2212.09748",
+      "rank": 97,
+      "alias": "DiT",
+      "title": "Diffusion Transformers (DiT)",
+      "url": "https://arxiv.org/abs/2212.09748",
+      "year": 2022,
+      "score": 89,
+      "categories": [
+        "Diffusion",
+        "Transformer",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "U-Net 대신 Transformer로 diffusion. Sora, SD3의 핵심 아키텍처",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2204.05862",
+      "rank": 98,
+      "alias": "HH-RLHF",
+      "title": "RLHF: Training a Helpful and Harmless Assistant",
+      "url": "https://arxiv.org/abs/2204.05862",
+      "year": 2022,
+      "score": 91,
+      "categories": [
+        "RLHF",
+        "Alignment",
+        "Safety"
+      ],
+      "cluster": "alignment",
+      "reason": "Anthropic의 RLHF 방법론 상세 공개. Helpful + Harmless 균형 학습",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2206.07682",
+      "rank": 99,
+      "alias": "Emergent Abilities",
+      "title": "Emerging Abilities of Large Language Models",
+      "url": "https://arxiv.org/abs/2206.07682",
+      "year": 2022,
+      "score": 90,
+      "categories": [
+        "Scaling",
+        "Emergent",
+        "LLM"
+      ],
+      "cluster": "llm",
+      "reason": "스케일에 따른 창발적 능력 분석. 왜 큰 모델이 갑자기 잘하는지 설명",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    },
+    {
+      "id": "2501.12948",
+      "rank": 100,
+      "alias": "DeepSeek-R1",
+      "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs",
+      "url": "https://arxiv.org/abs/2501.12948",
+      "year": 2025,
+      "score": 90,
+      "categories": [
+        "Reasoning",
+        "RL",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "RL로 추론 능력 자체를 학습. OpenAI o1 대항마로 오픈소스 추론 LLM 선도",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "1706.03762",
+      "target": "1810.04805",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2005.14165",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2010.11929",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2005.12872",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2203.02155",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2101.03961",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2302.13971",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2303.08774",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2307.09288",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "2312.00752",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "2005.14165",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "2111.06377",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "2106.08254",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "2203.02155",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "2302.13971",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "2303.08774",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "2107.03374",
+      "type": "lineage"
+    },
+    {
+      "source": "2010.11929",
+      "target": "2103.14030",
+      "type": "lineage"
+    },
+    {
+      "source": "2010.11929",
+      "target": "2111.06377",
+      "type": "lineage"
+    },
+    {
+      "source": "2010.11929",
+      "target": "2104.14294",
+      "type": "lineage"
+    },
+    {
+      "source": "2010.11929",
+      "target": "2012.12877",
+      "type": "lineage"
+    },
+    {
+      "source": "2010.11929",
+      "target": "2307.06304",
+      "type": "lineage"
+    },
+    {
+      "source": "1512.03385",
+      "target": "2010.11929",
+      "type": "lineage"
+    },
+    {
+      "source": "1512.03385",
+      "target": "1905.11946",
+      "type": "lineage"
+    },
+    {
+      "source": "1512.03385",
+      "target": "1506.01497",
+      "type": "lineage"
+    },
+    {
+      "source": "1512.03385",
+      "target": "1703.06870",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2112.10752",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2204.06125",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2212.09748",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2207.12598",
+      "type": "lineage"
+    },
+    {
+      "source": "2103.00020",
+      "target": "2204.06125",
+      "type": "lineage"
+    },
+    {
+      "source": "2103.00020",
+      "target": "2304.08485",
+      "type": "lineage"
+    },
+    {
+      "source": "2103.00020",
+      "target": "2301.12597",
+      "type": "lineage"
+    },
+    {
+      "source": "2203.02155",
+      "target": "2305.18290",
+      "type": "lineage"
+    },
+    {
+      "source": "2203.02155",
+      "target": "2212.08073",
+      "type": "lineage"
+    },
+    {
+      "source": "2203.02155",
+      "target": "2204.05862",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.2661",
+      "target": "2006.11239",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.2661",
+      "target": "2101.05278",
+      "type": "lineage"
+    },
+    {
+      "source": "1502.03167",
+      "target": "1607.06450",
+      "type": "lineage"
+    },
+    {
+      "source": "1502.03167",
+      "target": "1803.08494",
+      "type": "lineage"
+    },
+    {
+      "source": "2001.08361",
+      "target": "2203.15556",
+      "type": "lineage"
+    },
+    {
+      "source": "2001.08361",
+      "target": "2206.07682",
+      "type": "lineage"
+    },
+    {
+      "source": "2201.11903",
+      "target": "2305.10601",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.11401",
+      "target": "2404.16130",
+      "type": "lineage"
+    },
+    {
+      "source": "2106.09685",
+      "target": "2305.14314",
+      "type": "lineage"
+    },
+    {
+      "source": "2204.06125",
+      "target": "2112.10752",
+      "type": "lineage"
+    },
+    {
+      "source": "2112.10752",
+      "target": "2212.09748",
+      "type": "lineage"
+    },
+    {
+      "source": "2302.13971",
+      "target": "2307.09288",
+      "type": "lineage"
+    },
+    {
+      "source": "1505.04597",
+      "target": "2006.11239",
+      "type": "lineage"
+    },
+    {
+      "source": "1505.04597",
+      "target": "2304.02643",
+      "type": "lineage"
+    },
+    {
+      "source": "1301.3781",
+      "target": "1409.3215",
+      "type": "lineage"
+    },
+    {
+      "source": "1409.3215",
+      "target": "1409.0473",
+      "type": "lineage"
+    },
+    {
+      "source": "1409.0473",
+      "target": "1706.03762",
+      "type": "lineage"
+    },
+    {
+      "source": "1503.02531",
+      "target": "2305.14314",
+      "type": "lineage"
+    },
+    {
+      "source": "2003.08934",
+      "target": "2308.14737",
+      "type": "lineage"
+    },
+    {
+      "source": "2302.04761",
+      "target": "2210.03629",
+      "type": "lineage"
+    },
+    {
+      "source": "2210.03629",
+      "target": "2305.10601",
+      "type": "lineage"
+    },
+    {
+      "source": "2210.03629",
+      "target": "2305.16291",
+      "type": "lineage"
+    },
+    {
+      "source": "1707.06347",
+      "target": "2203.02155",
+      "type": "lineage"
+    },
+    {
+      "source": "2011.13456",
+      "target": "2210.02747",
+      "type": "lineage"
+    },
+    {
+      "source": "2204.02311",
+      "target": "2312.11805",
+      "type": "lineage"
+    },
+    {
+      "source": "2002.05709",
+      "target": "2006.07733",
+      "type": "lineage"
+    },
+    {
+      "source": "2002.05709",
+      "target": "2104.14294",
+      "type": "lineage"
+    },
+    {
+      "source": "1506.01497",
+      "target": "1703.06870",
+      "type": "lineage"
+    },
+    {
+      "source": "1506.01497",
+      "target": "2005.12872",
+      "type": "lineage"
+    },
+    {
+      "source": "2212.10560",
+      "target": "2304.12244",
+      "type": "lineage"
+    },
+    {
+      "source": "2204.14198",
+      "target": "2304.08485",
+      "type": "lineage"
+    },
+    {
+      "source": "2204.05862",
+      "target": "2212.08073",
+      "type": "lineage"
+    },
+    {
+      "source": "2204.05862",
+      "target": "2309.00267",
+      "type": "lineage"
+    },
+    {
+      "source": "2104.09864",
+      "target": "2302.13971",
+      "type": "lineage"
+    },
+    {
+      "source": "2104.09864",
+      "target": "2310.06825",
+      "type": "lineage"
+    },
+    {
+      "source": "2305.13245",
+      "target": "2307.09288",
+      "type": "lineage"
+    },
+    {
+      "source": "2305.13245",
+      "target": "2310.06825",
+      "type": "lineage"
+    },
+    {
+      "source": "2205.14135",
+      "target": "2211.17192",
+      "type": "lineage"
+    },
+    {
+      "source": "2212.08073",
+      "target": "2309.00267",
+      "type": "lineage"
+    }
+  ],
+  "clusters": {
+    "llm": {
+      "label": "LLM",
+      "color": "#3b82f6",
+      "icon": "🧠"
+    },
+    "infra": {
+      "label": "Architecture",
+      "color": "#8b5cf6",
+      "icon": "🏗️"
+    },
+    "vision": {
+      "label": "Vision",
+      "color": "#10b981",
+      "icon": "👁️"
+    },
+    "generation": {
+      "label": "Generation",
+      "color": "#f59e0b",
+      "icon": "🎨"
+    },
+    "multimodal": {
+      "label": "Multimodal",
+      "color": "#ec4899",
+      "icon": "🔗"
+    },
+    "alignment": {
+      "label": "Alignment",
+      "color": "#ef4444",
+      "icon": "🛡️"
+    },
+    "agent": {
+      "label": "Agent & Code",
+      "color": "#f97316",
+      "icon": "🤖"
+    },
+    "efficient": {
+      "label": "Efficient",
+      "color": "#14b8a6",
+      "icon": "⚡"
+    }
+  }
+}

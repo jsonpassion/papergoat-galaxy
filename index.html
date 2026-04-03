@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaperGoat Galaxy — AI Top 100</title>
+<style>
+:root{
+  --bg:#0b0b14;--surface:rgba(16,16,28,.94);--border:rgba(50,50,80,.5);
+  --text:#e8e8ec;--muted:#8888a0;--accent:#5b9bf5;
+}
+.light{
+  --bg:#f4f4f8;--surface:rgba(255,255,255,.92);--border:rgba(200,200,220,.6);
+  --text:#1a1a2e;--muted:#6b6b80;--accent:#2563eb;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;transition:background .4s,color .4s}
+#scene{position:fixed;inset:0}
+
+.hdr{position:fixed;top:0;left:0;right:0;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:10;pointer-events:none}
+.hdr>*{pointer-events:auto}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.4px}.logo span{color:var(--accent)}
+.search{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--text);font-size:13px;width:200px;outline:none;transition:border .2s,background .3s;backdrop-filter:blur(12px)}
+.search:focus{border-color:var(--accent)}.search::placeholder{color:var(--muted)}
+.theme-btn{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;backdrop-filter:blur(12px);transition:background .3s;color:var(--text)}
+.theme-btn:hover{border-color:var(--accent)}
+
+.legend{position:fixed;top:56px;left:20px;z-index:10;display:flex;flex-direction:column;gap:1px;background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;padding:6px;transition:background .3s}
+.leg-item{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--muted);transition:all .15s;user-select:none}
+.leg-item:hover{background:rgba(128,128,180,.08)}
+.leg-item.on{color:var(--text)}
+.leg-item.off{opacity:.3}
+.leg-chk{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--muted);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
+.leg-item.on .leg-chk{background:var(--accent);border-color:var(--accent);color:#fff}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.leg-count{font-size:10px;opacity:.5;margin-left:auto;min-width:14px;text-align:right}
+.leg-all{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;color:var(--accent);padding:5px 8px;cursor:pointer;border-top:1px solid var(--border);margin-top:3px;border-radius:0 0 6px 6px;transition:background .15s}
+.leg-all:hover{background:rgba(59,130,246,.08)}
+
+.tip{position:fixed;pointer-events:none;z-index:20;background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:12px;padding:14px 16px;max-width:300px;opacity:0;transform:translateY(6px) scale(.97);transition:all .12s;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.tip.show{opacity:1;transform:translateY(0) scale(1)}
+.tip-rank{font-size:10px;color:var(--muted)}.tip-alias{font-size:16px;font-weight:700;margin:2px 0}
+.tip-title{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:6px}
+.tip-reason{font-size:12px;line-height:1.5}.tip-yr{font-size:10px;color:var(--accent);margin-top:6px}
+.tip-cats{margin-top:6px;display:flex;flex-wrap:wrap;gap:3px}
+.tip-cat{font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(128,128,180,.1);color:var(--muted)}
+
+.pnl{position:fixed;top:0;right:0;bottom:0;width:400px;background:var(--surface);backdrop-filter:blur(20px);border-left:1px solid var(--border);z-index:30;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1),background .3s;padding:20px}
+.pnl.open{transform:translateX(0)}
+.pnl-x{position:sticky;top:0;float:right;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:4px 8px;z-index:1}.pnl-x:hover{color:var(--text)}
+.pnl .pr{font-size:11px;color:var(--accent);margin-bottom:2px}
+.pnl .pa{font-size:22px;font-weight:800;margin-bottom:3px}
+.pnl .pt{font-size:13px;color:var(--muted);margin-bottom:6px;line-height:1.4}
+.pnl .ps{display:inline-block;color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;margin-bottom:14px}
+.pnl .preason{font-size:13px;line-height:1.7;margin-bottom:14px;padding:10px 12px;background:rgba(128,128,180,.06);border-radius:8px;border-left:3px solid var(--accent)}
+.pnl .psec{font-size:12px;font-weight:600;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
+.pnl .pdisc{list-style:none;padding:0}.pnl .pdisc li{font-size:12px;line-height:1.5;padding:6px 0;border-bottom:1px solid var(--border)}
+.pnl .ptags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.pnl .ptag{font-size:10px;padding:2px 7px;border-radius:5px;border:1px solid var(--border);color:var(--muted)}
+.pnl .pconns{margin-top:12px}
+.pnl .pconn{display:flex;align-items:center;gap:6px;padding:5px 0;cursor:pointer;font-size:12px;color:var(--muted);transition:color .12s}
+.pnl .pconn:hover{color:var(--accent)}
+.pnl .pcdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pnl .plink{display:inline-block;margin-top:10px;color:var(--accent);text-decoration:none;font-size:12px}.pnl .plink:hover{text-decoration:underline}
+
+.tl{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:10;background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;padding:8px 16px;transition:background .3s}
+.tl label{font-size:11px;color:var(--muted);min-width:28px;text-align:center}
+.tl .range-wrap{position:relative;width:220px;height:24px;display:flex;align-items:center}
+.tl .range-wrap input[type=range]{position:absolute;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:none;height:24px}
+.tl .range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;pointer-events:auto;border:2px solid var(--text);box-shadow:0 0 4px rgba(0,0,0,.3)}
+.tl .range-wrap input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;pointer-events:auto;border:2px solid var(--text)}
+.tl .range-track{position:absolute;left:0;right:0;height:3px;background:var(--border);border-radius:2px}
+.tl .range-fill{position:absolute;height:3px;background:var(--accent);border-radius:2px;opacity:.5}
+.tl .yr{font-size:12px;font-weight:600;color:var(--accent);min-width:70px;text-align:center}
+
+.info{position:fixed;bottom:20px;left:20px;z-index:10;background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;padding:10px 14px;max-width:220px;font-size:10px;color:var(--muted);line-height:1.6;transition:background .3s}
+.info-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:4px}
+.info-shapes{display:flex;gap:14px;margin:6px 0 4px;align-items:center}
+.info-shape{display:flex;align-items:center;gap:4px;font-size:10px}
+.info-shape svg{width:14px;height:14px}
+
+.node-label{position:absolute;font-size:11px;color:#fff;pointer-events:none;white-space:nowrap;transform:translate(-50%,-100%);transition:opacity .2s;font-weight:600;letter-spacing:-.2px;background:rgba(0,0,0,.5);padding:1px 6px;border-radius:3px}
+.light .node-label{color:#222;background:rgba(255,255,255,.75);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.stats{position:fixed;bottom:16px;right:16px;font-size:10px;color:var(--muted);z-index:10}
+.hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);z-index:10;opacity:.5;transition:opacity 1s}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="labels" style="position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden"></div>
+
+<div class="hdr">
+  <div class="logo">PaperGoat <span>Galaxy</span></div>
+  <input class="search" placeholder="Search papers..." id="search">
+  <button class="theme-btn" id="theme-btn" title="Toggle theme">🌙</button>
+</div>
+<div class="legend" id="legend"></div>
+<div class="tip" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>
+<div class="pnl" id="pnl"><button class="pnl-x" id="pnl-x">&times;</button><div id="pnl-c"></div></div>
+<div class="tl">
+  <label id="tl-min-label">2012</label>
+  <div class="range-wrap">
+    <div class="range-track"></div>
+    <div class="range-fill" id="tl-fill"></div>
+    <input type="range" id="tl-min" min="2012" max="2025" value="2012">
+    <input type="range" id="tl-max" min="2012" max="2025" value="2025">
+  </div>
+  <label id="tl-max-label">2025</label>
+  <div class="yr" id="yr">All</div>
+</div>
+<div class="info">
+  <div class="info-title">Guide</div>
+  <div class="info-shapes">
+    <div class="info-shape"><svg viewBox="0 0 14 14"><polygon points="7,1 13,5 10,12 4,12 1,5" fill="#8b5cf6" stroke="#fff" stroke-width=".5"/></svg> 95+</div>
+    <div class="info-shape"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7" fill="#3b82f6" stroke="#fff" stroke-width=".5"/></svg> 90–94</div>
+    <div class="info-shape"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="#71717a" stroke="#fff" stroke-width=".5"/></svg> &lt;90</div>
+  </div>
+  <span style="opacity:.6">크기 = Score(영향력) 비례</span><br>
+  <span style="opacity:.6">엣지 = 논문 간 계보 관계</span><br>
+  <span style="opacity:.4;font-size:9px;margin-top:2px;display:block">더블클릭 뷰 리셋 · ESC 필터 초기화</span>
+</div>
+<div class="stats" id="stats"></div>
+<div class="hint" id="hint">Drag to rotate · Scroll to zoom · Click a node · Shift+Click multi-select</div>
+<div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);opacity:.35;z-index:10">© PaperGoat 2026</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+let DATA, clusters, nodeMap={}, meshMap={};
+let scene, camera, renderer, composer, bloomPass, controls, raycaster, mouse;
+let sphereGroup, edgeGroup;
+let hovered=null, selected=new Set(); // multi-select
+let activeClusters=new Set(), query='', tlMin=2012, tlMax=2025;
+let isDark=true;
+const RADIUS=5;
+
+async function init(){
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,100);
+  camera.position.set(0,3,14);
+
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.2;
+  updateBg();
+  document.getElementById('scene').appendChild(renderer.domElement);
+
+  // Bloom post-processing
+  composer=new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene,camera));
+  bloomPass=new UnrealBloomPass(
+    new THREE.Vector2(innerWidth,innerHeight),
+    0.5, 0.6, 0.3
+  );
+  composer.addPass(bloomPass);
+
+  controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true; controls.dampingFactor=0.05;
+  controls.rotateSpeed=0.5; controls.minDistance=6; controls.maxDistance=25;
+  controls.autoRotate=false; controls.enablePan=false;
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.6));
+  const dl=new THREE.DirectionalLight(0xffffff,0.8); dl.position.set(5,10,7); scene.add(dl);
+  const dl2=new THREE.DirectionalLight(0xffffff,0.3); dl2.position.set(-5,-5,-7); scene.add(dl2);
+
+  // Stars — multiple layers for depth
+  function makeStarLayer(count, minSize, maxSize, color, spread){
+    const geo=new THREE.BufferGeometry();
+    const pos=new Float32Array(count*3);
+    const sizes=new Float32Array(count);
+    for(let i=0;i<count;i++){
+      pos[i*3]=(Math.random()-.5)*spread;
+      pos[i*3+1]=(Math.random()-.5)*spread;
+      pos[i*3+2]=(Math.random()-.5)*spread;
+      sizes[i]=minSize+Math.random()*(maxSize-minSize);
+    }
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    geo.setAttribute('size',new THREE.BufferAttribute(sizes,1));
+    const mat=new THREE.PointsMaterial({
+      color, size:maxSize, sizeAttenuation:true,
+      transparent:true, opacity:0.8, blending:THREE.AdditiveBlending,
+    });
+    return new THREE.Points(geo,mat);
+  }
+  // Far tiny stars
+  const stars1=makeStarLayer(2000, 0.01, 0.03, 0x4455aa, 100);
+  // Mid stars
+  const stars2=makeStarLayer(400, 0.03, 0.06, 0x6677cc, 60);
+  // Close bright stars (few)
+  const stars3=makeStarLayer(60, 0.05, 0.12, 0x99aaee, 40);
+  scene.add(stars1); scene.add(stars2); scene.add(stars3);
+  starPoints={layers:[stars1,stars2,stars3]};
+
+  // Atom theme: electron orbit rings (visible in light mode only)
+  [RADIUS*0.7, RADIUS*1.0, RADIUS*1.3].forEach((r,i)=>{
+    const geo=new THREE.RingGeometry(r-0.005, r+0.005, 80);
+    const mat=new THREE.MeshBasicMaterial({
+      color:0x8899bb, transparent:true, opacity:0.3, side:THREE.DoubleSide
+    });
+    const ring=new THREE.Mesh(geo,mat);
+    // Tilt each ring differently
+    ring.rotation.x=Math.PI*0.5 + [0.3, -0.2, 0.5][i];
+    ring.rotation.y=[0, 0.8, -0.4][i];
+    ring.visible=false; // hidden by default (dark mode)
+    scene.add(ring);
+    orbitRings.push(ring);
+  });
+
+  // Shooting stars (dark mode only)
+  const shootingStars=[];
+  for(let i=0;i<3;i++){
+    const geo=new THREE.BufferGeometry();
+    const positions=new Float32Array(6); // 2 points = line
+    geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
+    const mat=new THREE.LineBasicMaterial({
+      color:0x88aaff, transparent:true, opacity:0, linewidth:1
+    });
+    const line=new THREE.Line(geo,mat);
+    line.visible=false;
+    scene.add(line);
+    shootingStars.push({
+      line, geo, mat,
+      active:false, timer:0,
+      delay:300+Math.random()*600, // frames between shots
+      x:0, y:0, z:0, vx:0, vy:0, vz:0, life:0
+    });
+  }
+  // Store for animate access
+  window._shootingStars=shootingStars;
+
+  raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
+
+  const r=await fetch('./papers.json'); DATA=await r.json(); clusters=DATA.clusters;
+  sphereGroup=new THREE.Group(); edgeGroup=new THREE.Group();
+  scene.add(sphereGroup); scene.add(edgeGroup);
+
+  buildNodes(); buildEdges(); buildLegend(); bindEvents(); initLabels();
+  window.addEventListener('resize',onResize);
+  animate();
+  updateStats();
+  setTimeout(()=>{document.getElementById('hint').style.opacity='0'},4000);
+}
+
+let starPoints, orbitRings=[];
+function updateBg(){
+  // Dark = Galaxy (deep space), Light = Atom (clean lab)
+  renderer.setClearColor(isDark?0x0b0b14:0xeaecf4);
+
+  // Bloom
+  if(bloomPass){
+    bloomPass.strength=isDark?0.5:0.15;
+    bloomPass.threshold=isDark?0.3:0.7;
+    bloomPass.radius=isDark?0.6:0.3;
+  }
+
+  // Tone mapping
+  if(renderer) renderer.toneMappingExposure=isDark?1.2:1.0;
+
+  // Stars (dark=galaxy) ↔ floating atoms (light=atom)
+  if(starPoints?.layers){
+    const darkColors=[0x4455aa,0x6677cc,0x99aaee];
+    // Light: vivid atom particles — must contrast against white bg
+    const lightColors=[0x5577bb,0xcc6655,0x44aa77];
+    starPoints.layers.forEach((l,i)=>{
+      l.material.color.set(isDark?darkColors[i]:lightColors[i]);
+      l.material.opacity=isDark?0.8:0.6;
+      l.material.blending=isDark?THREE.AdditiveBlending:THREE.NormalBlending;
+      l.material.size=isDark?[0.03,0.06,0.12][i]:[0.06,0.1,0.18][i];
+    });
+  }
+
+  // Orbit rings: hidden in dark, visible in light (electron orbits)
+  orbitRings.forEach(r=>{ r.visible=!isDark; });
+
+  // Nodes
+  if(sphereGroup){
+    sphereGroup.children.forEach(mesh=>{
+      if(!mesh.userData?.id) return;
+      const c=mesh._color;
+      if(isDark){
+        // Galaxy: emissive glow
+        mesh.material.emissive=c;
+        mesh.material.color=c;
+        mesh.material.roughness=0.1;
+        mesh.material.metalness=0.1;
+        mesh.material.clearcoat=0.8;
+      } else {
+        // Atom: solid glossy surface, no emissive
+        mesh.material.emissive=new THREE.Color(0x111111);
+        mesh.material.color=c;
+        mesh.material.roughness=0.15;
+        mesh.material.metalness=0.4; // metallic sheen
+        mesh.material.clearcoat=1.0; // high gloss like polished atoms
+      }
+    });
+  }
+
+  // Edges
+  if(edgeGroup){
+    edgeGroup.children.forEach(tube=>{
+      if(!tube.userData) return;
+      const isLineage=tube.userData.type==='lineage';
+      if(isDark){
+        tube.material.color.set(isLineage?0x7799cc:0x556688);
+        tube._baseOpacity=isLineage?0.3:0.08;
+      } else {
+        // Atom: dark visible bonds on light bg
+        tube.material.color.set(isLineage?0x445577:0x667788);
+        tube._baseOpacity=isLineage?0.7:0.35;
+        tube.material.blending=THREE.NormalBlending;
+      }
+    });
+  }
+}
+
+function buildNodes(){
+  const ck=Object.keys(clusters);
+
+  // Sort papers: group by cluster, then by score within cluster
+  // This way fibonacci spiral places same-cluster nodes adjacent
+  const sorted=[...DATA.papers].sort((a,b)=>{
+    const ci=ck.indexOf(a.cluster)-ck.indexOf(b.cluster);
+    return ci!==0?ci:b.score-a.score;
+  });
+
+  // Fibonacci sphere distribution — perfectly uniform, no overlap
+  const N=sorted.length;
+  const goldenAngle=Math.PI*(3-Math.sqrt(5));
+
+  sorted.forEach((p,i)=>{
+    nodeMap[p.id]=p;
+
+    // Fibonacci sphere: uniform distribution on sphere surface
+    const y=1-(i/(N-1))*2; // -1 to 1
+    const radiusAtY=Math.sqrt(1-y*y);
+    const theta=goldenAngle*i;
+    const x=Math.cos(theta)*radiusAtY;
+    const z=Math.sin(theta)*radiusAtY;
+
+    p._pos=new THREE.Vector3(x*RADIUS, y*RADIUS, z*RADIUS);
+    p._alpha=1; p._targetAlpha=1; p._visible=true;
+
+    const size=0.07+(p.score-80)*0.009;
+    const color=new THREE.Color(clusters[p.cluster]?.color||'#888');
+
+    // All nodes are smooth spheres — size differentiates score
+    const geo=new THREE.SphereGeometry(size,24,16);
+    const mat=new THREE.MeshPhysicalMaterial({
+      color, emissive:color, emissiveIntensity:1.5,
+      roughness:0.1, metalness:0.1,
+      clearcoat:0.8, clearcoatRoughness:0.2,
+      transparent:true, opacity:1,
+    });
+    const mesh=new THREE.Mesh(geo,mat);
+    mesh.position.copy(p._pos);
+    mesh.userData=p;
+    mesh._baseSize=size;
+    mesh._color=color;
+    mesh._scaleTarget=1;
+    mesh._scaleCurrent=1;
+    sphereGroup.add(mesh);
+    meshMap[p.id]=mesh;
+  });
+}
+
+function buildEdges(){
+  edgeGroup.clear();
+  DATA.edges.forEach(e=>{
+    const a=meshMap[e.source],b=meshMap[e.target];
+    if(!a||!b) return;
+    const isLineage=e.type==='lineage';
+    // Start/end at node surface (not inside, not far away)
+    const dir=new THREE.Vector3().subVectors(b.position,a.position).normalize();
+    const start=new THREE.Vector3().copy(a.position).addScaledVector(dir, a._baseSize||0.08);
+    const end=new THREE.Vector3().copy(b.position).addScaledVector(dir, -(b._baseSize||0.08));
+    // Curved path following sphere surface
+    const mid=new THREE.Vector3().addVectors(start,end).multiplyScalar(0.5);
+    mid.normalize().multiplyScalar(RADIUS*1.08);
+    const curve=new THREE.QuadraticBezierCurve3(start,mid,end);
+    const tubeR=isLineage?0.012:0.005;
+    const geo=new THREE.TubeGeometry(curve,12,tubeR,4,false);
+    const mat=new THREE.MeshBasicMaterial({
+      color:isLineage?0x7799cc:0x556688,
+      transparent:true, opacity:isLineage?0.3:0.08,
+    });
+    const tube=new THREE.Mesh(geo,mat);
+    tube.userData=e;
+    tube._baseOpacity=isLineage?0.3:0.08;
+    edgeGroup.add(tube);
+  });
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+
+  // Very slow rotation, near-stop on hover
+  sphereGroup.rotation.y+=hovered?0.000005:0.00015;
+  edgeGroup.rotation.y=sphereGroup.rotation.y;
+
+  // Parallax rotation — galaxy: subtle, atom: gentle float
+  if(starPoints?.layers){
+    const sp=isDark?1:1.5; // atom particles rotate slightly faster for "floating" feel
+    starPoints.layers[0].rotation.y+=0.00002*sp;
+    starPoints.layers[1].rotation.y+=0.00005*sp;
+    starPoints.layers[2].rotation.y+=0.00008*sp;
+    starPoints.layers[0].rotation.x+=0.00001*sp;
+    starPoints.layers[1].rotation.x+=0.00003*sp;
+    // Atom: extra z-axis wobble for organic floating
+    if(!isDark){
+      starPoints.layers[0].rotation.z+=0.00001;
+      starPoints.layers[2].rotation.z-=0.00002;
+    }
+  }
+
+  // Orbit rings gentle rotation (atom theme)
+  orbitRings.forEach((r,i)=>{
+    r.rotation.z+=0.0001*(i+1);
+  });
+
+  // Shooting stars (dark mode only)
+  if(isDark&&window._shootingStars){
+    window._shootingStars.forEach(s=>{
+      if(!s.active){
+        s.timer++;
+        if(s.timer>s.delay){
+          // Launch new shooting star
+          s.active=true; s.life=0;
+          s.x=(Math.random()-.5)*50; s.y=15+Math.random()*15; s.z=(Math.random()-.5)*30;
+          const speed=0.3+Math.random()*0.3;
+          s.vx=(Math.random()-.5)*speed;
+          s.vy=-speed;
+          s.vz=(Math.random()-.5)*speed*0.5;
+          s.line.visible=true;
+          s.delay=400+Math.random()*800;
+          s.timer=0;
+        }
+      } else {
+        s.life++;
+        s.x+=s.vx; s.y+=s.vy; s.z+=s.vz;
+        const tail=3;
+        const pos=s.geo.attributes.position.array;
+        pos[0]=s.x; pos[1]=s.y; pos[2]=s.z;
+        pos[3]=s.x-s.vx*tail; pos[4]=s.y-s.vy*tail; pos[5]=s.z-s.vz*tail;
+        s.geo.attributes.position.needsUpdate=true;
+        // Fade in then out
+        const maxLife=60;
+        const fade=s.life<10?s.life/10:Math.max(0,1-(s.life-10)/(maxLife-10));
+        s.mat.opacity=fade*0.6;
+        if(s.life>maxLife){
+          s.active=false; s.line.visible=false;
+        }
+      }
+    });
+  } else if(window._shootingStars){
+    window._shootingStars.forEach(s=>{s.line.visible=false;s.active=false});
+  }
+
+  // Pre-compute neighbor set for hover dimming (Obsidian-style)
+  const hovNeighbors=new Set();
+  if(hovered){
+    hovNeighbors.add(hovered.id);
+    DATA.edges.forEach(e=>{
+      if(e.source===hovered.id) hovNeighbors.add(e.target);
+      if(e.target===hovered.id) hovNeighbors.add(e.source);
+    });
+  }
+  const selIds=new Set([...selected].map(s=>s.id));
+  const selNeighbors=new Set();
+  selIds.forEach(sid=>{
+    selNeighbors.add(sid);
+    DATA.edges.forEach(e=>{
+      if(e.source===sid) selNeighbors.add(e.target);
+      if(e.target===sid) selNeighbors.add(e.source);
+    });
+  });
+
+  sphereGroup.children.forEach(mesh=>{
+    if(!mesh.userData?.id) return;
+    const p=mesh.userData;
+
+    // Hover dim: non-connected nodes fade to 0.1 (Obsidian-style)
+    let dimTarget=p._targetAlpha; // from filter/search
+    // Light mode needs higher dim alpha (no emissive glow to help)
+    const dimLo=isDark?0.08:0.25;
+    const dimMid=isDark?0.15:0.3;
+    if(hovered && dimTarget>0.5){
+      dimTarget=hovNeighbors.has(p.id)?1:dimLo;
+    } else if(selected.size>0 && dimTarget>0.5){
+      dimTarget=selNeighbors.has(p.id)?1:dimMid;
+    }
+    p._alpha+=(dimTarget-p._alpha)*0.1;
+    mesh.material.opacity=p._alpha;
+
+    // Scale
+    const isH=hovered===p, isS=selIds.has(p.id);
+    const isConn=hovNeighbors.has(p.id)||selNeighbors.has(p.id);
+    mesh._scaleTarget=isH?2.5:isS?2.0:(isConn&&(hovered||selected.size))?1.4:1;
+    mesh._scaleCurrent+=(mesh._scaleTarget-mesh._scaleCurrent)*0.08;
+    mesh.scale.setScalar(mesh._scaleCurrent);
+
+    // Dark: bloom glow, Light: subtle highlight only
+    const targetEI=isDark
+      ?(isH?3.0:isS?2.5:isConn?2.0:1.2)
+      :(isH?0.5:isS?0.3:0.05);
+    mesh.material.emissiveIntensity+=(targetEI-mesh.material.emissiveIntensity)*0.1;
+  });
+
+  edgeGroup.children.forEach(tube=>{
+    const e=tube.userData;
+    if(!e) return;
+    const base=tube._baseOpacity||0.15;
+    let targetOp=base;
+    const srcSel=selIds.has(e.source), tgtSel=selIds.has(e.target);
+    const srcHov=hovered&&e.source===hovered.id, tgtHov=hovered&&e.target===hovered.id;
+    if(srcSel||tgtSel) targetOp=0.9;
+    else if(srcHov||tgtHov) targetOp=0.7;
+    // Dim non-connected edges on hover
+    else if(hovered) targetOp=isDark?0.02:0.08;
+    const a1=nodeMap[e.source]?._alpha||0, a2=nodeMap[e.target]?._alpha||0;
+    tube.material.opacity+=(targetOp*Math.min(a1,a2)-tube.material.opacity)*0.1;
+    if(srcSel||tgtSel){
+      const selNode=[...selected].find(s=>s.id===e.source||s.id===e.target);
+      tube.material.color.set(selNode?clusters[selNode.cluster]?.color||'#5b9bf5':'#5b9bf5');
+    } else if(srcHov||tgtHov){
+      tube.material.color.set(clusters[hovered.cluster]?.color||'#5b9bf5');
+    } else {
+      tube.material.color.set(isDark?0x7799cc:0x445577);
+    }
+  });
+
+  controls.update();
+  composer.render(); // bloom post-processing
+  updateLabels();
+}
+
+function onResize(){
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+  composer.setSize(innerWidth,innerHeight);
+}
+
+// Zoom-based label fade (Obsidian-style) — all nodes get labels
+const labelEls={};
+function initLabels(){
+  const container=document.getElementById('labels');
+  DATA.papers.forEach(p=>{
+    const el=document.createElement('div');
+    el.className='node-label';
+    el.textContent=p.alias;
+    el.style.color=clusters[p.cluster]?.color||'#888';
+    container.appendChild(el);
+    labelEls[p.id]=el;
+  });
+}
+function updateLabels(){
+  const vec=new THREE.Vector3();
+  const camDist=camera.position.length(); // zoom level
+  // Zoom thresholds: at 14 (default) show score≥88, zoomed in shows more
+  const zoomThreshold=camDist>20?99:camDist>15?96:camDist>12?93:camDist>9?88:camDist>7?84:0;
+
+  for(const[id,el]of Object.entries(labelEls)){
+    const mesh=meshMap[id];
+    if(!mesh) continue;
+    const p=mesh.userData;
+    mesh.getWorldPosition(vec);
+    vec.project(camera);
+    const x=(vec.x*0.5+0.5)*innerWidth;
+    const y=(-vec.y*0.5+0.5)*innerHeight;
+
+    // Show label if: score above zoom threshold, or hovered/selected/connected
+    const isActive=hovered===p||selected.has(p);
+    const showByZoom=p.score>=zoomThreshold;
+    const show=(showByZoom||isActive)&&vec.z<1&&p._alpha>0.15;
+
+    if(!show){
+      el.style.opacity='0';
+    } else {
+      const fadeIn=isActive?1:Math.min(1, Math.max(0.3, (p.score-zoomThreshold+5)/10));
+      el.style.opacity=String(p._alpha*fadeIn*0.9);
+      el.style.left=x+'px';
+      el.style.top=(y-8)+'px';
+      // Larger font for hovered/selected
+      el.style.fontSize=isActive?'13px':'11px';
+      el.style.fontWeight=isActive?'700':'600';
+    }
+  }
+}
+
+function doRaycast(e){
+  mouse.x=(e.clientX/innerWidth)*2-1;
+  mouse.y=-(e.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(mouse,camera);
+  const hits=raycaster.intersectObjects(sphereGroup.children);
+  for(const h of hits){ if(h.object.userData?._alpha>0.15) return h.object.userData; }
+  return null;
+}
+
+function bindEvents(){
+  let pDown=false,pStartX=0,pStartY=0;
+  renderer.domElement.addEventListener('pointermove',e=>{
+    hovered=doRaycast(e);
+    renderer.domElement.style.cursor=hovered?'pointer':'grab';
+    showTip(e.clientX,e.clientY);
+  });
+  let lastClickEvent=null;
+  renderer.domElement.addEventListener('pointerdown',e=>{pDown=true;pStartX=e.clientX;pStartY=e.clientY;lastClickEvent=e});
+  renderer.domElement.addEventListener('pointerup',e=>{
+    const dist=Math.abs(e.clientX-pStartX)+Math.abs(e.clientY-pStartY);
+    const isClick=dist<5; // less than 5px = click, not drag
+    if(isClick&&hovered){
+      if(lastClickEvent&&lastClickEvent.shiftKey){
+        // Multi-select toggle with Shift
+        if(selected.has(hovered)) selected.delete(hovered);
+        else selected.add(hovered);
+      } else {
+        // Single click replaces selection
+        selected.clear();
+        selected.add(hovered);
+      }
+      openPanel([...selected][selected.size-1]); // show last selected
+    } else if(isClick){
+      selected.clear();
+      closePanel();
+    }
+    pDown=false;
+  });
+
+  document.getElementById('search').addEventListener('input',e=>{query=e.target.value;updateVis()});
+
+  const tlMinEl=document.getElementById('tl-min');
+  const tlMaxEl=document.getElementById('tl-max');
+  // Bring last-touched slider to top so it's always draggable
+  tlMinEl.addEventListener('pointerdown',()=>{tlMinEl.style.zIndex=2;tlMaxEl.style.zIndex=1});
+  tlMaxEl.addEventListener('pointerdown',()=>{tlMaxEl.style.zIndex=2;tlMinEl.style.zIndex=1});
+
+  function onTimelineChange(){
+    let lo=+tlMinEl.value, hi=+tlMaxEl.value;
+    // Prevent crossing — swap values if needed
+    if(lo>hi){ const tmp=lo; lo=hi; hi=tmp; tlMinEl.value=lo; tlMaxEl.value=hi; }
+    tlMin=lo; tlMax=hi;
+    document.getElementById('tl-min-label').textContent=lo;
+    document.getElementById('tl-max-label').textContent=hi;
+    document.getElementById('yr').textContent=(lo===2012&&hi===2025)?'All':`${lo}–${hi}`;
+    // Update fill bar
+    const pct0=(lo-2012)/(2025-2012)*100;
+    const pct1=(hi-2012)/(2025-2012)*100;
+    document.getElementById('tl-fill').style.left=pct0+'%';
+    document.getElementById('tl-fill').style.width=(pct1-pct0)+'%';
+    updateVis();
+  }
+  tlMinEl.addEventListener('input',onTimelineChange);
+  tlMaxEl.addEventListener('input',onTimelineChange);
+  onTimelineChange.call(tlMinEl); // init fill bar
+  document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      selected.clear();closePanel();query='';document.getElementById('search').value='';
+      activeClusters.clear();refreshLegendUI();
+      tlMinEl.value=2012;tlMaxEl.value=2025;onTimelineChange.call(tlMinEl);
+    }
+  });
+
+  // Theme toggle
+  document.getElementById('theme-btn').addEventListener('click',()=>{
+    isDark=!isDark;
+    document.body.classList.toggle('light',!isDark);
+    document.getElementById('theme-btn').textContent=isDark?'🌙':'☀️';
+    updateBg();
+  });
+}
+
+function updateVis(){
+  DATA.papers.forEach(p=>{
+    let v=true;
+    if(activeClusters.size>0&&!activeClusters.has(p.cluster)) v=false;
+    if(p.year<tlMin||p.year>tlMax) v=false;
+    if(query){
+      const q=query.toLowerCase();
+      v=p.alias.toLowerCase().includes(q)||p.title.toLowerCase().includes(q)||
+        p.categories.some(c=>c.toLowerCase().includes(q))||p.reason.toLowerCase().includes(q);
+    }
+    p._targetAlpha=v?1:0.03;
+    p._visible=v;
+  });
+  updateStats();
+}
+
+function updateStats(){
+  const vis=DATA.papers.filter(p=>p._visible).length;
+  document.getElementById('stats').textContent=`${vis}/${DATA.papers.length}`;
+}
+
+function showTip(mx,my){
+  const t=document.getElementById('tip');
+  if(!hovered){t.classList.remove('show');return}
+  const n=hovered,c=clusters[n.cluster]?.color||'#888';
+  t.querySelector('.tip-rank').textContent=`#${n.rank} · ${n.year}`;
+  t.querySelector('.tip-alias').textContent=n.alias;
+  t.querySelector('.tip-alias').style.color=c;
+  t.querySelector('.tip-title').textContent=n.title;
+  t.querySelector('.tip-reason').textContent=n.reason;
+  t.querySelector('.tip-cats').innerHTML=n.categories.map(x=>`<span class="tip-cat">#${x}</span>`).join('');
+  t.querySelector('.tip-yr').textContent=n.has_review?'📄 리뷰 있음':'Click for details';
+  let tx=mx+16,ty=my+16;
+  if(tx+310>innerWidth) tx=mx-320;
+  if(ty+200>innerHeight) ty=my-210;
+  t.style.left=tx+'px';t.style.top=ty+'px';t.classList.add('show');
+}
+
+// ── Legend (multi-select) ──
+function buildLegend(){
+  const el=document.getElementById('legend');
+  const counts={};
+  DATA.papers.forEach(p=>{counts[p.cluster]=(counts[p.cluster]||0)+1});
+  let html=Object.entries(clusters).map(([k,v])=>{
+    if(!counts[k]) return '';
+    return `<div class="leg-item on" data-c="${k}">
+      <span class="leg-chk">✓</span>
+      <span class="leg-dot" style="background:${v.color}"></span>
+      ${v.label}
+      <span class="leg-count">${counts[k]}</span>
+    </div>`;
+  }).join('');
+  html+=`<div class="leg-all" id="leg-all">All ✓</div>`;
+  el.innerHTML=html;
+
+  el.querySelectorAll('.leg-item').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const c=btn.dataset.c;
+      if(activeClusters.has(c)){
+        activeClusters.delete(c);
+      } else {
+        activeClusters.add(c);
+      }
+      // If all selected, clear (= show all)
+      if(activeClusters.size>=Object.keys(clusters).length) activeClusters.clear();
+      refreshLegendUI();
+      updateVis();
+    });
+  });
+
+  document.getElementById('leg-all').addEventListener('click',()=>{
+    activeClusters.clear();
+    refreshLegendUI();
+    updateVis();
+  });
+}
+
+function refreshLegendUI(){
+  const el=document.getElementById('legend');
+  const allOn=activeClusters.size===0;
+  el.querySelectorAll('.leg-item').forEach(btn=>{
+    const c=btn.dataset.c;
+    const isOn=allOn||activeClusters.has(c);
+    btn.classList.toggle('on',isOn);
+    btn.classList.toggle('off',!isOn);
+    btn.querySelector('.leg-chk').textContent=isOn?'✓':'';
+  });
+  document.getElementById('leg-all').textContent=allOn?'All ✓':'Show All';
+}
+
+// ── Panel ──
+function openPanel(n){
+  const p=document.getElementById('pnl');
+  const c=clusters[n.cluster];
+
+  // Find connections: parents (influenced by) and children (influenced)
+  const parents=[], children=[];
+  DATA.edges.forEach(e=>{
+    if(e.source===n.id&&nodeMap[e.target]) children.push(nodeMap[e.target]);
+    if(e.target===n.id&&nodeMap[e.source]) parents.push(nodeMap[e.source]);
+  });
+
+  // Find same-cluster peers (not connected, but same category)
+  const peers=DATA.papers.filter(pp=>pp.cluster===n.cluster&&pp.id!==n.id)
+    .sort((a,b)=>b.score-a.score).slice(0,5);
+
+  // Score bar visual
+  const scoreBar=`<div style="margin:8px 0 16px;display:flex;align-items:center;gap:8px">
+    <span class="ps" style="background:${c.color}">Score ${n.score}</span>
+    <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+      <div style="width:${n.score}%;height:100%;background:${c.color};border-radius:2px"></div>
+    </div>
+  </div>`;
+
+  let h=`
+    <div class="pr">${c.icon} ${c.label} · #${n.rank} · ${n.year}</div>
+    <div class="pa" style="color:${c.color}">${n.alias}</div>
+    <div class="pt">${n.title}</div>
+    ${scoreBar}
+    <div class="preason">${n.reason}</div>`;
+
+  // One-liner
+  if(n.one_liner) h+=`<div class="psec">💡 한줄 소개</div><p style="font-size:13px;line-height:1.6;font-style:italic;opacity:.85">${n.one_liner}</p>`;
+
+  // Key discoveries
+  if(n.key_discoveries?.length){
+    h+=`<div class="psec">🔬 핵심 발견</div><ul class="pdisc">`+n.key_discoveries.map(d=>`<li>${typeof d==='string'?d:JSON.stringify(d)}</li>`).join('')+`</ul>`;
+  }
+
+  // Categories
+  h+=`<div class="psec">🏷️ 카테고리</div><div class="ptags">`+n.categories.map(x=>`<span class="ptag">#${x}</span>`).join('')+`</div>`;
+
+  // Parents (influenced by)
+  if(parents.length){
+    h+=`<div class="psec">⬆️ 기반 논문 (${parents.length})</div><div class="pconns">`+parents.map(cn=>{
+      const cc=clusters[cn.cluster]?.color||'#888';
+      return `<div class="pconn" data-id="${cn.id}"><span class="pcdot" style="background:${cc}"></span><strong>${cn.alias}</strong> <span style="opacity:.4">#${cn.rank} · ${cn.year}</span></div>`;
+    }).join('')+`</div>`;
+  }
+
+  // Children (influenced)
+  if(children.length){
+    h+=`<div class="psec">⬇️ 영향을 준 논문 (${children.length})</div><div class="pconns">`+children.map(cn=>{
+      const cc=clusters[cn.cluster]?.color||'#888';
+      return `<div class="pconn" data-id="${cn.id}"><span class="pcdot" style="background:${cc}"></span><strong>${cn.alias}</strong> <span style="opacity:.4">#${cn.rank} · ${cn.year}</span></div>`;
+    }).join('')+`</div>`;
+  }
+
+  // Same cluster peers
+  if(peers.length){
+    h+=`<div class="psec">🔗 같은 분야</div><div class="pconns">`+peers.map(cn=>{
+      const cc=clusters[cn.cluster]?.color||'#888';
+      return `<div class="pconn" data-id="${cn.id}"><span class="pcdot" style="background:${cc}"></span>${cn.alias} <span style="opacity:.4">#${cn.rank}</span></div>`;
+    }).join('')+`</div>`;
+  }
+
+  // Links
+  h+=`<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">`;
+  if(n.url) h+=`<a class="plink" href="${n.url}" target="_blank">📄 논문 원문 ↗</a>`;
+  if(n.review_html) h+=`<a class="plink" href="../${n.review_html}" target="_blank" style="margin-left:12px">📝 PaperGoat 리뷰 ↗</a>`;
+  h+=`</div>`;
+
+  // Multi-select hint
+  h+=`<p style="font-size:10px;color:var(--muted);margin-top:12px;opacity:.5">Shift+Click으로 다중 선택</p>`;
+
+  document.getElementById('pnl-c').innerHTML=h;
+  p.classList.add('open');
+  p.querySelectorAll('.pconn').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const t=nodeMap[el.dataset.id];
+      if(t){selected.clear();selected.add(t);hovered=t;openPanel(t)}
+    });
+  });
+}
+function closePanel(){document.getElementById('pnl').classList.remove('open')}
+
+init();
+</script>
+</body>
+</html>
