@@ -845,7 +845,16 @@ function bindEvents(){
     pDown=false;
   });
 
-  document.getElementById('search').addEventListener('input',e=>{query=e.target.value;updateVis()});
+  const searchEl=document.getElementById('search');
+  searchEl.addEventListener('input',e=>{query=e.target.value;updateVis()});
+  // iOS Safari: prevent scroll jump on focus
+  searchEl.addEventListener('focus',()=>{
+    setTimeout(()=>{window.scrollTo(0,0);document.body.scrollTop=0},100);
+  });
+  searchEl.addEventListener('blur',()=>{
+    window.scrollTo(0,0);document.body.scrollTop=0;
+    onResize();
+  });
 
   const tlMinEl=document.getElementById('tl-min');
   const tlMaxEl=document.getElementById('tl-max');
