@@ -55,7 +55,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .leg-all{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;color:var(--accent);padding:5px 8px;cursor:pointer;border-top:1px solid var(--glass-border);margin-top:3px;border-radius:0 0 10px 10px;transition:background .15s}
 .leg-all:hover{background:rgba(59,130,246,.08)}
 
-.tip{position:fixed;pointer-events:none;z-index:20;border-radius:16px;padding:14px 16px;max-width:300px;opacity:0;transform:translateY(6px) scale(.97);transition:opacity .15s,transform .15s,left .08s,top .08s}
+.tip{position:fixed;pointer-events:none;z-index:20;border-radius:16px;padding:14px 16px;max-width:300px;opacity:0;transform:translateY(6px) scale(.97);transition:opacity .15s,transform .15s}
 .tip.show{opacity:1;transform:translateY(0) scale(1)}
 .tip-rank{font-size:10px;color:var(--muted)}.tip-alias{font-size:16px;font-weight:700;margin:2px 0}
 .tip-title{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:6px}
@@ -932,18 +932,29 @@ function updateStats(){
   document.getElementById('stats').textContent=`${vis}/${DATA.papers.length}`;
 }
 
+let _tipNode=null, _tipX=0, _tipY=0;
 function showTip(){
   const t=document.getElementById('tip');
-  if(!hovered||window.innerWidth<=768){t.classList.remove('show');return}
-  const n=hovered,c=clusters[n.cluster]?.color||'#888';
-  t.querySelector('.tip-rank').textContent=`#${n.rank} · ${n.year}`;
-  t.querySelector('.tip-alias').textContent=n.alias;
-  t.querySelector('.tip-alias').style.color=c;
-  t.querySelector('.tip-title').textContent=n.title;
-  t.querySelector('.tip-reason').textContent=n.reason;
-  t.querySelector('.tip-cats').innerHTML=n.categories.map(x=>`<span class="tip-cat">#${x}</span>`).join('');
-  t.querySelector('.tip-yr').textContent=n.has_review?'📄 리뷰 있음':'Click for details';
-  // Position at node's screen projection (not cursor)
+  if(!hovered||window.innerWidth<=768){
+    t.classList.remove('show');
+    _tipNode=null;
+    return;
+  }
+  const n=hovered;
+  // Update content only when node changes
+  if(_tipNode!==n){
+    _tipNode=n;
+    _tipX=0;_tipY=0; // snap to new node position instantly
+    const c=clusters[n.cluster]?.color||'#888';
+    t.querySelector('.tip-rank').textContent=`#${n.rank} · ${n.year}`;
+    t.querySelector('.tip-alias').textContent=n.alias;
+    t.querySelector('.tip-alias').style.color=c;
+    t.querySelector('.tip-title').textContent=n.title;
+    t.querySelector('.tip-reason').textContent=n.reason;
+    t.querySelector('.tip-cats').innerHTML=n.categories.map(x=>`<span class="tip-cat">#${x}</span>`).join('');
+    t.querySelector('.tip-yr').textContent=n.has_review?'📄 리뷰 있음':'Click for details';
+  }
+  // Position: anchor to node, update every frame smoothly
   const mesh=meshMap[n.id];
   if(mesh){
     const vec=new THREE.Vector3();
@@ -954,10 +965,14 @@ function showTip(){
     if(tx+300>innerWidth) tx=tx-330;
     if(ty+180>innerHeight) ty=ty-200;
     if(ty<10) ty=10;
-    t.style.left=tx+'px';t.style.top=ty+'px';
+    if(_tipX===0&&_tipY===0){_tipX=tx;_tipY=ty} // snap first frame
+    else{_tipX+=(tx-_tipX)*0.15;_tipY+=(ty-_tipY)*0.15} // smooth follow
+    t.style.left=_tipX+'px';t.style.top=_tipY+'px';
   }
   t.classList.add('show');
 }
+// Reset tip position when node changes
+function resetTipPos(){_tipX=0;_tipY=0;}
 
 // ── Legend (multi-select) ──
 function buildLegend(){
