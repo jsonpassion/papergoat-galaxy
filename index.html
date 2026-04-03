@@ -168,6 +168,7 @@ let scene, camera, renderer, composer, bloomPass, controls, raycaster, mouse;
 let sphereGroup, edgeGroup;
 let hovered=null, selected=new Set(); // multi-select
 let activeClusters=new Set(), query='', tlMin=2012, tlMax=2025, scMin=84, scMax=100;
+let targetRotationY=null; // for smooth rotate-to-node
 let isDark=true;
 const RADIUS=5;
 
@@ -432,8 +433,17 @@ function buildEdges(){
 function animate(){
   requestAnimationFrame(animate);
 
-  // Very slow rotation, near-stop on hover
-  sphereGroup.rotation.y+=hovered?0.000005:0.00015;
+  // Smooth rotate to clicked node, or slow auto-rotate
+  if(targetRotationY!==null){
+    let diff=targetRotationY-sphereGroup.rotation.y;
+    // Shortest path wrap
+    while(diff>Math.PI) diff-=Math.PI*2;
+    while(diff<-Math.PI) diff+=Math.PI*2;
+    sphereGroup.rotation.y+=diff*0.04;
+    if(Math.abs(diff)<0.005) targetRotationY=null;
+  } else {
+    sphereGroup.rotation.y+=hovered?0.000005:0.00015;
+  }
   edgeGroup.rotation.y=sphereGroup.rotation.y;
 
   // Parallax rotation — galaxy: subtle, atom: gentle float
@@ -670,7 +680,16 @@ function bindEvents(){
         selected.clear();
         selected.add(hovered);
       }
-      openPanel([...selected][selected.size-1]); // show last selected
+      // Rotate globe so clicked node faces camera
+      const clickedNode=[...selected][selected.size-1];
+      const pos=clickedNode._pos;
+      // Calculate angle to rotate: node's angle on sphere minus camera's viewing angle
+      const nodeAngle=Math.atan2(pos.z, pos.x);
+      // Camera looks at origin from +Z side, so front = angle 0 on XZ plane
+      // We want nodeAngle + currentRotation = PI/2 (facing camera)
+      const cameraAngle=Math.atan2(camera.position.z, camera.position.x);
+      targetRotationY=cameraAngle-nodeAngle;
+      openPanel(clickedNode);
     } else if(isClick){
       selected.clear();
       closePanel();
