@@ -118,8 +118,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .search{width:0;flex:1;min-width:80px;font-size:16px;padding:7px 10px;border-radius:10px;height:34px}
   .theme-btn{padding:0;font-size:15px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-  /* Filter toggle: bottom-right floating button */
-  .mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;bottom:16px;right:16px;top:auto;left:auto;width:44px;height:44px;border-radius:50%;font-size:16px;padding:0;z-index:16}
+  /* Filter toggle: bottom-right FAB, icon only */
+  .mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;bottom:16px;right:16px;top:auto;left:auto;width:44px;height:44px;border-radius:50%;font-size:18px;padding:0;z-index:16;line-height:1}
 
   /* Shared: bottom sheet style */
   .legend,.tl,.info{
@@ -132,11 +132,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
     max-height:0 !important;padding:0 !important;border:none !important;overflow:hidden;
   }
 
-  /* Legend: bottom sheet, grid layout */
+  /* Legend: bottom, just above FAB */
   .legend{
-    bottom:70px !important;top:auto !important;padding:10px 12px !important;
+    bottom:68px !important;top:auto !important;padding:10px 12px !important;
     display:grid !important;grid-template-columns:1fr 1fr !important;gap:2px 4px !important;
-    border-radius:12px 12px 0 0 !important;
+    border-radius:12px !important;
   }
   .leg-item{padding:5px 8px;font-size:11px;gap:5px;border-radius:6px}
   .leg-chk{width:13px;height:13px;font-size:9px;border-radius:4px}
@@ -193,7 +193,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   <input class="search glass" placeholder="Search papers..." id="search">
   <button class="theme-btn glass" id="theme-btn" title="Toggle theme">🌙</button>
 </div>
-<button class="mob-toggle glass" id="mob-toggle">☰ Filters</button>
+<button class="mob-toggle glass" id="mob-toggle">☰</button>
 <div class="legend glass" id="legend"></div>
 <div class="tip glass" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>
 <div class="pnl" id="pnl"><button class="pnl-x" id="pnl-x">&times;</button><div id="pnl-c"></div></div>
@@ -900,19 +900,20 @@ function bindEvents(){
     leg.classList.toggle('collapsed',!mobOpen);
     tl.classList.toggle('collapsed',!mobOpen);
     mobToggle.textContent=mobOpen?'✕':'☰';
-    // Position tl above legend
+    // Stack: legend at bottom, tl above legend
     if(mobOpen){
-      requestAnimationFrame(()=>{
+      setTimeout(()=>{
         const legRect=leg.getBoundingClientRect();
-        tl.style.bottom=(window.innerHeight-legRect.top+4)+'px';
+        tl.style.bottom=(window.innerHeight-legRect.top+6)+'px';
         tl.style.top='auto';
-      });
+      },50);
     }
   }
   mobToggle.addEventListener('click',mobToggleAll);
   if(window.innerWidth<=768){
     document.getElementById('legend').classList.add('collapsed');
     document.getElementById('tl-container').classList.add('collapsed');
+    mobToggle.textContent='☰';
   }
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
