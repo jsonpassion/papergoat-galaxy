@@ -695,7 +695,7 @@ function bindEvents(){
         // Camera's forward angle on XZ plane
         const camAngle=Math.atan2(camDir.x, camDir.z);
         // Rotation needed = difference (bring node to camera's forward)
-        let delta=camAngle-nodeWorldAngle;
+        let delta=nodeWorldAngle-camAngle;
         while(delta>Math.PI) delta-=Math.PI*2;
         while(delta<-Math.PI) delta+=Math.PI*2;
         targetRotationY=sphereGroup.rotation.y+delta;
