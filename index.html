@@ -680,15 +680,26 @@ function bindEvents(){
         selected.clear();
         selected.add(hovered);
       }
-      // Rotate globe so clicked node faces camera
+      // Rotate globe so clicked node faces camera (closest path)
       const clickedNode=[...selected][selected.size-1];
-      const pos=clickedNode._pos;
-      // Calculate angle to rotate: node's angle on sphere minus camera's viewing angle
-      const nodeAngle=Math.atan2(pos.z, pos.x);
-      // Camera looks at origin from +Z side, so front = angle 0 on XZ plane
-      // We want nodeAngle + currentRotation = PI/2 (facing camera)
-      const cameraAngle=Math.atan2(camera.position.z, camera.position.x);
-      targetRotationY=cameraAngle-nodeAngle;
+      const mesh=meshMap[clickedNode.id];
+      if(mesh){
+        // Get node's current world position (with current rotation applied)
+        const worldPos=new THREE.Vector3();
+        mesh.getWorldPosition(worldPos);
+        // Camera direction on XZ plane
+        const camDir=new THREE.Vector3();
+        camera.getWorldDirection(camDir);
+        // Current angle of node on XZ plane (in world space)
+        const nodeWorldAngle=Math.atan2(worldPos.x, worldPos.z);
+        // Camera's forward angle on XZ plane
+        const camAngle=Math.atan2(camDir.x, camDir.z);
+        // Rotation needed = difference (bring node to camera's forward)
+        let delta=camAngle-nodeWorldAngle;
+        while(delta>Math.PI) delta-=Math.PI*2;
+        while(delta<-Math.PI) delta+=Math.PI*2;
+        targetRotationY=sphereGroup.rotation.y+delta;
+      }
       openPanel(clickedNode);
     } else if(isClick){
       selected.clear();
