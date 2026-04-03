@@ -906,10 +906,15 @@ function openPanel(n){
   h+=`<div class="preason">${n.reason}</div>`;
 
   // ── PaperGoat 리뷰 (CTA) ──
+  const isPlaceholder=reviewUrl==='https://papergoat.beehiiv.com/';
   h+=`<div style="margin:14px 0;padding:12px;background:rgba(91,155,245,.06);border:1px solid rgba(91,155,245,.15);border-radius:10px">
     <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">📝 PaperGoat 논문 리뷰</div>
-    <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px">${n.alias}의 핵심 아이디어를 비유와 다이어그램으로 쉽게 풀어낸 심층 해설</p>
-    <a class="plink" href="${reviewUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:var(--accent);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-weight:600;font-size:11px">리뷰 읽기 →</a>
+    <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px">${
+      isPlaceholder
+        ?`${n.alias} 심층 리뷰가 곧 업데이트됩니다`
+        :`${n.alias}의 핵심 아이디어를 비유와 다이어그램으로 쉽게 풀어낸 심층 해설`
+    }</p>
+    <a class="plink" href="${reviewUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:${isPlaceholder?'var(--muted)':'var(--accent)'};color:#fff;border:none;padding:5px 12px;border-radius:6px;font-weight:600;font-size:11px">${isPlaceholder?'Coming Soon':'리뷰 읽기 →'}</a>
   </div>`;
 
   // ── 한줄 소개 ──
