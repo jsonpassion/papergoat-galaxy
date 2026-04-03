@@ -116,36 +116,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .search{width:100px;font-size:16px;padding:5px 8px;border-radius:8px}
   .theme-btn{padding:4px 8px;font-size:12px}
 
-  .mob-toggle{display:block}
+  .mob-toggle{display:block;position:fixed;bottom:12px;left:12px;top:auto}
 
-  /* All panels: full width, auto-collapse */
-  .legend,.tl,.info{position:fixed !important;left:12px !important;width:calc(100vw - 24px) !important;border-radius:12px}
-  .legend.collapsed,.tl.collapsed,.info.collapsed{opacity:0;pointer-events:none;max-height:0 !important;padding:0 !important;border:none !important;overflow:hidden;margin:0}
+  /* All panels: bottom sheet, semi-transparent */
+  .legend,.tl,.info{
+    position:fixed !important;left:0 !important;right:0 !important;
+    width:100% !important;border-radius:16px 16px 0 0 !important;
+    background:var(--glass) !important;
+    backdrop-filter:blur(40px) saturate(1.8) !important;
+    -webkit-backdrop-filter:blur(40px) saturate(1.8) !important;
+    z-index:15 !important;
+  }
+  .legend.collapsed,.tl.collapsed,.info.collapsed{
+    opacity:0 !important;pointer-events:none !important;
+    transform:translateY(20px) !important;
+    max-height:0 !important;padding:0 !important;border:none !important;overflow:hidden;
+  }
 
-  .legend{top:82px !important;padding:6px;max-height:35vh;overflow-y:auto}
-  .leg-item{padding:4px 8px;font-size:11px;gap:5px}
-  .leg-chk{width:13px;height:13px;font-size:9px}
-  .leg-dot{width:8px;height:8px}
-  .leg-count{font-size:9px}
-  .leg-all{font-size:10px;padding:4px}
+  /* Legend: bottom sheet */
+  .legend{
+    bottom:50px !important;top:auto !important;
+    padding:12px 16px !important;
+    max-height:45vh;overflow-y:auto;
+    display:flex;flex-direction:row !important;flex-wrap:wrap !important;gap:4px !important;
+    transition:opacity .2s,transform .2s !important;
+  }
+  .leg-item{padding:4px 8px;font-size:11px;gap:4px;flex:0 0 auto}
+  .leg-chk{width:12px;height:12px;font-size:8px}
+  .leg-dot{width:7px;height:7px}
+  .leg-count{font-size:9px;margin-left:2px}
+  .leg-all{flex-basis:100%;font-size:10px;padding:4px;border-top:1px solid var(--glass-border);margin-top:2px}
 
-  /* Sliders: horizontal, rows */
-  .tl{padding:10px 14px !important;gap:8px !important;flex-direction:column !important;flex-wrap:nowrap !important}
+  /* Sliders: horizontal rows, stacked */
+  .tl{
+    bottom:50px !important;top:auto !important;
+    padding:12px 16px !important;gap:6px !important;
+    flex-direction:column !important;flex-wrap:nowrap !important;
+    transition:opacity .2s,transform .2s !important;
+  }
   .tl .filter-col{flex-direction:row !important;width:100% !important;align-items:center;gap:8px}
   .tl .filter-label{font-size:10px;width:42px;flex-shrink:0}
   .tl .filter-val{font-size:10px;min-width:36px;text-align:right}
-  .tl .range-wrap-v{height:auto !important;width:auto !important;flex:1;overflow:visible}
-  .tl .range-wrap-v .range-track-v,.tl .range-wrap-v .range-fill-v{display:none}
+  .tl .range-wrap-v{
+    position:relative !important;height:28px !important;width:auto !important;flex:1;overflow:visible !important;
+  }
+  .tl .range-wrap-v .range-track-v,.tl .range-wrap-v .range-fill-v{display:none !important}
   .tl .range-wrap-v input[type=range]{
-    position:relative !important;writing-mode:horizontal-tb !important;direction:ltr !important;
+    position:absolute !important;writing-mode:horizontal-tb !important;direction:ltr !important;
     -webkit-appearance:none !important;appearance:none !important;
     width:100% !important;height:28px !important;transform:none !important;
-    left:0 !important;top:0 !important;pointer-events:auto !important;background:none !important;margin:0 !important;
+    left:0 !important;top:0 !important;pointer-events:none !important;background:none !important;margin:0 !important;
   }
   .tl .range-wrap-v input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--glass-border);border-radius:2px}
-  .tl .range-wrap-v input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,.6);margin-top:-8px}
+  .tl .range-wrap-v input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,.6);margin-top:-9px;pointer-events:auto}
 
-  .info{padding:8px 12px !important;font-size:9px}
+  .info{
+    bottom:50px !important;top:auto !important;
+    padding:10px 16px !important;font-size:9px;
+    transition:opacity .2s,transform .2s !important;
+  }
   .info-title{font-size:10px}
 
   .tip{display:none !important}
@@ -873,24 +902,28 @@ function bindEvents(){
 
   // Mobile: toggle filter panels
   const mobToggle=document.getElementById('mob-toggle');
-  let mobOpen=true;
-  mobToggle.addEventListener('click',()=>{
-    mobOpen=!mobOpen;
-    document.getElementById('legend').classList.toggle('collapsed',!mobOpen);
-    document.getElementById('tl-container').classList.toggle('collapsed',!mobOpen);
-    document.querySelector('.info').classList.toggle('collapsed',!mobOpen);
-    mobToggle.textContent=mobOpen?'☰ Filters':'☰ Show';
-    // Recalculate positions after transition
-    setTimeout(layoutSidebar, 100);
-    setTimeout(layoutSidebar, 350);
-  });
-  // Auto-collapse on mobile
-  if(window.innerWidth<=768){
-    mobOpen=false;
+  const mobPanels=['legend','tl-container'];
+  let mobState=-1; // -1=all hidden, 0=legend, 1=sliders
+  const mobLabels=['☰','✕'];
+  function mobHideAll(){
     document.getElementById('legend').classList.add('collapsed');
     document.getElementById('tl-container').classList.add('collapsed');
     document.querySelector('.info').classList.add('collapsed');
-    mobToggle.textContent='☰ Show';
+  }
+  mobToggle.addEventListener('click',()=>{
+    mobState++;
+    if(mobState>=mobPanels.length) mobState=-1;
+    mobHideAll();
+    if(mobState>=0){
+      document.getElementById(mobPanels[mobState]).classList.remove('collapsed');
+      mobToggle.textContent='✕';
+    } else {
+      mobToggle.textContent='☰';
+    }
+  });
+  if(window.innerWidth<=768){
+    mobHideAll();
+    mobToggle.textContent='☰';
   }
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
