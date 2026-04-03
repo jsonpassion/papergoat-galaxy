@@ -113,7 +113,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .stats{position:fixed;bottom:16px;right:16px;font-size:10px;color:var(--muted);z-index:10}
 .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);z-index:10;opacity:.5;transition:opacity 1s}
 
-/* ── Mobile toggle ── */
+/* ── Mobile sheet + toggle ── */
+.mob-sheet{display:contents} /* desktop: invisible wrapper */
 .mob-toggle{display:none;position:fixed;top:56px;left:12px;z-index:12;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:12px;color:var(--accent)}
 
 /* ── Mobile responsive ── */
@@ -127,22 +128,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   /* Filter toggle: bottom-right FAB, icon only */
   .mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;bottom:16px;right:16px;top:auto;left:auto;width:44px;height:44px;border-radius:50%;font-size:18px;padding:0;z-index:16;line-height:1}
 
-  /* Shared: bottom sheet style */
-  .legend,.tl,.info{
-    position:fixed !important;left:8px !important;right:8px !important;width:auto !important;
-    border-radius:14px !important;z-index:15 !important;
-    transition:opacity .2s,transform .2s !important;
+  /* Sheet container: holds both panels, no JS positioning needed */
+  .mob-sheet{
+    display:flex !important;flex-direction:column-reverse;gap:6px;
+    position:fixed;bottom:68px;left:8px;right:8px;z-index:15;
+    transition:opacity .2s,transform .2s;max-height:70vh;overflow-y:auto;
   }
-  .legend.collapsed,.tl.collapsed,.info.collapsed{
-    opacity:0 !important;pointer-events:none !important;transform:translateY(10px) !important;
-    max-height:0 !important;padding:0 !important;border:none !important;overflow:hidden;
-  }
+  .mob-sheet.collapsed{opacity:0;pointer-events:none;transform:translateY(10px)}
 
-  /* Legend: bottom, just above FAB */
+  /* Inside sheet: panels flow naturally, no fixed position */
+  .mob-sheet .legend,.mob-sheet .tl{
+    position:static !important;width:auto !important;top:auto !important;bottom:auto !important;
+    border-radius:12px !important;opacity:1 !important;
+  }
+  .info{display:none !important}
+
   .legend{
-    bottom:68px !important;top:auto !important;padding:10px 12px !important;
+    padding:10px 12px !important;
     display:grid !important;grid-template-columns:1fr 1fr !important;gap:2px 4px !important;
-    border-radius:12px !important;
   }
   .leg-item{padding:5px 8px;font-size:11px;gap:5px;border-radius:6px}
   .leg-chk{width:13px;height:13px;font-size:9px;border-radius:4px}
@@ -150,14 +153,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .leg-count{font-size:9px;margin-left:auto}
   .leg-all{grid-column:1/-1;font-size:10px;padding:5px;border-top:1px solid var(--glass-border);margin-top:2px;text-align:center}
 
-  /* Sliders: above legend */
   .tl{
     padding:10px 14px !important;gap:10px !important;
     flex-direction:column !important;flex-wrap:nowrap !important;
-    opacity:1 !important;
     border-radius:12px !important;
   }
-  .tl.ready{opacity:1 !important}
   .tl .filter-col{flex-direction:row !important;width:100% !important;align-items:center;gap:8px}
   .tl .filter-label{font-size:11px;width:40px;flex-shrink:0;font-weight:600}
   .tl .filter-val{font-size:11px;min-width:36px;text-align:right}
@@ -200,6 +200,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   <button class="theme-btn glass" id="theme-btn" title="Toggle theme">🌙</button>
 </div>
 <button class="mob-toggle glass" id="mob-toggle">☰</button>
+<div class="mob-sheet" id="mob-sheet">
 <div class="legend glass" id="legend"></div>
 <div class="tip glass" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>
 <div class="pnl" id="pnl"><button class="pnl-x" id="pnl-x">&times;</button><div id="pnl-c"></div></div>
@@ -226,6 +227,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   </div>
   <div class="leg-all" id="slider-reset" style="width:100%;flex-basis:100%;border-top:1px solid var(--glass-border);margin-top:0;padding-top:6px">All ✓</div>
 </div>
+</div><!-- /mob-sheet -->
 <div class="info glass">
   <div class="info-title">Guide</div>
   <div class="info-shapes">
@@ -916,30 +918,14 @@ function bindEvents(){
   // Mobile: toggle filter panels
   const mobToggle=document.getElementById('mob-toggle');
   let mobOpen=false;
-  function mobToggleAll(){
+  const mobSheet=document.getElementById('mob-sheet');
+  mobToggle.addEventListener('click',()=>{
     mobOpen=!mobOpen;
-    const leg=document.getElementById('legend');
-    const tl=document.getElementById('tl-container');
-    leg.classList.toggle('collapsed',!mobOpen);
-    tl.classList.toggle('collapsed',!mobOpen);
+    mobSheet.classList.toggle('collapsed',!mobOpen);
     mobToggle.textContent=mobOpen?'✕':'☰';
-    // Stack: legend at bottom, tl above legend
-    if(mobOpen){
-      const positionTl=()=>{
-        const legRect=leg.getBoundingClientRect();
-        if(legRect.height>0){
-          tl.style.bottom=(window.innerHeight-legRect.top+8)+'px';
-          tl.style.top='auto';
-        }
-      };
-      setTimeout(positionTl,80);
-      setTimeout(positionTl,200);
-    }
-  }
-  mobToggle.addEventListener('click',mobToggleAll);
+  });
   if(window.innerWidth<=768){
-    document.getElementById('legend').classList.add('collapsed');
-    document.getElementById('tl-container').classList.add('collapsed');
+    mobSheet.classList.add('collapsed');
     mobToggle.textContent='☰';
   }
   document.addEventListener('keydown',e=>{
