@@ -139,6 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
       <input type="range" id="sc-max" min="84" max="100" value="100">
     </div>
   </div>
+  <div class="leg-all" id="slider-reset" style="width:100%;border-top:1px solid var(--glass-border);margin-top:4px;padding-top:6px">All ✓</div>
 </div>
 <div class="info glass">
   <div class="info-title">Guide</div>
@@ -721,6 +722,11 @@ function bindEvents(){
   scMinEl.addEventListener('input',onScoreChange);
   scMaxEl.addEventListener('input',onScoreChange);
   onScoreChange.call(scMinEl);
+
+  document.getElementById('slider-reset').addEventListener('click',()=>{
+    tlMinEl.value=2012;tlMaxEl.value=2025;onTimelineChange.call(tlMinEl);
+    scMinEl.value=84;scMaxEl.value=100;onScoreChange.call(scMinEl);
+  });
 
   document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
   document.addEventListener('keydown',e=>{
