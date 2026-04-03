@@ -852,13 +852,15 @@ function bindEvents(){
 
   const searchEl=document.getElementById('search');
   searchEl.addEventListener('input',e=>{query=e.target.value;updateVis()});
-  // iOS Safari: prevent scroll jump on focus
+  // iOS Safari: prevent viewport shift on keyboard open
   searchEl.addEventListener('focus',()=>{
-    setTimeout(()=>{window.scrollTo(0,0);document.body.scrollTop=0},100);
+    document.documentElement.style.position='fixed';
+    document.documentElement.style.width='100%';
   });
   searchEl.addEventListener('blur',()=>{
-    window.scrollTo(0,0);document.body.scrollTop=0;
-    onResize();
+    document.documentElement.style.position='';
+    document.documentElement.style.width='';
+    window.scrollTo(0,0);
   });
 
   const tlMinEl=document.getElementById('tl-min');
