@@ -126,13 +126,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .leg-count{font-size:9px}
   .leg-all{font-size:10px;padding:4px}
 
-  .tl{left:12px;width:150px;padding:8px 10px;gap:12px;border-radius:12px}
+  .tl{left:12px;width:150px;padding:8px 10px;gap:6px;border-radius:12px;flex-direction:column}
   .tl.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
-  .tl .filter-col{width:45px}
-  .tl .filter-label{font-size:8px}
-  .tl .filter-val{font-size:9px}
-  .tl .range-wrap-v{height:80px}
-  .tl .range-wrap-v input[type=range]{width:80px}
+  .tl .filter-col{flex-direction:row;width:100%;align-items:center;gap:6px}
+  .tl .filter-label{font-size:9px;width:36px}
+  .tl .filter-val{font-size:9px;min-width:36px}
+  .tl .range-wrap-v{height:auto;width:100%;overflow:visible}
+  .tl .range-wrap-v .range-track-v{display:none}
+  .tl .range-wrap-v .range-fill-v{display:none}
+  .tl .range-wrap-v input[type=range]{position:relative;writing-mode:horizontal-tb;direction:ltr;-webkit-appearance:none;appearance:none;width:100%;height:20px;transform:none;left:0;top:0;pointer-events:auto;background:none}
+  .tl .range-wrap-v input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--glass-border);border-radius:2px}
+  .tl .range-wrap-v input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,.6);margin-top:-6px}
 
   .info{left:12px;width:150px;padding:8px 10px;border-radius:12px;font-size:9px}
   .info.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
@@ -671,15 +675,23 @@ function onResize(){
 }
 
 function layoutSidebar(){
-  // Stack: legend → filters → guide, no overlap
   const legend=document.getElementById('legend');
   const tl=document.getElementById('tl-container');
   const info=document.querySelector('.info');
   if(!legend||!tl||!info) return;
-  const legBottom=legend.getBoundingClientRect().bottom;
-  tl.style.top=(legBottom+8)+'px';
-  const tlBottom=tl.getBoundingClientRect().bottom;
-  info.style.top=(tlBottom+8)+'px';
+  // Skip layout if collapsed
+  if(legend.classList.contains('collapsed')){
+    tl.style.top='0';info.style.top='0';
+    return;
+  }
+  const gap=6;
+  const legRect=legend.getBoundingClientRect();
+  tl.style.top=(legRect.bottom+gap)+'px';
+  // Wait for tl to reflow
+  requestAnimationFrame(()=>{
+    const tlRect=tl.getBoundingClientRect();
+    info.style.top=(tlRect.bottom+gap)+'px';
+  });
   info.style.bottom='auto';
 }
 
@@ -856,8 +868,9 @@ function bindEvents(){
     document.getElementById('tl-container').classList.toggle('collapsed',!mobOpen);
     document.querySelector('.info').classList.toggle('collapsed',!mobOpen);
     mobToggle.textContent=mobOpen?'☰ Filters':'☰ Show';
-    // Recalculate positions after toggle animation
-    setTimeout(layoutSidebar, 50);
+    // Recalculate positions after transition
+    setTimeout(layoutSidebar, 100);
+    setTimeout(layoutSidebar, 350);
   });
   // Auto-collapse on mobile
   if(window.innerWidth<=768){
