@@ -911,11 +911,15 @@ function bindEvents(){
     mobToggle.textContent=mobOpen?'✕':'☰';
     // Stack: legend at bottom, tl above legend
     if(mobOpen){
-      setTimeout(()=>{
+      const positionTl=()=>{
         const legRect=leg.getBoundingClientRect();
-        tl.style.bottom=(window.innerHeight-legRect.top+6)+'px';
-        tl.style.top='auto';
-      },50);
+        if(legRect.height>0){
+          tl.style.bottom=(window.innerHeight-legRect.top+8)+'px';
+          tl.style.top='auto';
+        }
+      };
+      setTimeout(positionTl,80);
+      setTimeout(positionTl,200);
     }
   }
   mobToggle.addEventListener('click',mobToggleAll);
