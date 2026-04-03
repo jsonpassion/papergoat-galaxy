@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>PaperGoat Galaxy — AI Top 100</title>
 <style>
 :root{
@@ -22,8 +22,8 @@
   --shadow:0 8px 32px rgba(0,0,0,.08),inset 0 1px 0 var(--glass-shine);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;transition:background .4s,color .4s}
-#scene{position:fixed;inset:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;transition:background .4s,color .4s;touch-action:none;-webkit-touch-callout:none}
+#scene{position:fixed;inset:0;touch-action:none}
 
 /* ── Liquid Glass base ── */
 .glass{
@@ -81,7 +81,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .pnl .pcdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 4px currentColor}
 .pnl .plink{display:inline-block;margin-top:10px;color:var(--accent);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid var(--glass-border);transition:all .15s}.pnl .plink:hover{background:rgba(91,155,245,.08);border-color:var(--accent)}
 
-.tl{position:fixed;left:20px;z-index:10;border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:20px;bottom:auto;width:180px;justify-content:center}
+.tl{position:fixed;left:20px;z-index:10;border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:20px;bottom:auto;width:180px;justify-content:center;opacity:0}
+.tl.ready,.info.ready{opacity:1}
 .tl .filter-col{display:flex;flex-direction:column;align-items:center;gap:4px;width:50px}
 .tl .filter-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .tl .filter-val{font-size:10px;font-weight:600;color:var(--accent);text-align:center;white-space:nowrap}
@@ -94,7 +95,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .tl .range-wrap-v input[type=range]::-moz-range-track{background:none;border:none;height:4px}
 .tl .range-wrap-v input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--accent);cursor:pointer;pointer-events:auto;border:1.5px solid rgba(255,255,255,.6)}
 
-.info{position:fixed;left:20px;z-index:10;border-radius:14px;padding:10px 14px;width:180px;font-size:10px;color:var(--muted);line-height:1.6}
+.info{position:fixed;left:20px;z-index:10;border-radius:14px;padding:10px 14px;width:180px;font-size:10px;color:var(--muted);line-height:1.6;opacity:0}
 .info-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:4px}
 .info-shapes{display:flex;flex-direction:column;gap:3px;margin:6px 0 4px}
 .info-shape{display:flex;align-items:center;gap:6px;font-size:10px;white-space:nowrap}
@@ -112,13 +113,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 @media(max-width:768px){
   .hdr{padding:10px 12px;gap:8px}
   .logo{font-size:14px}
-  .search{width:120px;font-size:12px;padding:6px 10px;border-radius:10px}
+  .search{width:120px;font-size:16px;padding:6px 10px;border-radius:10px}
   .theme-btn{padding:5px 8px;font-size:12px}
 
   .mob-toggle{display:block}
 
   .legend{top:88px;left:12px;width:150px;padding:5px 4px;border-radius:12px;max-height:50vh;overflow-y:auto}
-  .legend,.tl,.info{transition:max-height .3s,padding .3s,opacity .3s}
+  .legend,.tl,.info{transition:max-height .3s,padding .3s,opacity .3s,top .3s}
   .legend.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
   .leg-item{padding:3px 8px;font-size:11px;gap:4px}
   .leg-chk{width:12px;height:12px;font-size:8px}
@@ -144,7 +145,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .info-shapes{gap:2px}
   .info-shape{font-size:9px}
 
-  .tip{max-width:240px;padding:10px 12px;border-radius:10px;font-size:11px}
+  .tip{max-width:240px;padding:10px 12px;border-radius:10px;font-size:11px;display:none}
   .tip-alias{font-size:14px}
   .tip-title{font-size:10px}
   .tip-reason{font-size:11px}
@@ -687,10 +688,11 @@ function layoutSidebar(){
   const gap=6;
   const legRect=legend.getBoundingClientRect();
   tl.style.top=(legRect.bottom+gap)+'px';
-  // Wait for tl to reflow
   requestAnimationFrame(()=>{
     const tlRect=tl.getBoundingClientRect();
     info.style.top=(tlRect.bottom+gap)+'px';
+    tl.classList.add('ready');
+    info.classList.add('ready');
   });
   info.style.bottom='auto';
 }
@@ -762,6 +764,17 @@ function doRaycast(e){
 }
 
 function bindEvents(){
+  // Prevent browser zoom/scroll on canvas
+  renderer.domElement.addEventListener('touchstart',e=>{e.preventDefault()},{passive:false});
+  renderer.domElement.addEventListener('touchmove',e=>{e.preventDefault()},{passive:false});
+  // Prevent double-tap zoom
+  let lastTap=0;
+  renderer.domElement.addEventListener('touchend',e=>{
+    const now=Date.now();
+    if(now-lastTap<300) e.preventDefault();
+    lastTap=now;
+  },{passive:false});
+
   let pDown=false,pStartX=0,pStartY=0;
   renderer.domElement.addEventListener('pointermove',e=>{
     hovered=doRaycast(e);
