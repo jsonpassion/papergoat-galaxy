@@ -168,7 +168,7 @@ let scene, camera, renderer, composer, bloomPass, controls, raycaster, mouse;
 let sphereGroup, edgeGroup;
 let hovered=null, selected=new Set(); // multi-select
 let activeClusters=new Set(), query='', tlMin=2012, tlMax=2025, scMin=84, scMax=100;
-let targetRotationY=null; // for smooth rotate-to-node
+let targetRotationY=null, targetZoom=null; // for smooth rotate/zoom-to-node
 let isDark=true;
 const RADIUS=5;
 
@@ -436,13 +436,20 @@ function animate(){
   // Smooth rotate to clicked node, or slow auto-rotate
   if(targetRotationY!==null){
     let diff=targetRotationY-sphereGroup.rotation.y;
-    // Shortest path wrap
     while(diff>Math.PI) diff-=Math.PI*2;
     while(diff<-Math.PI) diff+=Math.PI*2;
     sphereGroup.rotation.y+=diff*0.04;
     if(Math.abs(diff)<0.005) targetRotationY=null;
   } else {
     sphereGroup.rotation.y+=hovered?0.000005:0.00015;
+  }
+  // Smooth zoom out if too close
+  if(targetZoom!==null){
+    const dir=camera.position.clone().normalize();
+    const curDist=camera.position.length();
+    const newDist=curDist+(targetZoom-curDist)*0.05;
+    camera.position.copy(dir.multiplyScalar(newDist));
+    if(Math.abs(newDist-targetZoom)<0.1) targetZoom=null;
   }
   edgeGroup.rotation.y=sphereGroup.rotation.y;
 
@@ -690,6 +697,9 @@ function bindEvents(){
       const camAngle=Math.atan2(camera.position.x, camera.position.z);
       // We want: nodeLocalAngle + targetRot = camAngle → targetRot = camAngle - nodeLocalAngle
       targetRotationY=camAngle-nodeLocalAngle;
+      // If zoomed in too close, ease out to comfortable distance
+      const dist=camera.position.length();
+      if(dist<10) targetZoom=12;
       openPanel(clickedNode);
     } else if(isClick){
       selected.clear();
