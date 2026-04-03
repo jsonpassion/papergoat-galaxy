@@ -167,7 +167,8 @@ let DATA, clusters, nodeMap={}, meshMap={};
 let scene, camera, renderer, composer, bloomPass, controls, raycaster, mouse;
 let sphereGroup, edgeGroup;
 let hovered=null, selected=new Set(); // multi-select
-let activeClusters=new Set(), query='', tlMin=2012, tlMax=2025, scMin=84, scMax=100;
+let activeClusters=new Set(), query='';
+let tlMin, tlMax, scMin, scMax; // set from data
 let targetRotationY=null, targetZoom=null; // for smooth rotate/zoom-to-node
 let isDark=true;
 const RADIUS=5;
@@ -271,6 +272,27 @@ async function init(){
   raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
 
   const r=await fetch('./papers.json'); DATA=await r.json(); clusters=DATA.clusters;
+
+  // Derive filter ranges from data
+  const years=DATA.papers.map(p=>p.year);
+  const scores=DATA.papers.map(p=>p.score);
+  const dataYearMin=Math.min(...years), dataYearMax=Math.max(...years);
+  const dataScoreMin=Math.min(...scores), dataScoreMax=Math.max(...scores);
+  tlMin=dataYearMin; tlMax=dataYearMax;
+  scMin=dataScoreMin; scMax=dataScoreMax;
+
+  // Update slider DOM to match data ranges
+  ['tl-min','tl-max'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.min=dataYearMin; el.max=dataYearMax;
+    el.value=id==='tl-min'?dataYearMin:dataYearMax;
+  });
+  ['sc-min','sc-max'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.min=dataScoreMin; el.max=dataScoreMax;
+    el.value=id==='sc-min'?dataScoreMin:dataScoreMax;
+  });
+
   sphereGroup=new THREE.Group(); edgeGroup=new THREE.Group();
   scene.add(sphereGroup); scene.add(edgeGroup);
 
@@ -731,10 +753,10 @@ function bindEvents(){
     // Prevent crossing — swap values if needed
     if(lo>hi){ const tmp=lo; lo=hi; hi=tmp; tlMinEl.value=lo; tlMaxEl.value=hi; }
     tlMin=lo; tlMax=hi;
-    document.getElementById('yr').textContent=(lo===2012&&hi===2025)?'All':`${lo}–${hi}`;
+    document.getElementById('yr').textContent=(lo===+tlMinEl.min&&hi===+tlMinEl.max)?'All':`${lo}–${hi}`;
     // Update fill bar
-    const pct0=(lo-2012)/(2025-2012)*100;
-    const pct1=(hi-2012)/(2025-2012)*100;
+    const pct0=(lo-tlMinEl.min)/(tlMinEl.max-tlMinEl.min)*100;
+    const pct1=(hi-tlMinEl.min)/(tlMinEl.max-tlMinEl.min)*100;
     document.getElementById('tl-fill').style.bottom=pct0+'%';
     document.getElementById('tl-fill').style.height=(pct1-pct0)+'%';
     updateVis();
@@ -752,9 +774,9 @@ function bindEvents(){
     let lo=+scMinEl.value, hi=+scMaxEl.value;
     if(lo>hi){ const tmp=lo; lo=hi; hi=tmp; scMinEl.value=lo; scMaxEl.value=hi; }
     scMin=lo; scMax=hi;
-    document.getElementById('sc-display').textContent=(lo===84&&hi===100)?'All':`${lo}–${hi}`;
-    const pct0=(lo-84)/(100-84)*100;
-    const pct1=(hi-84)/(100-84)*100;
+    document.getElementById('sc-display').textContent=(lo===+scMinEl.min&&hi===+scMinEl.max)?'All':`${lo}–${hi}`;
+    const pct0=(lo-scMinEl.min)/(scMinEl.max-scMinEl.min)*100;
+    const pct1=(hi-scMinEl.min)/(scMinEl.max-scMinEl.min)*100;
     document.getElementById('sc-fill').style.bottom=pct0+'%';
     document.getElementById('sc-fill').style.height=(pct1-pct0)+'%';
     updateVis();
@@ -764,8 +786,8 @@ function bindEvents(){
   onScoreChange.call(scMinEl);
 
   document.getElementById('slider-reset').addEventListener('click',()=>{
-    tlMinEl.value=2012;tlMaxEl.value=2025;onTimelineChange.call(tlMinEl);
-    scMinEl.value=84;scMaxEl.value=100;onScoreChange.call(scMinEl);
+    tlMinEl.value=tlMinEl.min;tlMaxEl.value=tlMaxEl.max;onTimelineChange.call(tlMinEl);
+    scMinEl.value=scMinEl.min;scMaxEl.value=scMaxEl.max;onScoreChange.call(scMinEl);
   });
 
   document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
@@ -773,8 +795,8 @@ function bindEvents(){
     if(e.key==='Escape'){
       selected.clear();closePanel();query='';document.getElementById('search').value='';
       activeClusters.clear();refreshLegendUI();
-      tlMinEl.value=2012;tlMaxEl.value=2025;onTimelineChange.call(tlMinEl);
-      scMinEl.value=84;scMaxEl.value=100;onScoreChange.call(scMinEl);
+      tlMinEl.value=tlMinEl.min;tlMaxEl.value=tlMaxEl.max;onTimelineChange.call(tlMinEl);
+      scMinEl.value=scMinEl.min;scMaxEl.value=scMaxEl.max;onScoreChange.call(scMinEl);
     }
   });
 
