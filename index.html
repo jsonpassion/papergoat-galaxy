@@ -104,6 +104,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .light .node-label{color:#1a1a2e;background:rgba(255,255,255,.55);backdrop-filter:blur(8px);border-color:rgba(180,185,210,.3);box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .stats{position:fixed;bottom:16px;right:16px;font-size:10px;color:var(--muted);z-index:10}
 .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);z-index:10;opacity:.5;transition:opacity 1s}
+
+/* ── Mobile toggle ── */
+.mob-toggle{display:none;position:fixed;top:56px;left:12px;z-index:12;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:12px;color:var(--accent)}
+
+/* ── Mobile responsive ── */
+@media(max-width:768px){
+  .hdr{padding:10px 12px;gap:8px}
+  .logo{font-size:14px}
+  .search{width:120px;font-size:12px;padding:6px 10px;border-radius:10px}
+  .theme-btn{padding:5px 8px;font-size:12px}
+
+  .mob-toggle{display:block}
+
+  .legend{top:88px;left:12px;width:150px;padding:5px 4px;border-radius:12px;max-height:50vh;overflow-y:auto}
+  .legend.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
+  .leg-item{padding:3px 8px;font-size:11px;gap:4px}
+  .leg-chk{width:12px;height:12px;font-size:8px}
+  .leg-dot{width:7px;height:7px}
+  .leg-count{font-size:9px}
+  .leg-all{font-size:10px;padding:4px}
+
+  .tl{left:12px;width:150px;padding:8px 10px;gap:12px;border-radius:12px}
+  .tl.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
+  .tl .filter-col{width:45px}
+  .tl .filter-label{font-size:8px}
+  .tl .filter-val{font-size:9px}
+  .tl .range-wrap-v{height:80px}
+  .tl .range-wrap-v input[type=range]{width:80px}
+
+  .info{left:12px;width:150px;padding:8px 10px;border-radius:12px;font-size:9px}
+  .info.collapsed{max-height:0;padding:0;border:none;overflow:hidden;opacity:0}
+  .info-title{font-size:10px}
+  .info-shapes{gap:2px}
+  .info-shape{font-size:9px}
+
+  .tip{max-width:240px;padding:10px 12px;border-radius:10px;font-size:11px}
+  .tip-alias{font-size:14px}
+  .tip-title{font-size:10px}
+  .tip-reason{font-size:11px}
+
+  .pnl{width:85vw;max-width:340px;padding:16px}
+  .pnl .pa{font-size:18px}
+  .pnl .pt{font-size:12px}
+
+  .node-label{font-size:9px;padding:1px 5px}
+
+  .hint{font-size:9px;bottom:8px}
+  .stats{font-size:9px;bottom:8px;right:12px}
+}
 </style>
 </head>
 <body>
@@ -115,6 +164,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   <input class="search glass" placeholder="Search papers..." id="search">
   <button class="theme-btn glass" id="theme-btn" title="Toggle theme">🌙</button>
 </div>
+<button class="mob-toggle glass" id="mob-toggle">☰ Filters</button>
 <div class="legend glass" id="legend"></div>
 <div class="tip glass" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>
 <div class="pnl" id="pnl"><button class="pnl-x" id="pnl-x">&times;</button><div id="pnl-c"></div></div>
@@ -709,7 +759,8 @@ function bindEvents(){
   renderer.domElement.addEventListener('pointerdown',e=>{pDown=true;pStartX=e.clientX;pStartY=e.clientY;lastClickEvent=e});
   renderer.domElement.addEventListener('pointerup',e=>{
     const dist=Math.abs(e.clientX-pStartX)+Math.abs(e.clientY-pStartY);
-    const isClick=dist<10; // less than 10px = click, not drag
+    const isMobile=window.innerWidth<=768;
+    const isClick=dist<(isMobile?20:10); // wider threshold on mobile
     if(isClick&&hovered){
       if(lastClickEvent&&lastClickEvent.shiftKey){
         // Multi-select toggle with Shift
@@ -792,6 +843,26 @@ function bindEvents(){
   });
 
   document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
+
+  // Mobile: toggle filter panels
+  const mobToggle=document.getElementById('mob-toggle');
+  let mobOpen=true;
+  mobToggle.addEventListener('click',()=>{
+    mobOpen=!mobOpen;
+    document.getElementById('legend').classList.toggle('collapsed',!mobOpen);
+    document.getElementById('tl-container').classList.toggle('collapsed',!mobOpen);
+    document.querySelector('.info').classList.toggle('collapsed',!mobOpen);
+    mobToggle.textContent=mobOpen?'☰ Filters':'☰ Show';
+    if(!mobOpen) layoutSidebar();
+  });
+  // Auto-collapse on mobile
+  if(window.innerWidth<=768){
+    mobOpen=false;
+    document.getElementById('legend').classList.add('collapsed');
+    document.getElementById('tl-container').classList.add('collapsed');
+    document.querySelector('.info').classList.add('collapsed');
+    mobToggle.textContent='☰ Show';
+  }
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
       selected.clear();closePanel();query='';document.getElementById('search').value='';
