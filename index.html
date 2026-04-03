@@ -907,14 +907,18 @@ function openPanel(n){
 
   // ── PaperGoat 리뷰 (CTA) ──
   const isPlaceholder=reviewUrl==='https://papergoat.beehiiv.com/';
-  h+=`<div style="margin:14px 0;padding:12px;background:rgba(91,155,245,.06);border:1px solid rgba(91,155,245,.15);border-radius:10px">
-    <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">📝 PaperGoat 논문 리뷰</div>
-    <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px">${
+  h+=`<div style="margin:16px 0;padding:14px 16px;background:linear-gradient(135deg,rgba(91,155,245,.12),rgba(139,92,246,.08));border:1px solid rgba(91,155,245,.25);border-radius:14px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-10px;right:-10px;font-size:40px;opacity:.06;pointer-events:none">🐐</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+      <span style="font-size:16px">📝</span>
+      <span style="font-size:13px;font-weight:700;color:var(--accent)">PaperGoat 논문 리뷰</span>
+    </div>
+    <p style="font-size:12px;color:var(--text);line-height:1.6;margin-bottom:10px;opacity:.85">${
       isPlaceholder
-        ?`${n.alias} 심층 리뷰가 곧 업데이트됩니다`
-        :`${n.alias}의 핵심 아이디어를 비유와 다이어그램으로 쉽게 풀어낸 심층 해설`
+        ?`<strong>${n.alias}</strong> 심층 리뷰가 곧 업데이트됩니다`
+        :`<strong>${n.alias}</strong>의 핵심 아이디어를 비유와 다이어그램으로 쉽게 풀어낸 심층 해설`
     }</p>
-    <a class="plink" href="${reviewUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:${isPlaceholder?'var(--muted)':'var(--accent)'};color:#fff;border:none;padding:5px 12px;border-radius:6px;font-weight:600;font-size:11px">${isPlaceholder?'Coming Soon':'리뷰 읽기 →'}</a>
+    <a href="${reviewUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:${isPlaceholder?'var(--muted)':'var(--accent)'};color:#fff;border:none;padding:7px 16px;border-radius:8px;font-weight:600;font-size:12px;text-decoration:none;box-shadow:0 2px 8px ${isPlaceholder?'rgba(0,0,0,.15)':'rgba(91,155,245,.3)'};transition:transform .15s,box-shadow .15s;letter-spacing:-.2px" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''">${isPlaceholder?'Coming Soon':'리뷰 읽기 →'}</a>
   </div>`;
 
   // ── 한줄 소개 ──
