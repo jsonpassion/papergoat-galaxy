@@ -96,7 +96,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .tl .range-wrap-v input[type=range]::-moz-range-track{background:none;border:none;height:4px}
 .tl .range-wrap-v input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--accent);cursor:pointer;pointer-events:auto;border:1.5px solid rgba(255,255,255,.6)}
 
-.info{position:fixed;left:20px;z-index:10;border-radius:14px;padding:10px 14px;width:180px;font-size:10px;color:var(--muted);line-height:1.6;opacity:0}
+.info{position:fixed;right:20px;top:56px;z-index:10;border-radius:14px;padding:10px 14px;width:180px;font-size:10px;color:var(--muted);line-height:1.6;opacity:1}
 .info-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:4px}
 .info-shapes{display:flex;flex-direction:column;gap:3px;margin:6px 0 4px}
 .info-shape{display:flex;align-items:center;gap:6px;font-size:10px;white-space:nowrap}
@@ -699,25 +699,20 @@ function onResize(){
 }
 
 function layoutSidebar(){
-  if(window.innerWidth<=768) return; // mobile uses CSS positioning
+  if(window.innerWidth<=768) return;
   const legend=document.getElementById('legend');
   const tl=document.getElementById('tl-container');
-  const info=document.querySelector('.info');
-  if(!legend||!tl||!info) return;
+  if(!legend||!tl) return;
   if(legend.classList.contains('collapsed')){
-    tl.style.top='0';info.style.top='0';
+    tl.style.top='0';
     return;
   }
   const gap=6;
   const legRect=legend.getBoundingClientRect();
   tl.style.top=(legRect.bottom+gap)+'px';
   requestAnimationFrame(()=>{
-    const tlRect=tl.getBoundingClientRect();
-    info.style.top=(tlRect.bottom+gap)+'px';
     tl.classList.add('ready');
-    info.classList.add('ready');
   });
-  info.style.bottom='auto';
 }
 
 // Zoom-based label fade (Obsidian-style) — all nodes get labels
