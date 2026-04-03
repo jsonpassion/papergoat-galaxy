@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>PaperGoat Galaxy — AI Top 100</title>
 <style>
 :root{
@@ -22,7 +22,8 @@
   --shadow:0 8px 32px rgba(0,0,0,.08),inset 0 1px 0 var(--glass-shine);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;height:100dvh;transition:background .4s,color .4s;touch-action:none;-webkit-touch-callout:none}
+html,body{height:100%;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;position:fixed;inset:0;transition:background .4s,color .4s;touch-action:none;-webkit-touch-callout:none}
 #scene{position:fixed;inset:0;touch-action:none}
 
 /* ── Liquid Glass base ── */
@@ -131,10 +132,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
     max-height:0 !important;padding:0 !important;border:none !important;overflow:hidden;
   }
 
-  /* Legend: bottom, horizontal wrap, compact */
+  /* Legend: bottom sheet, grid layout */
   .legend{
     bottom:70px !important;top:auto !important;padding:10px 12px !important;
     display:grid !important;grid-template-columns:1fr 1fr !important;gap:2px 4px !important;
+    border-radius:12px 12px 0 0 !important;
   }
   .leg-item{padding:5px 8px;font-size:11px;gap:5px;border-radius:6px}
   .leg-chk{width:13px;height:13px;font-size:9px;border-radius:4px}
@@ -142,12 +144,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .leg-count{font-size:9px;margin-left:auto}
   .leg-all{grid-column:1/-1;font-size:10px;padding:5px;border-top:1px solid var(--glass-border);margin-top:2px;text-align:center}
 
-  /* Sliders: bottom sheet */
+  /* Sliders: above legend */
   .tl{
-    bottom:70px !important;top:auto !important;
-    padding:12px 14px !important;gap:10px !important;
+    padding:10px 14px !important;gap:10px !important;
     flex-direction:column !important;flex-wrap:nowrap !important;
     opacity:1 !important;
+    border-radius:12px !important;
   }
   .tl.ready{opacity:1 !important}
   .tl .filter-col{flex-direction:row !important;width:100% !important;align-items:center;gap:8px}
@@ -895,20 +897,28 @@ function bindEvents(){
 
   // Mobile: toggle filter panels
   const mobToggle=document.getElementById('mob-toggle');
-  const mobIds=['legend','tl-container'];
-  let mobIdx=-1; // -1=closed, 0=legend, 1=year/score
-  function mobSetPanel(idx){
-    mobIdx=idx;
-    mobIds.forEach(id=>document.getElementById(id).classList.add('collapsed'));
-    if(idx>=0){
-      document.getElementById(mobIds[idx]).classList.remove('collapsed');
-      mobToggle.textContent='✕';
-    } else {
-      mobToggle.textContent='☰';
+  let mobOpen=false;
+  function mobToggleAll(){
+    mobOpen=!mobOpen;
+    const leg=document.getElementById('legend');
+    const tl=document.getElementById('tl-container');
+    leg.classList.toggle('collapsed',!mobOpen);
+    tl.classList.toggle('collapsed',!mobOpen);
+    mobToggle.textContent=mobOpen?'✕':'☰';
+    // Position tl above legend
+    if(mobOpen){
+      requestAnimationFrame(()=>{
+        const legRect=leg.getBoundingClientRect();
+        tl.style.bottom=(window.innerHeight-legRect.top+4)+'px';
+        tl.style.top='auto';
+      });
     }
   }
-  mobToggle.addEventListener('click',()=>mobSetPanel(mobIdx>=mobIds.length-1?-1:mobIdx+1));
-  if(window.innerWidth<=768) mobSetPanel(-1);
+  mobToggle.addEventListener('click',mobToggleAll);
+  if(window.innerWidth<=768){
+    document.getElementById('legend').classList.add('collapsed');
+    document.getElementById('tl-container').classList.add('collapsed');
+  }
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
       selected.clear();closePanel();query='';document.getElementById('search').value='';
