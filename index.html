@@ -55,7 +55,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .leg-all{display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;color:var(--accent);padding:5px 8px;cursor:pointer;border-top:1px solid var(--glass-border);margin-top:3px;border-radius:0 0 10px 10px;transition:background .15s}
 .leg-all:hover{background:rgba(59,130,246,.08)}
 
-.tip{position:fixed;pointer-events:none;z-index:20;border-radius:16px;padding:14px 16px;max-width:300px;opacity:0;transform:translateY(6px) scale(.97);transition:all .15s}
+.tip{position:fixed;pointer-events:none;z-index:20;border-radius:16px;padding:14px 16px;max-width:300px;opacity:0;transform:translateY(6px) scale(.97);transition:opacity .15s,transform .15s,left .08s,top .08s}
 .tip.show{opacity:1;transform:translateY(0) scale(1)}
 .tip-rank{font-size:10px;color:var(--muted)}.tip-alias{font-size:16px;font-weight:700;margin:2px 0}
 .tip-title{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:6px}
@@ -779,7 +779,7 @@ function bindEvents(){
   renderer.domElement.addEventListener('pointermove',e=>{
     hovered=doRaycast(e);
     renderer.domElement.style.cursor=hovered?'pointer':'grab';
-    showTip(e.clientX,e.clientY);
+    showTip();
   });
   let lastClickEvent=null;
   renderer.domElement.addEventListener('pointerdown',e=>{pDown=true;pStartX=e.clientX;pStartY=e.clientY;lastClickEvent=e});
@@ -933,9 +933,9 @@ function updateStats(){
   document.getElementById('stats').textContent=`${vis}/${DATA.papers.length}`;
 }
 
-function showTip(mx,my){
+function showTip(){
   const t=document.getElementById('tip');
-  if(!hovered){t.classList.remove('show');return}
+  if(!hovered||window.innerWidth<=768){t.classList.remove('show');return}
   const n=hovered,c=clusters[n.cluster]?.color||'#888';
   t.querySelector('.tip-rank').textContent=`#${n.rank} · ${n.year}`;
   t.querySelector('.tip-alias').textContent=n.alias;
@@ -944,10 +944,20 @@ function showTip(mx,my){
   t.querySelector('.tip-reason').textContent=n.reason;
   t.querySelector('.tip-cats').innerHTML=n.categories.map(x=>`<span class="tip-cat">#${x}</span>`).join('');
   t.querySelector('.tip-yr').textContent=n.has_review?'📄 리뷰 있음':'Click for details';
-  let tx=mx+16,ty=my+16;
-  if(tx+310>innerWidth) tx=mx-320;
-  if(ty+200>innerHeight) ty=my-210;
-  t.style.left=tx+'px';t.style.top=ty+'px';t.classList.add('show');
+  // Position at node's screen projection (not cursor)
+  const mesh=meshMap[n.id];
+  if(mesh){
+    const vec=new THREE.Vector3();
+    mesh.getWorldPosition(vec);
+    vec.project(camera);
+    let tx=(vec.x*0.5+0.5)*innerWidth+16;
+    let ty=(-vec.y*0.5+0.5)*innerHeight-20;
+    if(tx+300>innerWidth) tx=tx-330;
+    if(ty+180>innerHeight) ty=ty-200;
+    if(ty<10) ty=10;
+    t.style.left=tx+'px';t.style.top=ty+'px';
+  }
+  t.classList.add('show');
 }
 
 // ── Legend (multi-select) ──
