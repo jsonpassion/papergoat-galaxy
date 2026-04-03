@@ -872,61 +872,70 @@ function refreshLegendUI(){
 function openPanel(n){
   const p=document.getElementById('pnl');
   const c=clusters[n.cluster];
+  const reviewUrl=n.review_url||'https://papergoat.beehiiv.com/';
 
-  // Find connections: parents (influenced by) and children (influenced)
   const parents=[], children=[];
   DATA.edges.forEach(e=>{
     if(e.source===n.id&&nodeMap[e.target]) children.push(nodeMap[e.target]);
     if(e.target===n.id&&nodeMap[e.source]) parents.push(nodeMap[e.source]);
   });
-
-  // Find same-cluster peers (not connected, but same category)
   const peers=DATA.papers.filter(pp=>pp.cluster===n.cluster&&pp.id!==n.id)
     .sort((a,b)=>b.score-a.score).slice(0,5);
 
-  // Score bar visual
-  const scoreBar=`<div style="margin:8px 0 16px;display:flex;align-items:center;gap:8px">
+  let h='';
+
+  // ── Header ──
+  h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+    <span style="font-size:20px">${c.icon}</span>
+    <div>
+      <div style="font-size:10px;color:var(--muted)">${c.label} · #${n.rank} · ${n.year}</div>
+      <div class="pa" style="color:${c.color}">${n.alias}</div>
+    </div>
+  </div>`;
+  h+=`<div class="pt">${n.title}</div>`;
+
+  // ── Score bar ──
+  h+=`<div style="margin:6px 0 12px;display:flex;align-items:center;gap:8px">
     <span class="ps" style="background:${c.color}">Score ${n.score}</span>
-    <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+    <div style="flex:1;height:3px;background:var(--glass-border);border-radius:2px;overflow:hidden">
       <div style="width:${n.score}%;height:100%;background:${c.color};border-radius:2px"></div>
     </div>
   </div>`;
 
-  let h=`
-    <div class="pr">${c.icon} ${c.label} · #${n.rank} · ${n.year}</div>
-    <div class="pa" style="color:${c.color}">${n.alias}</div>
-    <div class="pt">${n.title}</div>
-    ${scoreBar}
-    <div class="preason">${n.reason}</div>`;
+  // ── 선정 이유 ──
+  h+=`<div class="preason">${n.reason}</div>`;
 
-  // One-liner
+  // ── PaperGoat 리뷰 (CTA) ──
+  h+=`<div style="margin:14px 0;padding:12px;background:rgba(91,155,245,.06);border:1px solid rgba(91,155,245,.15);border-radius:10px">
+    <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">📝 PaperGoat 논문 리뷰</div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px">${n.alias}의 핵심 아이디어를 비유와 다이어그램으로 쉽게 풀어낸 심층 해설</p>
+    <a class="plink" href="${reviewUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:var(--accent);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-weight:600;font-size:11px">리뷰 읽기 →</a>
+  </div>`;
+
+  // ── 한줄 소개 ──
   if(n.one_liner) h+=`<div class="psec">💡 한줄 소개</div><p style="font-size:13px;line-height:1.6;font-style:italic;opacity:.85">${n.one_liner}</p>`;
 
-  // Key discoveries
+  // ── 핵심 발견 ──
   if(n.key_discoveries?.length){
     h+=`<div class="psec">🔬 핵심 발견</div><ul class="pdisc">`+n.key_discoveries.map(d=>`<li>${typeof d==='string'?d:JSON.stringify(d)}</li>`).join('')+`</ul>`;
   }
 
-  // Categories
+  // ── 카테고리 ──
   h+=`<div class="psec">🏷️ 카테고리</div><div class="ptags">`+n.categories.map(x=>`<span class="ptag">#${x}</span>`).join('')+`</div>`;
 
-  // Parents (influenced by)
+  // ── 연결 논문 ──
   if(parents.length){
-    h+=`<div class="psec">⬆️ 기반 논문 (${parents.length})</div><div class="pconns">`+parents.map(cn=>{
+    h+=`<div class="psec">⬆️ 기반 논문</div><div class="pconns">`+parents.map(cn=>{
       const cc=clusters[cn.cluster]?.color||'#888';
       return `<div class="pconn" data-id="${cn.id}"><span class="pcdot" style="background:${cc}"></span><strong>${cn.alias}</strong> <span style="opacity:.4">#${cn.rank} · ${cn.year}</span></div>`;
     }).join('')+`</div>`;
   }
-
-  // Children (influenced)
   if(children.length){
-    h+=`<div class="psec">⬇️ 영향을 준 논문 (${children.length})</div><div class="pconns">`+children.map(cn=>{
+    h+=`<div class="psec">⬇️ 영향을 준 논문</div><div class="pconns">`+children.map(cn=>{
       const cc=clusters[cn.cluster]?.color||'#888';
       return `<div class="pconn" data-id="${cn.id}"><span class="pcdot" style="background:${cc}"></span><strong>${cn.alias}</strong> <span style="opacity:.4">#${cn.rank} · ${cn.year}</span></div>`;
     }).join('')+`</div>`;
   }
-
-  // Same cluster peers
   if(peers.length){
     h+=`<div class="psec">🔗 같은 분야</div><div class="pconns">`+peers.map(cn=>{
       const cc=clusters[cn.cluster]?.color||'#888';
@@ -934,14 +943,13 @@ function openPanel(n){
     }).join('')+`</div>`;
   }
 
-  // Links
-  h+=`<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">`;
+  // ── 외부 링크 ──
+  h+=`<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--glass-border);display:flex;flex-wrap:wrap;gap:8px">`;
   if(n.url) h+=`<a class="plink" href="${n.url}" target="_blank">📄 논문 원문 ↗</a>`;
-  if(n.review_html) h+=`<a class="plink" href="../${n.review_html}" target="_blank" style="margin-left:12px">📝 PaperGoat 리뷰 ↗</a>`;
+  h+=`<a class="plink" href="${reviewUrl}" target="_blank">🐐 PaperGoat ↗</a>`;
   h+=`</div>`;
 
-  // Multi-select hint
-  h+=`<p style="font-size:10px;color:var(--muted);margin-top:12px;opacity:.5">Shift+Click으로 다중 선택</p>`;
+  h+=`<p style="font-size:9px;color:var(--muted);margin-top:10px;opacity:.4">Shift+Click 다중선택 · ESC 초기화</p>`;
 
   document.getElementById('pnl-c').innerHTML=h;
   p.classList.add('open');
