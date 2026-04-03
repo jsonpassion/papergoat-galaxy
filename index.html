@@ -175,7 +175,7 @@ const RADIUS=5;
 async function init(){
   scene=new THREE.Scene();
   camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,100);
-  camera.position.set(0,3,14);
+  camera.position.set(0, RADIUS*0.6, RADIUS*2.8);
 
   renderer=new THREE.WebGLRenderer({antialias:true});
   renderer.setSize(innerWidth,innerHeight);
@@ -196,7 +196,7 @@ async function init(){
 
   controls=new OrbitControls(camera,renderer.domElement);
   controls.enableDamping=true; controls.dampingFactor=0.05;
-  controls.rotateSpeed=0.5; controls.minDistance=6; controls.maxDistance=25;
+  controls.rotateSpeed=0.5; controls.minDistance=RADIUS*1.2; controls.maxDistance=RADIUS*5;
   controls.autoRotate=false; controls.enablePan=false;
 
   scene.add(new THREE.AmbientLight(0xffffff,0.6));
@@ -626,7 +626,8 @@ function updateLabels(){
   const vec=new THREE.Vector3();
   const camDist=camera.position.length(); // zoom level
   // Zoom thresholds: at 14 (default) show score≥88, zoomed in shows more
-  const zoomThreshold=camDist>20?99:camDist>15?96:camDist>12?93:camDist>9?88:camDist>7?84:0;
+  const R=RADIUS;
+  const zoomThreshold=camDist>R*4?99:camDist>R*3?96:camDist>R*2.4?93:camDist>R*1.8?88:camDist>R*1.4?84:0;
 
   for(const[id,el]of Object.entries(labelEls)){
     const mesh=meshMap[id];
@@ -708,7 +709,7 @@ function bindEvents(){
       targetRotationY=camAngle-nodeLocalAngle;
       // If zoomed in too close, ease out to comfortable distance
       const dist=camera.position.length();
-      if(dist<10) targetZoom=12;
+      if(dist<RADIUS*2) targetZoom=RADIUS*2.4;
       openPanel(clickedNode);
     } else if(isClick){
       selected.clear();
