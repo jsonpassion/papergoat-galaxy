@@ -151,7 +151,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 </div>
 <div class="stats" id="stats"></div>
 <div class="hint" id="hint">Drag to rotate · Scroll to zoom · Click a node · Shift+Click multi-select</div>
-<div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);opacity:.35;z-index:10">© PaperGoat 2026</div>
+<div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);opacity:.35;z-index:10">© PaperGoat Galaxy 2026</div>
 
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
@@ -660,8 +660,17 @@ function doRaycast(e){
   mouse.x=(e.clientX/innerWidth)*2-1;
   mouse.y=-(e.clientY/innerHeight)*2+1;
   raycaster.setFromCamera(mouse,camera);
-  const hits=raycaster.intersectObjects(sphereGroup.children);
-  for(const h of hits){ if(h.object.userData?._alpha>0.15) return h.object.userData; }
+  // Use scaled threshold for easier picking
+  const camDist=camera.position.length();
+  raycaster.params.Mesh={threshold:0};
+  // Intersect with recursive to catch rotated group
+  const hits=raycaster.intersectObjects(sphereGroup.children,false);
+  // Sort by distance and find closest visible node
+  hits.sort((a,b)=>a.distance-b.distance);
+  for(const h of hits){
+    const ud=h.object.userData;
+    if(ud?.id && ud._alpha>0.15) return ud;
+  }
   return null;
 }
 
@@ -676,7 +685,7 @@ function bindEvents(){
   renderer.domElement.addEventListener('pointerdown',e=>{pDown=true;pStartX=e.clientX;pStartY=e.clientY;lastClickEvent=e});
   renderer.domElement.addEventListener('pointerup',e=>{
     const dist=Math.abs(e.clientX-pStartX)+Math.abs(e.clientY-pStartY);
-    const isClick=dist<5; // less than 5px = click, not drag
+    const isClick=dist<10; // less than 10px = click, not drag
     if(isClick&&hovered){
       if(lastClickEvent&&lastClickEvent.shiftKey){
         // Multi-select toggle with Shift
