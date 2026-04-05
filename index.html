@@ -157,7 +157,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .mob-bar{display:none}
 .mob-reset-btn{display:none}
 
-@media(max-width:768px){
+@media(max-width:1024px){
   .hdr{padding:8px 12px;gap:6px}
   .logo{font-size:13px;flex-shrink:0}
   .search{width:auto;flex:1;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
@@ -196,7 +196,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .mob-bar{display:none}
 .mob-reset-btn{display:none}
 
-@media(max-width:768px){
+@media(max-width:1024px){
   .hdr{padding:8px 12px;gap:6px}
   .logo{font-size:13px;flex-shrink:0}
   .search{width:auto;flex:1;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
@@ -828,10 +828,23 @@ function onResize(){
   renderer.setSize(w,h,false);
   composer.setSize(w,h);
   layoutSidebar();
+  // Clean up mobile-state classes when resizing across the breakpoint
+  const isMobile=window.innerWidth<=1024;
+  const leg=document.getElementById('legend');
+  const tl=document.getElementById('tl-container');
+  if(!isMobile){
+    // Back to desktop: close any open mobile panels
+    leg&&leg.classList.remove('mob-show');
+    tl&&tl.classList.remove('mob-show');
+    document.getElementById('mob-btn-cat')?.classList.remove('active');
+    document.getElementById('mob-btn-range')?.classList.remove('active');
+  }
+  // Close score popover on any resize (its position is cached)
+  document.getElementById('score-popover')?.classList.remove('open');
 }
 
 function layoutSidebar(){
-  if(window.innerWidth<=768) return;
+  if(window.innerWidth<=1024) return;
   const legend=document.getElementById('legend');
   const tl=document.getElementById('tl-container');
   const info=document.querySelector('.info');
@@ -936,7 +949,7 @@ function bindEvents(){
   renderer.domElement.addEventListener('pointerdown',e=>{pDown=true;pStartX=e.clientX;pStartY=e.clientY;lastClickEvent=e});
   renderer.domElement.addEventListener('pointerup',e=>{
     const dist=Math.abs(e.clientX-pStartX)+Math.abs(e.clientY-pStartY);
-    const isMobile=window.innerWidth<=768;
+    const isMobile=window.innerWidth<=1024;
     const isClick=dist<(isMobile?25:10);
     // On mobile, re-raycast at tap position (pointermove may not fire)
     if(isClick) hovered=doRaycast(e);
@@ -1034,9 +1047,8 @@ function bindEvents(){
 
   document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
 
-  // Mobile: toggle filter panels
-  // Mobile: top bar toggles
-  if(window.innerWidth<=768){
+  // Mobile/Tablet: toggle filter panels (always bind — CSS controls visibility)
+  {
     const leg=document.getElementById('legend');
     const tl=document.getElementById('tl-container');
     const btnCat=document.getElementById('mob-btn-cat');
@@ -1103,7 +1115,7 @@ function bindEvents(){
     if(!btn||!pop)return;
     function positionPopover(){
       const r=btn.getBoundingClientRect();
-      const isMobile=window.matchMedia('(max-width:768px)').matches;
+      const isMobile=window.matchMedia('(max-width:1024px)').matches;
       if(isMobile){
         pop.style.top=(r.bottom+8)+'px';
         pop.style.left='12px';
@@ -1172,7 +1184,7 @@ function updateStats(){
 let _tipNode=null, _tipX=0, _tipY=0;
 function showTip(){
   const t=document.getElementById('tip');
-  if(!hovered||window.innerWidth<=768){
+  if(!hovered||window.innerWidth<=1024){
     t.classList.remove('show');
     _tipNode=null;
     return;
