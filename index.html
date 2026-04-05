@@ -113,6 +113,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .stats{position:fixed;bottom:16px;right:16px;font-size:10px;color:var(--muted);z-index:10}
 .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);z-index:10;opacity:.5;transition:opacity 1s}
 
+/* ── Score Info Button + Popover ── */
+.score-info-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:14px;height:14px;margin-left:4px;padding:0;
+  border:1px solid var(--glass-border);border-radius:50%;
+  background:transparent;color:var(--muted);
+  font-size:9px;font-weight:700;font-family:Georgia,serif;font-style:italic;
+  cursor:pointer;line-height:1;vertical-align:middle;transition:all .15s;
+}
+.score-info-btn:hover{color:var(--accent);border-color:var(--accent);background:rgba(91,155,245,.08)}
+.score-popover{
+  display:none;position:fixed;z-index:40;
+  width:280px;max-width:calc(100vw - 24px);
+  padding:0;border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.25);
+  font-size:11px;
+}
+.score-popover.open{display:block}
+.score-popover-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-bottom:1px solid var(--glass-border);
+  font-weight:700;font-size:12px;color:var(--text);
+}
+.score-popover-x{
+  background:transparent;border:none;color:var(--muted);
+  font-size:18px;cursor:pointer;line-height:1;padding:0 4px;
+}
+.score-popover-x:hover{color:var(--text)}
+.score-popover-body{padding:10px 14px;max-height:60vh;overflow-y:auto}
+.sp-row{display:flex;justify-content:space-between;margin-top:6px;font-weight:600;color:var(--text)}
+.sp-row:first-child{margin-top:0}
+.sp-k{font-size:11px}
+.sp-w{font-size:10px;color:var(--accent)}
+.sp-desc{font-size:10px;color:var(--muted);margin-top:1px;margin-bottom:2px}
+.sp-div{height:1px;background:var(--glass-border);margin:10px 0}
+.sp-band{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}
+.sp-band b{color:var(--text);font-weight:700;margin-right:6px}
+
 /* ── Mobile ── */
 .mob-sheet{display:contents}
 .mob-toggle{display:none}
@@ -142,13 +180,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   }
   .mob-bar-btn.active{color:var(--accent);background:rgba(91,155,245,.1)}
   .mob-reset-btn{
-    display:block;position:fixed;top:48px;right:8px;z-index:14;
-    padding:4px 10px;border:none;border-radius:8px;font-size:10px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;top:48px;right:8px;z-index:14;
+    padding:0 12px;border:none;border-radius:10px;
+    font-size:11px;font-weight:600;line-height:1;
     cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
-    height:32px;line-height:32px;
+    height:36px;box-sizing:border-box;
   }
   .mob-reset-btn:active{color:var(--accent)}
-  .mob-bar{right:72px}
+  .mob-bar{right:80px;align-items:center;min-height:36px}
+
+/* ── Mobile ── */
+.mob-sheet{display:contents}
+.mob-toggle{display:none}
+.mob-bar{display:none}
+.mob-reset-btn{display:none}
+
+@media(max-width:768px){
+  .hdr{padding:8px 12px;gap:6px}
+  .logo{font-size:13px;flex-shrink:0}
+  .search{width:auto;flex:1;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
+  .theme-btn{padding:0;font-size:15px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* Hide desktop elements */
+  .mob-toggle{display:none !important}
+  .info{display:none !important}
+  .tip{display:none !important}
+  .hint{display:none}
+
+  /* Top filter bar: below header */
+  .mob-bar{
+    display:flex;position:fixed;top:48px;left:8px;right:8px;z-index:13;
+    gap:4px;padding:4px;border-radius:10px;
+  }
+  .mob-bar-btn{
+    flex:1;padding:6px 0;border:none;border-radius:8px;font-size:11px;font-weight:600;
+    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
+  }
+  .mob-bar-btn.active{color:var(--accent);background:rgba(91,155,245,.1)}
+  .mob-reset-btn{
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;top:48px;right:8px;z-index:14;
+    padding:0 12px;border:none;border-radius:10px;
+    font-size:11px;font-weight:600;line-height:1;
+    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
+    height:36px;box-sizing:border-box;
+  }
+  .mob-reset-btn:active{color:var(--accent)}
+  .mob-bar{right:80px;align-items:center;min-height:36px}
 
   /* Panels: appear below bar */
   .mob-sheet{display:block !important;position:fixed;top:86px;left:8px;right:8px;z-index:12;pointer-events:none}
@@ -248,6 +327,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   </div>
   <span style="opacity:.4;font-size:9px">ESC 초기화 · Shift+Click 다중선택</span>
   <a href="https://papergoat.beehiiv.com/" target="_blank" style="display:flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;background:rgba(91,155,245,.08);border:1px solid rgba(91,155,245,.2);border-radius:8px;color:var(--accent);text-decoration:none;font-size:11px;font-weight:600;transition:all .15s" onmouseover="this.style.background='rgba(91,155,245,.15)';this.style.borderColor='rgba(91,155,245,.4)';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='rgba(91,155,245,.08)';this.style.borderColor='rgba(91,155,245,.2)';this.style.transform=''"><span style="font-size:14px">🐐</span> PaperGoat <span style="opacity:.5">↗</span></a>
+</div>
+<div class="score-popover glass" id="score-popover" role="dialog" aria-label="Scoring rubric">
+  <div class="score-popover-head">
+    <span>점수 산정 기준</span>
+    <button class="score-popover-x" id="score-popover-x" aria-label="Close">&times;</button>
+  </div>
+  <div class="score-popover-body">
+    <div class="sp-row"><span class="sp-k">Paradigm Shift</span><span class="sp-w">30%</span></div>
+    <div class="sp-desc">새 패러다임을 열었는가</div>
+    <div class="sp-row"><span class="sp-k">Adoption & Industry</span><span class="sp-w">25%</span></div>
+    <div class="sp-desc">산업 프로덕션 채택 정도</div>
+    <div class="sp-row"><span class="sp-k">Citation & Ecosystem</span><span class="sp-w">20%</span></div>
+    <div class="sp-desc">인용·파생 연구 규모</div>
+    <div class="sp-row"><span class="sp-k">Technical Novelty</span><span class="sp-w">15%</span></div>
+    <div class="sp-desc">기법의 독창성·깊이</div>
+    <div class="sp-row"><span class="sp-k">Timeliness</span><span class="sp-w">10%</span></div>
+    <div class="sp-desc">현재 관련성·향후 궤적</div>
+    <div class="sp-div"></div>
+    <div class="sp-band"><b>95–100</b> 판을 바꾼 논문 (Transformer, ResNet)</div>
+    <div class="sp-band"><b>90–94</b> 필독 (LoRA, Chinchilla, Llama 3)</div>
+    <div class="sp-band"><b>85–89</b> 고영향 (AWQ, Consistency, DreamBooth)</div>
+    <div class="sp-band"><b>≤84</b> 보조 참고 (Label Smoothing)</div>
+  </div>
 </div>
 <div class="stats" id="stats"></div>
 <div class="hint" id="hint">Drag to rotate · Scroll to zoom · Click a node · Shift+Click multi-select</div>
@@ -977,6 +1079,46 @@ function bindEvents(){
     }
   });
 
+  // Score info popover
+  (()=>{
+    const btn=document.getElementById('score-info-btn');
+    const pop=document.getElementById('score-popover');
+    const xBtn=document.getElementById('score-popover-x');
+    if(!btn||!pop)return;
+    function positionPopover(){
+      const r=btn.getBoundingClientRect();
+      const isMobile=window.matchMedia('(max-width:768px)').matches;
+      if(isMobile){
+        pop.style.top=(r.bottom+8)+'px';
+        pop.style.left='12px';
+        pop.style.right='12px';
+        pop.style.width='auto';
+      }else{
+        // Desktop: tl is fixed on right side, open popover to the left of the button
+        const popW=280;
+        let left=r.left-popW-12;
+        if(left<12)left=r.right+12;
+        pop.style.left=left+'px';
+        pop.style.top=Math.max(12,r.top)+'px';
+        pop.style.right='auto';
+        pop.style.width=popW+'px';
+      }
+    }
+    btn.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      const open=pop.classList.toggle('open');
+      if(open)positionPopover();
+    });
+    xBtn.addEventListener('click',()=>pop.classList.remove('open'));
+    document.addEventListener('click',(e)=>{
+      if(pop.classList.contains('open')&&!pop.contains(e.target)&&e.target!==btn){
+        pop.classList.remove('open');
+      }
+    });
+    window.addEventListener('resize',()=>{if(pop.classList.contains('open'))positionPopover()});
+  })();
+
+  // Theme toggle
   // Theme toggle
   document.getElementById('theme-btn').addEventListener('click',()=>{
     isDark=!isDark;
