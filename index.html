@@ -1377,6 +1377,16 @@ function openPanel(n){
       const t=nodeMap[el.dataset.id];
       if(t){selected.clear();selected.add(t);hovered=t;openPanel(t)}
     });
+    // Hover over connected-paper row → glow the referenced node in the 3D scene
+    el.addEventListener('mouseenter',()=>{
+      const t=nodeMap[el.dataset.id];
+      if(t) hovered=t;
+    });
+    el.addEventListener('mouseleave',()=>{
+      // Only clear if still highlighting this row's target (avoid race with 3D hover)
+      const t=nodeMap[el.dataset.id];
+      if(hovered===t) hovered=null;
+    });
   });
 }
 function closePanel(){document.getElementById('pnl').classList.remove('open')}
