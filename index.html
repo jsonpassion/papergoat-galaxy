@@ -643,9 +643,13 @@ function buildEdges(){
     // Curved path following sphere surface
     const mid=new THREE.Vector3().addVectors(start,end).multiplyScalar(0.5);
     mid.normalize().multiplyScalar(RADIUS*1.08);
-    const curve=new THREE.QuadraticBezierCurve3(start,mid,end);
+    // Smoother curvature: CatmullRom with extra control points between start/mid/end
+    const q1=new THREE.Vector3().addVectors(start,mid).multiplyScalar(0.5).normalize().multiplyScalar(RADIUS*1.04);
+    const q2=new THREE.Vector3().addVectors(mid,end).multiplyScalar(0.5).normalize().multiplyScalar(RADIUS*1.04);
+    const curve=new THREE.CatmullRomCurve3([start,q1,mid,q2,end],false,'catmullrom',0.5);
     const tubeR=isLineage?0.012:0.005;
-    const geo=new THREE.TubeGeometry(curve,12,tubeR,4,false);
+    // High-density tessellation for smooth appearance at any zoom level
+    const geo=new THREE.TubeGeometry(curve,64,tubeR,8,false);
     const mat=new THREE.MeshBasicMaterial({
       color:isLineage?0x7799cc:0x556688,
       transparent:true, opacity:isLineage?0.3:0.08,
