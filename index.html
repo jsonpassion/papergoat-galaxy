@@ -1043,35 +1043,47 @@ function bindEvents(){
     const btnRange=document.getElementById('mob-btn-range');
     const btnReset=document.getElementById('mob-btn-reset');
 
-    function mobTogglePanel(panel,btn){
-      const isOpen=panel.classList.contains('mob-show');
-      // Close all first
+    function mobCloseAll(){
       leg.classList.remove('mob-show');
       tl.classList.remove('mob-show');
       btnCat.classList.remove('active');
       btnRange.classList.remove('active');
-      // Toggle target
+    }
+    function mobTogglePanel(panel,btn){
+      const isOpen=panel.classList.contains('mob-show');
+      mobCloseAll();
       if(!isOpen){
         panel.classList.add('mob-show');
         btn.classList.add('active');
       }
     }
-    btnCat.addEventListener('click',()=>mobTogglePanel(leg,btnCat));
-    btnRange.addEventListener('click',()=>mobTogglePanel(tl,btnRange));
-    btnReset.addEventListener('click',()=>{
-      // Reset all filters
+    btnCat.addEventListener('click',(e)=>{e.stopPropagation();mobTogglePanel(leg,btnCat);});
+    btnRange.addEventListener('click',(e)=>{e.stopPropagation();mobTogglePanel(tl,btnRange);});
+    // Prevent clicks inside the open panels from closing them
+    leg.addEventListener('click',(e)=>e.stopPropagation());
+    tl.addEventListener('click',(e)=>e.stopPropagation());
+    // Tap outside (background) closes open panels
+    document.addEventListener('click',(e)=>{
+      const anyOpen=leg.classList.contains('mob-show')||tl.classList.contains('mob-show');
+      if(!anyOpen)return;
+      // Ignore clicks on the toggle buttons (they handle their own toggle)
+      if(e.target===btnCat||e.target===btnRange)return;
+      mobCloseAll();
+    });
+    btnReset.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      // Reset category: clear active set = "all selected"
       activeClusters.clear();refreshLegendUI();
-      const tlMinEl=document.getElementById('tl-min');
-      const tlMaxEl=document.getElementById('tl-max');
-      const scMinEl=document.getElementById('sc-min');
-      const scMaxEl=document.getElementById('sc-max');
+      // Reset Year/Score sliders to full range (call change handlers to update fill + display)
       tlMinEl.value=tlMinEl.min;tlMaxEl.value=tlMaxEl.max;
+      onTimelineChange.call(tlMinEl);
       scMinEl.value=scMinEl.min;scMaxEl.value=scMaxEl.max;
+      onScoreChange.call(scMinEl);
+      // Reset search query
       query='';document.getElementById('search').value='';
       updateVis();
-      // Close panels
-      leg.classList.remove('mob-show');tl.classList.remove('mob-show');
-      btnCat.classList.remove('active');btnRange.classList.remove('active');
+      // Close any open panels
+      mobCloseAll();
     });
   }
   document.addEventListener('keydown',e=>{
