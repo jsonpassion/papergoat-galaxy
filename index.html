@@ -117,6 +117,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .mob-sheet{display:contents}
 .mob-toggle{display:none}
 .mob-bar{display:none}
+.mob-reset-btn{display:none}
 
 @media(max-width:768px){
   .hdr{padding:8px 12px;gap:6px}
@@ -140,7 +141,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
     cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
   }
   .mob-bar-btn.active{color:var(--accent);background:rgba(91,155,245,.1)}
-  .mob-bar-btn:last-child{flex:0;padding:6px 10px;font-size:10px}
+  .mob-reset-btn{
+    display:block;position:fixed;top:48px;right:8px;z-index:14;
+    padding:4px 10px;border:none;border-radius:8px;font-size:10px;font-weight:600;
+    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
+    height:32px;line-height:32px;
+  }
+  .mob-reset-btn:active{color:var(--accent)}
+  .mob-bar{right:72px}
 
   /* Panels: appear below bar */
   .mob-sheet{display:block !important;position:fixed;top:86px;left:8px;right:8px;z-index:12;pointer-events:none}
@@ -202,8 +210,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 <div class="mob-bar glass" id="mob-bar">
   <button class="mob-bar-btn" id="mob-btn-cat">Category</button>
   <button class="mob-bar-btn" id="mob-btn-range">Year/Score</button>
-  <button class="mob-bar-btn" id="mob-btn-reset">Reset</button>
 </div>
+<button class="mob-reset-btn glass" id="mob-btn-reset">Reset</button>
 <div class="mob-sheet" id="mob-sheet">
 <div class="legend glass" id="legend"></div>
 <div class="tip glass" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>

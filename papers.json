@@ -1961,6 +1961,1004 @@
       "one_liner": "",
       "key_discoveries": [],
       "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1406.1078",
+      "rank": 101,
+      "alias": "GRU",
+      "title": "Learning Phrase Representations using RNN Encoder-Decoder",
+      "url": "https://arxiv.org/abs/1406.1078",
+      "year": 2014,
+      "score": 88,
+      "categories": [
+        "RNN",
+        "NLP",
+        "Architecture"
+      ],
+      "cluster": "infra",
+      "reason": "GRU 게이트 구조 제안. LSTM보다 단순하면서 유사 성능, Seq2Seq의 핵심 구성요소",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1910.10683",
+      "rank": 102,
+      "alias": "T5",
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+      "url": "https://arxiv.org/abs/1910.10683",
+      "year": 2019,
+      "score": 91,
+      "categories": [
+        "LLM",
+        "NLP",
+        "PreTraining"
+      ],
+      "cluster": "llm",
+      "reason": "모든 NLP를 text-to-text로 통합. 사전학습 기법 체계적 비교의 결정판",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1906.08237",
+      "rank": 103,
+      "alias": "XLNet",
+      "title": "XLNet: Generalized Autoregressive Pretraining",
+      "url": "https://arxiv.org/abs/1906.08237",
+      "year": 2019,
+      "score": 86,
+      "categories": [
+        "LLM",
+        "NLP",
+        "PreTraining"
+      ],
+      "cluster": "llm",
+      "reason": "순열 기반 자기회귀로 BERT 한계 극복. 양방향 컨텍스트 + AR 장점 결합",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1907.11692",
+      "rank": 104,
+      "alias": "RoBERTa",
+      "title": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+      "url": "https://arxiv.org/abs/1907.11692",
+      "year": 2019,
+      "score": 88,
+      "categories": [
+        "LLM",
+        "NLP",
+        "PreTraining"
+      ],
+      "cluster": "llm",
+      "reason": "BERT 학습 레시피 최적화만으로 대폭 성능 향상. 하이퍼파라미터의 중요성 입증",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2003.10555",
+      "rank": 105,
+      "alias": "ELECTRA",
+      "title": "ELECTRA: Pre-training Text Encoders as Discriminators",
+      "url": "https://arxiv.org/abs/2003.10555",
+      "year": 2020,
+      "score": 86,
+      "categories": [
+        "LLM",
+        "NLP",
+        "Efficient"
+      ],
+      "cluster": "llm",
+      "reason": "Replaced token detection으로 MLM 대비 효율적 사전학습. 소형 모델에서 특히 강력",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1609.03499",
+      "rank": 106,
+      "alias": "WaveNet",
+      "title": "WaveNet: A Generative Model for Raw Audio",
+      "url": "https://arxiv.org/abs/1609.03499",
+      "year": 2016,
+      "score": 89,
+      "categories": [
+        "Audio",
+        "Generation",
+        "Architecture"
+      ],
+      "cluster": "generation",
+      "reason": "Dilated causal convolution으로 고품질 음성 합성. Google Assistant TTS의 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1812.04948",
+      "rank": 107,
+      "alias": "StyleGAN",
+      "title": "A Style-Based Generator Architecture for GANs",
+      "url": "https://arxiv.org/abs/1812.04948",
+      "year": 2018,
+      "score": 90,
+      "categories": [
+        "GAN",
+        "Generation",
+        "CV"
+      ],
+      "cluster": "generation",
+      "reason": "Style-based 생성으로 고해상도 얼굴 합성 혁명. Latent space 조작의 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1703.10593",
+      "rank": 108,
+      "alias": "CycleGAN",
+      "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+      "url": "https://arxiv.org/abs/1703.10593",
+      "year": 2017,
+      "score": 89,
+      "categories": [
+        "GAN",
+        "ImageTranslation",
+        "CV"
+      ],
+      "cluster": "generation",
+      "reason": "쌍이 없는 이미지 변환. Cycle consistency loss로 비지도 도메인 변환 개척",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "1611.07004",
+      "rank": 109,
+      "alias": "Pix2Pix",
+      "title": "Image-to-Image Translation with Conditional Adversarial Networks",
+      "url": "https://arxiv.org/abs/1611.07004",
+      "year": 2016,
+      "score": 88,
+      "categories": [
+        "GAN",
+        "ImageTranslation",
+        "CV"
+      ],
+      "cluster": "generation",
+      "reason": "조건부 GAN으로 범용 이미지 변환. 스케치→사진, 낮→밤 등",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2102.12092",
+      "rank": 110,
+      "alias": "DALL-E",
+      "title": "Zero-Shot Text-to-Image Generation",
+      "url": "https://arxiv.org/abs/2102.12092",
+      "year": 2021,
+      "score": 91,
+      "categories": [
+        "Generation",
+        "TextToImage",
+        "VLM"
+      ],
+      "cluster": "multimodal",
+      "reason": "dVAE + Transformer로 텍스트→이미지 생성 시대 개막. DALL-E 2의 선행 연구",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2205.11487",
+      "rank": 111,
+      "alias": "Imagen",
+      "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "url": "https://arxiv.org/abs/2205.11487",
+      "year": 2022,
+      "score": 90,
+      "categories": [
+        "Diffusion",
+        "TextToImage",
+        "Generation"
+      ],
+      "cluster": "generation",
+      "reason": "대형 언어모델(T5-XXL) 텍스트 인코더로 포토리얼리스틱 생성. 텍스트 이해력이 핵심",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2208.12242",
+      "rank": 112,
+      "alias": "DreamBooth",
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "url": "https://arxiv.org/abs/2208.12242",
+      "year": 2022,
+      "score": 89,
+      "categories": [
+        "Diffusion",
+        "Personalization",
+        "FineTuning"
+      ],
+      "cluster": "generation",
+      "reason": "3-5장 사진으로 개인화 이미지 생성. Subject-driven generation의 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2302.05543",
+      "rank": 113,
+      "alias": "ControlNet",
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "url": "https://arxiv.org/abs/2302.05543",
+      "year": 2023,
+      "score": 90,
+      "categories": [
+        "Diffusion",
+        "ControlGeneration",
+        "CV"
+      ],
+      "cluster": "generation",
+      "reason": "엣지/깊이/포즈 등 공간 조건 제어. 프로덕션 이미지 생성 파이프라인의 필수 구성요소",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2303.01469",
+      "rank": 114,
+      "alias": "Consistency Models",
+      "title": "Consistency Models",
+      "url": "https://arxiv.org/abs/2303.01469",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Diffusion",
+        "Generation",
+        "Efficient"
+      ],
+      "cluster": "generation",
+      "reason": "1-step 생성으로 diffusion 속도 혁신. Song (Score SDE 저자)의 차세대 생성 모델",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2307.01952",
+      "rank": 115,
+      "alias": "SDXL",
+      "title": "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis",
+      "url": "https://arxiv.org/abs/2307.01952",
+      "year": 2023,
+      "score": 88,
+      "categories": [
+        "Diffusion",
+        "Generation",
+        "OpenSource"
+      ],
+      "cluster": "generation",
+      "reason": "Two-stage 아키텍처로 고해상도 생성. Stable Diffusion 생태계의 표준 베이스 모델",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2210.17323",
+      "rank": 116,
+      "alias": "GPTQ",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "url": "https://arxiv.org/abs/2210.17323",
+      "year": 2022,
+      "score": 88,
+      "categories": [
+        "Quantization",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "원샷 가중치 양자화로 LLM 배포 민주화. 4-bit 양자화의 사실상 표준",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2306.00978",
+      "rank": 117,
+      "alias": "AWQ",
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression",
+      "url": "https://arxiv.org/abs/2306.00978",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Quantization",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "활성값 기반 중요 가중치 보존으로 GPTQ 대비 품질 향상. vLLM 등 서빙 프레임워크 기본 탑재",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2401.10774",
+      "rank": 118,
+      "alias": "Medusa",
+      "title": "Medusa: Simple LLM Inference Acceleration with Multiple Decoding Heads",
+      "url": "https://arxiv.org/abs/2401.10774",
+      "year": 2024,
+      "score": 86,
+      "categories": [
+        "Inference",
+        "Efficient",
+        "LLM"
+      ],
+      "cluster": "efficient",
+      "reason": "다중 헤드 병렬 디코딩으로 2-3x 가속. Speculative decoding의 실용적 대안",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "nature16961",
+      "rank": 119,
+      "alias": "AlphaGo",
+      "title": "Mastering the Game of Go with Deep Neural Networks and Tree Search",
+      "url": "https://www.nature.com/articles/nature16961",
+      "year": 2016,
+      "score": 95,
+      "categories": [
+        "RL",
+        "GameAI",
+        "DeepLearning"
+      ],
+      "cluster": "agent",
+      "reason": "바둑에서 인간 세계 챔피언 격파. 딥러닝 + MCTS로 AI의 가능성을 전 세계에 각인",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "s41586-021-03819-2",
+      "rank": 120,
+      "alias": "AlphaFold",
+      "title": "Highly Accurate Protein Structure Prediction with AlphaFold",
+      "url": "https://www.nature.com/articles/s41586-021-03819-2",
+      "year": 2021,
+      "score": 96,
+      "categories": [
+        "Science",
+        "ProteinStructure",
+        "DeepLearning"
+      ],
+      "cluster": "infra",
+      "reason": "50년 난제 단백질 구조 예측 해결. AI for Science의 상징. 노벨 화학상 수상",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2307.15818",
+      "rank": 121,
+      "alias": "RT-2",
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "url": "https://arxiv.org/abs/2307.15818",
+      "year": 2023,
+      "score": 88,
+      "categories": [
+        "Robotics",
+        "VLA",
+        "Foundation"
+      ],
+      "cluster": "agent",
+      "reason": "웹 지식을 로봇 제어로 전이. Vision-Language-Action 모델의 개념 정립",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2301.04104",
+      "rank": 122,
+      "alias": "DreamerV3",
+      "title": "Mastering Diverse Domains through World Models",
+      "url": "https://arxiv.org/abs/2301.04104",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "WorldModel",
+        "RL",
+        "Imagination"
+      ],
+      "cluster": "agent",
+      "reason": "하이퍼파라미터 튜닝 없이 다양한 도메인 마스터. 월드 모델 기반 RL의 집대성",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2410.24164",
+      "rank": 123,
+      "alias": "pi0",
+      "title": "π₀: A Vision-Language-Action Flow Model for General Robot Control",
+      "url": "https://arxiv.org/abs/2410.24164",
+      "year": 2024,
+      "score": 88,
+      "categories": [
+        "Robotics",
+        "VLA",
+        "FlowMatching"
+      ],
+      "cluster": "agent",
+      "reason": "VLM + Flow matching으로 범용 로봇 정책. 7개 로봇 / 68개 태스크 학습. Physical Intelligence",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2501.03575",
+      "rank": 124,
+      "alias": "Cosmos",
+      "title": "Cosmos World Foundation Model Platform for Physical AI",
+      "url": "https://arxiv.org/abs/2501.03575",
+      "year": 2025,
+      "score": 87,
+      "categories": [
+        "WorldModel",
+        "Robotics",
+        "Foundation"
+      ],
+      "cluster": "agent",
+      "reason": "NVIDIA의 물리 AI 세계 모델 플랫폼. 비디오 토크나이저 + 사전학습 월드 모델 오픈소스",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2401.04088",
+      "rank": 125,
+      "alias": "Mixtral",
+      "title": "Mixtral of Experts",
+      "url": "https://arxiv.org/abs/2401.04088",
+      "year": 2024,
+      "score": 90,
+      "categories": [
+        "MoE",
+        "LLM",
+        "OpenSource"
+      ],
+      "cluster": "llm",
+      "reason": "8x7B MoE로 Llama 2 70B 능가. 오픈소스 MoE의 실용화 증명",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2407.21783",
+      "rank": 126,
+      "alias": "Llama 3",
+      "title": "The Llama 3 Herd of Models",
+      "url": "https://arxiv.org/abs/2407.21783",
+      "year": 2024,
+      "score": 93,
+      "categories": [
+        "LLM",
+        "OpenSource",
+        "Multimodal"
+      ],
+      "cluster": "llm",
+      "reason": "405B 오픈 웨이트로 GPT-4급 성능. 멀티모달(이미지/비디오/음성) 128K 컨텍스트",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2412.15115",
+      "rank": 127,
+      "alias": "Qwen 2.5",
+      "title": "Qwen2.5 Technical Report",
+      "url": "https://arxiv.org/abs/2412.15115",
+      "year": 2024,
+      "score": 89,
+      "categories": [
+        "LLM",
+        "OpenSource",
+        "Multilingual"
+      ],
+      "cluster": "llm",
+      "reason": "18T 토큰 사전학습. 최강 오픈소스 다국어 LLM. 파인튜닝 베이스로 광범위 채택",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2403.08295",
+      "rank": 128,
+      "alias": "Gemma",
+      "title": "Gemma: Open Models Based on Gemini Research and Technology",
+      "url": "https://arxiv.org/abs/2403.08295",
+      "year": 2024,
+      "score": 87,
+      "categories": [
+        "LLM",
+        "OpenSource",
+        "Efficient"
+      ],
+      "cluster": "llm",
+      "reason": "Gemini 기술 기반 경량 오픈 모델. 2B/7B로 효율적 배포",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2410.21276",
+      "rank": 129,
+      "alias": "GPT-4o",
+      "title": "GPT-4o System Card",
+      "url": "https://arxiv.org/abs/2410.21276",
+      "year": 2024,
+      "score": 91,
+      "categories": [
+        "Multimodal",
+        "LLM",
+        "Safety"
+      ],
+      "cluster": "multimodal",
+      "reason": "최초 네이티브 멀티모달(텍스트+오디오+비전) 상용 모델. 실시간 음성 대화",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2412.16720",
+      "rank": 130,
+      "alias": "o1",
+      "title": "OpenAI o1 System Card",
+      "url": "https://arxiv.org/abs/2412.16720",
+      "year": 2024,
+      "score": 92,
+      "categories": [
+        "Reasoning",
+        "RL",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "대규모 RL로 학습한 최초 프론티어 추론 모델. \"reasoning model\" 패러다임 개막",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2408.03314",
+      "rank": 131,
+      "alias": "Test-Time Scaling",
+      "title": "Scaling LLM Test-Time Compute Optimally",
+      "url": "https://arxiv.org/abs/2408.03314",
+      "year": 2024,
+      "score": 90,
+      "categories": [
+        "Reasoning",
+        "Scaling",
+        "Inference"
+      ],
+      "cluster": "agent",
+      "reason": "테스트 시간 컴퓨트 스케일링이 14x 큰 모델을 능가. 추론 패러다임의 이론적 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2501.19393",
+      "rank": 132,
+      "alias": "s1",
+      "title": "s1: Simple Test-Time Scaling",
+      "url": "https://arxiv.org/abs/2501.19393",
+      "year": 2025,
+      "score": 88,
+      "categories": [
+        "Reasoning",
+        "OpenSource",
+        "LLM"
+      ],
+      "cluster": "agent",
+      "reason": "1K 예제 + budget forcing으로 o1 재현. 32B가 o1-preview AIME24에서 27% 초과",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2502.06807",
+      "rank": 133,
+      "alias": "o3",
+      "title": "Competitive Programming with Large Reasoning Models",
+      "url": "https://arxiv.org/abs/2502.06807",
+      "year": 2025,
+      "score": 89,
+      "categories": [
+        "Reasoning",
+        "CodeGeneration",
+        "RL"
+      ],
+      "cluster": "agent",
+      "reason": "IOI 금메달 + Codeforces 엘리트 레이팅. 범용 RL이 도메인 특화 기법 능가",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2310.06770",
+      "rank": 134,
+      "alias": "SWE-bench",
+      "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+      "url": "https://arxiv.org/abs/2310.06770",
+      "year": 2023,
+      "score": 89,
+      "categories": [
+        "Agent",
+        "CodeGeneration",
+        "Benchmark"
+      ],
+      "cluster": "agent",
+      "reason": "2,294개 실제 GitHub 이슈로 코딩 에이전트 평가. Claude Code, Devin 등의 표준 벤치마크",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2509.16941",
+      "rank": 135,
+      "alias": "SWE-bench Pro",
+      "title": "SWE-bench Pro: Long-Horizon Software Engineering Tasks",
+      "url": "https://arxiv.org/abs/2509.16941",
+      "year": 2025,
+      "score": 86,
+      "categories": [
+        "Agent",
+        "CodeGeneration",
+        "Benchmark"
+      ],
+      "cluster": "agent",
+      "reason": "1,865개 엔터프라이즈급 태스크. 다중 파일/장기 작업의 현실적 평가",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2503.09642",
+      "rank": 136,
+      "alias": "Open-Sora 2.0",
+      "title": "Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k",
+      "url": "https://arxiv.org/abs/2503.09642",
+      "year": 2025,
+      "score": 88,
+      "categories": [
+        "VideoGeneration",
+        "OpenSource"
+      ],
+      "cluster": "generation",
+      "reason": "$200K로 상업급 비디오 생성. 완전 오픈소스로 HunyuanVideo/Runway Gen-3급",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2504.19874",
+      "rank": 137,
+      "alias": "TurboQuant",
+      "title": "TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate",
+      "url": "https://arxiv.org/abs/2504.19874",
+      "year": 2025,
+      "score": 90,
+      "categories": [
+        "Quantization",
+        "KVCache",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "정보이론 하한에 근접한 최적 벡터 양자화. 3.5-bit 품질 무손실 KV 캐시 압축. ICLR 2026",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2603.27914",
+      "rank": 138,
+      "alias": "ITQ3_S",
+      "title": "ITQ3_S: High-Fidelity 3-bit LLM Inference via Interleaved Ternary Quantization",
+      "url": "https://arxiv.org/abs/2603.27914",
+      "year": 2026,
+      "score": 89,
+      "categories": [
+        "Quantization",
+        "Inference",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "TurboQuant 회전을 가중치 양자화에 적용. 70B 모델을 32GB GPU 1장에서 풀스피드 추론",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "lstm-1997",
+      "rank": 139,
+      "alias": "LSTM",
+      "title": "Long Short-Term Memory",
+      "url": "https://doi.org/10.1162/neco.1997.9.8.1735",
+      "year": 1997,
+      "score": 93,
+      "categories": [
+        "RNN",
+        "Architecture",
+        "Foundational"
+      ],
+      "cluster": "infra",
+      "reason": "장기 의존성 학습의 근본 해결. 게이트 메커니즘으로 시퀀스 모델링 20년 지배",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "gpt2-2019",
+      "rank": 140,
+      "alias": "GPT-2",
+      "title": "Language Models are Unsupervised Multitask Learners",
+      "url": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+      "year": 2019,
+      "score": 91,
+      "categories": [
+        "LLM",
+        "Generation",
+        "Scaling"
+      ],
+      "cluster": "llm",
+      "reason": "Zero-shot 텍스트 생성의 가능성 최초 입증. \"너무 위험해서 공개 불가\" 논란으로 AI 안전 논의 촉발",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "glove-2014",
+      "rank": 141,
+      "alias": "GloVe",
+      "title": "GloVe: Global Vectors for Word Representation",
+      "url": "https://nlp.stanford.edu/pubs/glove.pdf",
+      "year": 2014,
+      "score": 88,
+      "categories": [
+        "Embedding",
+        "NLP"
+      ],
+      "cluster": "infra",
+      "reason": "전역 동시출현 통계 기반 임베딩. Word2Vec과 함께 NLP 임베딩의 양대 산맥",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "s41586-024-07487-w",
+      "rank": 142,
+      "alias": "AlphaFold 3",
+      "title": "Accurate structure prediction of biomolecular interactions with AlphaFold 3",
+      "url": "https://www.nature.com/articles/s41586-024-07487-w",
+      "year": 2024,
+      "score": 91,
+      "categories": [
+        "Science",
+        "ProteinStructure",
+        "Diffusion"
+      ],
+      "cluster": "infra",
+      "reason": "단백질-DNA/RNA/리간드 복합체 구조 예측. Diffusion 기반으로 AlphaFold 2 확장",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "claude3-2024",
+      "rank": 143,
+      "alias": "Claude 3",
+      "title": "The Claude 3 Model Family: Opus, Sonnet, Haiku",
+      "url": "https://www.anthropic.com/claude-3-model-card",
+      "year": 2024,
+      "score": 90,
+      "categories": [
+        "LLM",
+        "Multimodal",
+        "Safety"
+      ],
+      "cluster": "llm",
+      "reason": "최초 GPT-4 능가 벤치마크 달성 오픈 모델 카드. Constitutional AI 기반 안전 설계",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2402.03300",
+      "rank": 144,
+      "alias": "GRPO",
+      "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning",
+      "url": "https://arxiv.org/abs/2402.03300",
+      "year": 2024,
+      "score": 88,
+      "categories": [
+        "Reasoning",
+        "RL",
+        "Math"
+      ],
+      "cluster": "agent",
+      "reason": "Group Relative Policy Optimization 제안. DeepSeek-R1의 핵심 알고리즘",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2507.09595",
+      "rank": 145,
+      "alias": "Flux Analysis",
+      "title": "Demystifying the Latent Space of Diffusion Transformer Architectures",
+      "url": "https://arxiv.org/abs/2507.09595",
+      "year": 2025,
+      "score": 86,
+      "categories": [
+        "Diffusion",
+        "Transformer",
+        "Analysis"
+      ],
+      "cluster": "generation",
+      "reason": "FLUX/SD3 아키텍처 역분석. Rectified flow transformer의 내부 동작 해명",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2307.08691",
+      "rank": 146,
+      "alias": "FlashAttention-2",
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "url": "https://arxiv.org/abs/2307.08691",
+      "year": 2023,
+      "score": 90,
+      "categories": [
+        "Optimization",
+        "Attention",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "FlashAttention 2x 추가 가속. 현재 거의 모든 LLM 학습/추론의 표준 어텐션 커널",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2305.16264",
+      "rank": 147,
+      "alias": "Scaling Data-Constrained",
+      "title": "Scaling Data-Constrained Language Models",
+      "url": "https://arxiv.org/abs/2305.16264",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Scaling",
+        "Data",
+        "LLM"
+      ],
+      "cluster": "llm",
+      "reason": "데이터 반복 학습의 스케일링 법칙 규명. 데이터 부족 시대의 학습 전략 가이드",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2404.02258",
+      "rank": 148,
+      "alias": "Mixture of Depths",
+      "title": "Mixture-of-Depths: Dynamically Allocating Compute in Transformers",
+      "url": "https://arxiv.org/abs/2404.02258",
+      "year": 2024,
+      "score": 86,
+      "categories": [
+        "Efficient",
+        "Architecture",
+        "Transformer"
+      ],
+      "cluster": "efficient",
+      "reason": "토큰별 동적 컴퓨트 할당으로 FLOPs 50% 절감. MoE의 깊이 방향 확장",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2310.01889",
+      "rank": 149,
+      "alias": "Ring Attention",
+      "title": "Ring Attention with Blockwise Transformers for Near-Infinite Context",
+      "url": "https://arxiv.org/abs/2310.01889",
+      "year": 2023,
+      "score": 87,
+      "categories": [
+        "Attention",
+        "LongContext",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "디바이스 간 블록와이즈 어텐션으로 사실상 무한 컨텍스트. 1M+ 토큰 학습의 기반",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2502.11089",
+      "rank": 150,
+      "alias": "Native Sparse Attention",
+      "title": "Native Sparse Attention: Hardware-Aligned Block Sparse Attention",
+      "url": "https://arxiv.org/abs/2502.11089",
+      "year": 2025,
+      "score": 87,
+      "categories": [
+        "Attention",
+        "Efficient",
+        "LongContext"
+      ],
+      "cluster": "efficient",
+      "reason": "DeepSeek의 하드웨어 정렬 블록 스파스 어텐션. 64K+ 컨텍스트 효율적 처리",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
     }
   ],
   "edges": [
