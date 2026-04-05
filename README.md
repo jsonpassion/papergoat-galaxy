@@ -42,7 +42,9 @@ Transformer부터 TurboQuant 삼부작(2024–2026)까지, AI 엔지니어라면
 | ❌ 상업적 AI/ML 학습 데이터 | 금지 |
 | ❌ 브랜딩/출처 제거 | 금지 |
 
-**상업적 라이선스 문의**: https://papergoat.beehiiv.com/
+**상업적 라이선스 문의**:
+- Newsletter: https://papergoat.beehiiv.com/
+- 제작자 (Jason Lee): https://www.linkedin.com/in/json-lee
 
 ## Credit
 
