@@ -781,7 +781,10 @@ function animate(){
     // Scale
     const isH=hovered===p, isS=selIds.has(p.id);
     const isConn=hovNeighbors.has(p.id)||selNeighbors.has(p.id);
-    mesh._scaleTarget=isH?2.5:isS?2.0:(isConn&&(hovered||selected.size))?1.4:1;
+    // Dimmed/inactive nodes render thinner
+    const isDimmed=(hovered||selected.size>0)&&!isH&&!isS&&!isConn;
+    const isFilteredOut=p._targetAlpha<0.5;
+    mesh._scaleTarget=isH?2.5:isS?2.0:(isConn&&(hovered||selected.size))?1.4:(isDimmed||isFilteredOut?0.7:1);
     mesh._scaleCurrent+=(mesh._scaleTarget-mesh._scaleCurrent)*0.08;
     mesh.scale.setScalar(mesh._scaleCurrent);
 
