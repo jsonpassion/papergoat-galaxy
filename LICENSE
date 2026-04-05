@@ -1,0 +1,61 @@
+PaperGoat Galaxy
+Copyright (c) 2026 PaperGoat. All Rights Reserved.
+
+This work — including but not limited to the curated paper list, scoring
+methodology, visualization source code (HTML/CSS/JavaScript), and all
+associated data files (papers.json, etc.) — is licensed under the
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+License (CC BY-NC-SA 4.0).
+
+You are free to:
+  • Share — copy and redistribute the material in any medium or format
+  • Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+  • Attribution — You must give appropriate credit, provide a link to
+    the license, and indicate if changes were made. You must prominently
+    credit "PaperGoat" (https://papergoat.beehiiv.com/) and link back to
+    the original repository.
+  • NonCommercial — You may not use the material for commercial purposes.
+    Any use by a for-profit entity, or use that generates revenue
+    directly or indirectly, is strictly prohibited without prior written
+    permission.
+  • ShareAlike — If you remix, transform, or build upon the material,
+    you must distribute your contributions under the same license as
+    the original.
+  • No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing
+    anything the license permits.
+
+Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+────────────────────────────────────────────────────────────────────────
+
+ADDITIONAL NOTICES
+
+1. CURATION & SCORING
+   The paper selection, ranking, scoring rubric, and editorial commentary
+   represent original intellectual work. Reproducing the curated list or
+   scores in any database, product, or publication without attribution is
+   prohibited.
+
+2. PROHIBITED USES (explicitly, not limited to)
+   • Mirror/copycat websites or applications replicating the UI
+   • Training data for commercial AI/ML models
+   • Resale or paywall of the content
+   • Removal of branding, attribution, or links to PaperGoat
+
+3. PERMITTED USES
+   • Personal study and non-commercial academic use
+   • Educational materials (with attribution)
+   • Open-source derivative projects under CC BY-NC-SA 4.0
+
+4. CONTACT
+   For commercial licensing, permissions, or questions:
+   https://papergoat.beehiiv.com/
+
+────────────────────────────────────────────────────────────────────────
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
