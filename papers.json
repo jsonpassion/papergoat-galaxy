@@ -2695,27 +2695,47 @@
         "Efficient"
       ],
       "cluster": "efficient",
-      "reason": "정보이론 하한에 근접한 최적 벡터 양자화. 3.5-bit 품질 무손실 KV 캐시 압축. ICLR 2026",
+      "reason": "Zandieh/Mirrokni 양자화 삼부작의 완성편. Random rotation + 스칼라 양자화로 MSE/내적 보존 모두 near-optimal distortion. Google Research의 극한 압축 연구 (ICLR 2026)",
       "has_review": false,
       "one_liner": "",
       "key_discoveries": [],
       "review_url": "https://papergoat.beehiiv.com/"
     },
     {
-      "id": "2603.27914",
+      "id": "2502.02617",
       "rank": 138,
-      "alias": "ITQ3_S",
-      "title": "ITQ3_S: High-Fidelity 3-bit LLM Inference via Interleaved Ternary Quantization",
-      "url": "https://arxiv.org/abs/2603.27914",
-      "year": 2026,
+      "alias": "PolarQuant",
+      "title": "PolarQuant: Quantizing KV Caches with Polar Transformation",
+      "url": "https://arxiv.org/abs/2502.02617",
+      "year": 2025,
       "score": 89,
       "categories": [
         "Quantization",
-        "Inference",
+        "KVCache",
         "Efficient"
       ],
       "cluster": "efficient",
-      "reason": "TurboQuant 회전을 가중치 양자화에 적용. 70B 모델을 32GB GPU 1장에서 풀스피드 추론",
+      "reason": "TurboQuant 삼부작의 2단계. Random preconditioning + polar coordinate로 각도를 양자화. 4.2x 압축 + 정규화 파라미터 오버헤드 제거",
+      "has_review": false,
+      "one_liner": "",
+      "key_discoveries": [],
+      "review_url": "https://papergoat.beehiiv.com/"
+    },
+    {
+      "id": "2406.03482",
+      "rank": 139,
+      "alias": "QJL",
+      "title": "QJL: 1-Bit Quantized JL Transform for KV Cache Quantization with Zero Overhead",
+      "url": "https://arxiv.org/abs/2406.03482",
+      "year": 2024,
+      "score": 88,
+      "categories": [
+        "Quantization",
+        "KVCache",
+        "Efficient"
+      ],
+      "cluster": "efficient",
+      "reason": "TurboQuant 삼부작의 시작. Johnson-Lindenstrauss 변환 + sign-bit 양자화로 3-bit KV 캐시. 양자화 상수 저장 오버헤드 zero",
       "has_review": false,
       "one_liner": "",
       "key_discoveries": [],
@@ -2723,7 +2743,7 @@
     },
     {
       "id": "lstm-1997",
-      "rank": 139,
+      "rank": 140,
       "alias": "LSTM",
       "title": "Long Short-Term Memory",
       "url": "https://doi.org/10.1162/neco.1997.9.8.1735",
@@ -2743,7 +2763,7 @@
     },
     {
       "id": "gpt2-2019",
-      "rank": 140,
+      "rank": 141,
       "alias": "GPT-2",
       "title": "Language Models are Unsupervised Multitask Learners",
       "url": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
@@ -2763,7 +2783,7 @@
     },
     {
       "id": "glove-2014",
-      "rank": 141,
+      "rank": 142,
       "alias": "GloVe",
       "title": "GloVe: Global Vectors for Word Representation",
       "url": "https://nlp.stanford.edu/pubs/glove.pdf",
@@ -2782,7 +2802,7 @@
     },
     {
       "id": "s41586-024-07487-w",
-      "rank": 142,
+      "rank": 143,
       "alias": "AlphaFold 3",
       "title": "Accurate structure prediction of biomolecular interactions with AlphaFold 3",
       "url": "https://www.nature.com/articles/s41586-024-07487-w",
@@ -2802,7 +2822,7 @@
     },
     {
       "id": "claude3-2024",
-      "rank": 143,
+      "rank": 144,
       "alias": "Claude 3",
       "title": "The Claude 3 Model Family: Opus, Sonnet, Haiku",
       "url": "https://www.anthropic.com/claude-3-model-card",
@@ -2822,7 +2842,7 @@
     },
     {
       "id": "2402.03300",
-      "rank": 144,
+      "rank": 145,
       "alias": "GRPO",
       "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning",
       "url": "https://arxiv.org/abs/2402.03300",
@@ -2842,7 +2862,7 @@
     },
     {
       "id": "2507.09595",
-      "rank": 145,
+      "rank": 146,
       "alias": "Flux Analysis",
       "title": "Demystifying the Latent Space of Diffusion Transformer Architectures",
       "url": "https://arxiv.org/abs/2507.09595",
@@ -2862,7 +2882,7 @@
     },
     {
       "id": "2307.08691",
-      "rank": 146,
+      "rank": 147,
       "alias": "FlashAttention-2",
       "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
       "url": "https://arxiv.org/abs/2307.08691",
@@ -2882,7 +2902,7 @@
     },
     {
       "id": "2305.16264",
-      "rank": 147,
+      "rank": 148,
       "alias": "Scaling Data-Constrained",
       "title": "Scaling Data-Constrained Language Models",
       "url": "https://arxiv.org/abs/2305.16264",
@@ -2902,7 +2922,7 @@
     },
     {
       "id": "2404.02258",
-      "rank": 148,
+      "rank": 149,
       "alias": "Mixture of Depths",
       "title": "Mixture-of-Depths: Dynamically Allocating Compute in Transformers",
       "url": "https://arxiv.org/abs/2404.02258",
@@ -2922,7 +2942,7 @@
     },
     {
       "id": "2310.01889",
-      "rank": 149,
+      "rank": 150,
       "alias": "Ring Attention",
       "title": "Ring Attention with Blockwise Transformers for Near-Infinite Context",
       "url": "https://arxiv.org/abs/2310.01889",
@@ -2942,7 +2962,7 @@
     },
     {
       "id": "2502.11089",
-      "rank": 150,
+      "rank": 151,
       "alias": "Native Sparse Attention",
       "title": "Native Sparse Attention: Hardware-Aligned Block Sparse Attention",
       "url": "https://arxiv.org/abs/2502.11089",
@@ -3335,6 +3355,296 @@
     {
       "source": "2212.08073",
       "target": "2309.00267",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "1910.10683",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "1906.08237",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "1907.11692",
+      "type": "lineage"
+    },
+    {
+      "source": "1810.04805",
+      "target": "2003.10555",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "gpt2-2019",
+      "type": "lineage"
+    },
+    {
+      "source": "1706.03762",
+      "target": "1910.10683",
+      "type": "lineage"
+    },
+    {
+      "source": "2302.13971",
+      "target": "2412.15115",
+      "type": "lineage"
+    },
+    {
+      "source": "2307.09288",
+      "target": "2407.21783",
+      "type": "lineage"
+    },
+    {
+      "source": "2310.06825",
+      "target": "2401.04088",
+      "type": "lineage"
+    },
+    {
+      "source": "2101.03961",
+      "target": "2401.04088",
+      "type": "lineage"
+    },
+    {
+      "source": "2101.03961",
+      "target": "2404.02258",
+      "type": "lineage"
+    },
+    {
+      "source": "2312.11805",
+      "target": "2403.08295",
+      "type": "lineage"
+    },
+    {
+      "source": "2303.08774",
+      "target": "2410.21276",
+      "type": "lineage"
+    },
+    {
+      "source": "2201.11903",
+      "target": "2412.16720",
+      "type": "lineage"
+    },
+    {
+      "source": "2201.11903",
+      "target": "2408.03314",
+      "type": "lineage"
+    },
+    {
+      "source": "2412.16720",
+      "target": "2501.19393",
+      "type": "lineage"
+    },
+    {
+      "source": "2412.16720",
+      "target": "2502.06807",
+      "type": "lineage"
+    },
+    {
+      "source": "2408.03314",
+      "target": "2501.19393",
+      "type": "lineage"
+    },
+    {
+      "source": "2408.03314",
+      "target": "2412.16720",
+      "type": "lineage"
+    },
+    {
+      "source": "2402.03300",
+      "target": "2501.12948",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.2661",
+      "target": "1812.04948",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.2661",
+      "target": "1703.10593",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.2661",
+      "target": "1611.07004",
+      "type": "lineage"
+    },
+    {
+      "source": "1611.07004",
+      "target": "1703.10593",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2205.11487",
+      "type": "lineage"
+    },
+    {
+      "source": "2006.11239",
+      "target": "2303.01469",
+      "type": "lineage"
+    },
+    {
+      "source": "2011.13456",
+      "target": "2303.01469",
+      "type": "lineage"
+    },
+    {
+      "source": "2112.10752",
+      "target": "2208.12242",
+      "type": "lineage"
+    },
+    {
+      "source": "2112.10752",
+      "target": "2302.05543",
+      "type": "lineage"
+    },
+    {
+      "source": "2112.10752",
+      "target": "2307.01952",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "2102.12092",
+      "type": "lineage"
+    },
+    {
+      "source": "2005.14165",
+      "target": "gpt2-2019",
+      "type": "lineage"
+    },
+    {
+      "source": "1312.6114",
+      "target": "2102.12092",
+      "type": "lineage"
+    },
+    {
+      "source": "2212.09748",
+      "target": "2503.09642",
+      "type": "lineage"
+    },
+    {
+      "source": "2212.09748",
+      "target": "2507.09595",
+      "type": "lineage"
+    },
+    {
+      "source": "2210.02747",
+      "target": "2410.24164",
+      "type": "lineage"
+    },
+    {
+      "source": "2210.02747",
+      "target": "2507.09595",
+      "type": "lineage"
+    },
+    {
+      "source": "2406.03482",
+      "target": "2502.02617",
+      "type": "lineage"
+    },
+    {
+      "source": "2502.02617",
+      "target": "2504.19874",
+      "type": "lineage"
+    },
+    {
+      "source": "2210.17323",
+      "target": "2306.00978",
+      "type": "lineage"
+    },
+    {
+      "source": "2211.17192",
+      "target": "2401.10774",
+      "type": "lineage"
+    },
+    {
+      "source": "2205.14135",
+      "target": "2307.08691",
+      "type": "lineage"
+    },
+    {
+      "source": "2205.14135",
+      "target": "2310.01889",
+      "type": "lineage"
+    },
+    {
+      "source": "2205.14135",
+      "target": "2502.11089",
+      "type": "lineage"
+    },
+    {
+      "source": "2307.08691",
+      "target": "2310.01889",
+      "type": "lineage"
+    },
+    {
+      "source": "2001.08361",
+      "target": "2305.16264",
+      "type": "lineage"
+    },
+    {
+      "source": "2203.15556",
+      "target": "2305.16264",
+      "type": "lineage"
+    },
+    {
+      "source": "2307.15818",
+      "target": "2410.24164",
+      "type": "lineage"
+    },
+    {
+      "source": "2304.08485",
+      "target": "2307.15818",
+      "type": "lineage"
+    },
+    {
+      "source": "2103.00020",
+      "target": "2307.15818",
+      "type": "lineage"
+    },
+    {
+      "source": "s41586-021-03819-2",
+      "target": "s41586-024-07487-w",
+      "type": "lineage"
+    },
+    {
+      "source": "1505.04597",
+      "target": "s41586-021-03819-2",
+      "type": "lineage"
+    },
+    {
+      "source": "1609.03499",
+      "target": "2212.04356",
+      "type": "lineage"
+    },
+    {
+      "source": "2310.06770",
+      "target": "2509.16941",
+      "type": "lineage"
+    },
+    {
+      "source": "2212.08073",
+      "target": "claude3-2024",
+      "type": "lineage"
+    },
+    {
+      "source": "1301.3781",
+      "target": "glove-2014",
+      "type": "lineage"
+    },
+    {
+      "source": "lstm-1997",
+      "target": "1406.1078",
+      "type": "lineage"
+    },
+    {
+      "source": "1406.1078",
+      "target": "1409.3215",
       "type": "lineage"
     }
   ],
