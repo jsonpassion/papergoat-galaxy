@@ -113,57 +113,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .stats{position:fixed;bottom:16px;right:16px;font-size:10px;color:var(--muted);z-index:10}
 .hint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);z-index:10;opacity:.5;transition:opacity 1s}
 
-/* ── Mobile sheet + toggle ── */
-.mob-sheet{display:contents} /* desktop: invisible wrapper */
-.mob-toggle{display:none;position:fixed;top:56px;left:12px;z-index:12;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:12px;color:var(--accent)}
+/* ── Mobile ── */
+.mob-sheet{display:contents}
+.mob-toggle{display:none}
+.mob-bar{display:none}
 
-/* ── Mobile responsive ── */
 @media(max-width:768px){
-  /* Header: logo + search + theme in one row */
   .hdr{padding:8px 12px;gap:6px}
   .logo{font-size:13px;flex-shrink:0}
   .search{width:0;flex:1;min-width:80px;font-size:16px;padding:7px 10px;border-radius:10px;height:34px}
   .theme-btn{padding:0;font-size:15px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-  /* Filter toggle: bottom-right FAB, icon only */
-  .mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;bottom:16px;right:16px;top:auto;left:auto;width:44px;height:44px;border-radius:50%;font-size:18px;padding:0;z-index:16;line-height:1}
+  /* Hide desktop elements */
+  .mob-toggle{display:none !important}
+  .info{display:none !important}
+  .tip{display:none !important}
+  .hint{display:none}
 
-  /* Sheet container: holds both panels, no JS positioning needed */
-  .mob-sheet{
-    display:flex !important;flex-direction:column-reverse;gap:6px;
-    position:fixed;bottom:68px;left:8px;right:8px;z-index:15;
-    transition:opacity .2s,transform .2s;max-height:70vh;overflow-y:auto;
+  /* Top filter bar: below header */
+  .mob-bar{
+    display:flex;position:fixed;top:48px;left:8px;right:8px;z-index:13;
+    gap:4px;padding:4px;border-radius:10px;
   }
-  .mob-sheet.collapsed{opacity:0;pointer-events:none;transform:translateY(10px)}
+  .mob-bar-btn{
+    flex:1;padding:6px 0;border:none;border-radius:8px;font-size:11px;font-weight:600;
+    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
+  }
+  .mob-bar-btn.active{color:var(--accent);background:rgba(91,155,245,.1)}
+  .mob-bar-btn:last-child{flex:0;padding:6px 10px;font-size:10px}
 
-  /* Inside sheet: panels flow naturally, no fixed position */
+  /* Panels: appear below bar */
+  .mob-sheet{display:block !important;position:fixed;top:86px;left:8px;right:8px;z-index:12;pointer-events:none}
+  .mob-sheet>*{pointer-events:auto}
+
   .mob-sheet .legend,.mob-sheet .tl{
     position:static !important;width:auto !important;top:auto !important;bottom:auto !important;
-    border-radius:12px !important;opacity:1 !important;
+    border-radius:12px !important;opacity:1 !important;margin-bottom:6px;
+    display:none;
   }
-  .info{display:none !important}
+  .mob-sheet .legend.mob-show{display:grid !important;grid-template-columns:1fr 1fr;gap:2px 4px}
+  .mob-sheet .tl.mob-show{display:flex !important;flex-direction:column;flex-wrap:nowrap;gap:10px}
 
-  .legend{
-    padding:10px 12px !important;
-    display:grid !important;grid-template-columns:1fr 1fr !important;gap:2px 4px !important;
-  }
+  .legend{padding:10px 12px !important}
   .leg-item{padding:5px 8px;font-size:11px;gap:5px;border-radius:6px}
   .leg-chk{width:13px;height:13px;font-size:9px;border-radius:4px}
   .leg-dot{width:8px;height:8px}
   .leg-count{font-size:9px;margin-left:auto}
   .leg-all{grid-column:1/-1;font-size:10px;padding:5px;border-top:1px solid var(--glass-border);margin-top:2px;text-align:center}
 
-  .tl{
-    padding:10px 14px !important;gap:10px !important;
-    flex-direction:column !important;flex-wrap:nowrap !important;
-    border-radius:12px !important;
-  }
+  .tl{padding:10px 14px !important;border-radius:12px !important}
   .tl .filter-col{flex-direction:row !important;width:100% !important;align-items:center;gap:8px}
   .tl .filter-label{font-size:11px;width:40px;flex-shrink:0;font-weight:600}
   .tl .filter-val{font-size:11px;min-width:36px;text-align:right}
-  .tl .range-wrap-v{
-    position:relative !important;height:32px !important;width:auto !important;flex:1;overflow:visible !important;
-  }
+  .tl .range-wrap-v{position:relative !important;height:32px !important;width:auto !important;flex:1;overflow:visible !important}
   .tl .range-wrap-v .range-track-v,.tl .range-wrap-v .range-fill-v{display:none !important}
   .tl .range-wrap-v input[type=range]{
     position:absolute !important;writing-mode:horizontal-tb !important;direction:ltr !important;
@@ -174,18 +176,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .tl .range-wrap-v input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--glass-border);border-radius:2px}
   .tl .range-wrap-v input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,.6);margin-top:-10px;pointer-events:auto}
 
-  /* Info: hidden on mobile */
-  .info{display:none !important}
-
-  .tip{display:none !important}
-
-  /* Detail panel: full screen */
-  .pnl{width:100vw;max-width:100vw;padding:16px 14px;border-radius:0}
+  .pnl{width:100vw;max-width:100vw;padding:16px 14px;border-radius:16px 16px 0 0;
+    top:auto !important;bottom:0 !important;right:0;
+    max-height:75vh;overflow-y:auto;
+    transform:translateY(100%);
+  }
+  .pnl.open{transform:translateY(0)}
   .pnl .pa{font-size:18px}
   .pnl .pt{font-size:12px}
 
   .node-label{font-size:9px;padding:1px 5px}
-  .hint{display:none}
   .stats{font-size:9px;bottom:6px;left:12px;right:auto}
 }
 </style>
@@ -199,7 +199,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   <input class="search glass" placeholder="Search papers..." id="search">
   <button class="theme-btn glass" id="theme-btn" title="Toggle theme">🌙</button>
 </div>
-<button class="mob-toggle glass" id="mob-toggle">☰</button>
+<div class="mob-bar glass" id="mob-bar">
+  <button class="mob-bar-btn" id="mob-btn-cat">Category</button>
+  <button class="mob-bar-btn" id="mob-btn-range">Year/Score</button>
+  <button class="mob-bar-btn" id="mob-btn-reset">Reset</button>
+</div>
 <div class="mob-sheet" id="mob-sheet">
 <div class="legend glass" id="legend"></div>
 <div class="tip glass" id="tip"><div class="tip-rank"></div><div class="tip-alias"></div><div class="tip-title"></div><div class="tip-reason"></div><div class="tip-cats"></div><div class="tip-yr"></div></div>
@@ -917,17 +921,44 @@ function bindEvents(){
   document.getElementById('pnl-x').addEventListener('click',()=>{selected.clear();closePanel()});
 
   // Mobile: toggle filter panels
-  const mobToggle=document.getElementById('mob-toggle');
-  let mobOpen=false;
-  const mobSheet=document.getElementById('mob-sheet');
-  mobToggle.addEventListener('click',()=>{
-    mobOpen=!mobOpen;
-    mobSheet.classList.toggle('collapsed',!mobOpen);
-    mobToggle.textContent=mobOpen?'✕':'☰';
-  });
+  // Mobile: top bar toggles
   if(window.innerWidth<=768){
-    mobSheet.classList.add('collapsed');
-    mobToggle.textContent='☰';
+    const leg=document.getElementById('legend');
+    const tl=document.getElementById('tl-container');
+    const btnCat=document.getElementById('mob-btn-cat');
+    const btnRange=document.getElementById('mob-btn-range');
+    const btnReset=document.getElementById('mob-btn-reset');
+
+    function mobTogglePanel(panel,btn){
+      const isOpen=panel.classList.contains('mob-show');
+      // Close all first
+      leg.classList.remove('mob-show');
+      tl.classList.remove('mob-show');
+      btnCat.classList.remove('active');
+      btnRange.classList.remove('active');
+      // Toggle target
+      if(!isOpen){
+        panel.classList.add('mob-show');
+        btn.classList.add('active');
+      }
+    }
+    btnCat.addEventListener('click',()=>mobTogglePanel(leg,btnCat));
+    btnRange.addEventListener('click',()=>mobTogglePanel(tl,btnRange));
+    btnReset.addEventListener('click',()=>{
+      // Reset all filters
+      activeClusters.clear();refreshLegendUI();
+      const tlMinEl=document.getElementById('tl-min');
+      const tlMaxEl=document.getElementById('tl-max');
+      const scMinEl=document.getElementById('sc-min');
+      const scMaxEl=document.getElementById('sc-max');
+      tlMinEl.value=tlMinEl.min;tlMaxEl.value=tlMaxEl.max;
+      scMinEl.value=scMinEl.min;scMaxEl.value=scMaxEl.max;
+      query='';document.getElementById('search').value='';
+      updateVis();
+      // Close panels
+      leg.classList.remove('mob-show');tl.classList.remove('mob-show');
+      btnCat.classList.remove('active');btnRange.classList.remove('active');
+    });
   }
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
