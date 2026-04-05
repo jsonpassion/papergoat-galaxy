@@ -59,10 +59,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 .logo{font-size:17px;font-weight:700;letter-spacing:-.4px}.logo span{color:var(--accent)}
 .search{padding:7px 14px;color:var(--text);font-size:13px;width:200px;outline:none;border-radius:12px}
 .search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,155,245,.15)}.search::placeholder{color:var(--muted)}
-.theme-btn{border-radius:12px;padding:6px 12px;cursor:pointer;font-size:14px;color:var(--text)}
-.theme-btn:hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,155,245,.15)}
-.lang-btn{border-radius:12px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.5px;line-height:1}
-.lang-btn:hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,155,245,.15)}
+.theme-btn,.lang-btn{width:32px;height:32px;min-width:32px;padding:0;border-radius:10px;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;box-sizing:border-box}
+.theme-btn{font-size:14px}
+.lang-btn{font-size:11px;font-weight:700;letter-spacing:.5px}
+.theme-btn:hover,.lang-btn:hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,155,245,.15)}
 
 .legend{position:fixed;top:56px;left:20px;z-index:10;display:flex;flex-direction:column;gap:1px;border-radius:16px;padding:8px 6px;width:180px}
 .leg-item{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;cursor:pointer;font-size:12px;color:var(--muted);transition:all .15s;user-select:none}
@@ -175,8 +175,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .hdr{padding:8px 12px;gap:6px;box-sizing:border-box}
   .logo{font-size:13px;flex-shrink:0}
   .search{width:auto;flex:1 1 0;min-width:0;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
-  .theme-btn{padding:0;font-size:15px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .lang-btn{padding:0;font-size:10px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;letter-spacing:.5px}
+  .theme-btn,.lang-btn{padding:0;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-sizing:border-box}
+  .theme-btn{font-size:15px}
+  .lang-btn{font-size:10px;font-weight:700;letter-spacing:.5px}
 
   /* Hide desktop elements */
   .mob-toggle{display:none !important}
@@ -215,8 +216,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .hdr{padding:8px 12px;gap:6px;box-sizing:border-box}
   .logo{font-size:13px;flex-shrink:0}
   .search{width:auto;flex:1 1 0;min-width:0;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
-  .theme-btn{padding:0;font-size:15px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .lang-btn{padding:0;font-size:10px;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;letter-spacing:.5px}
+  .theme-btn,.lang-btn{padding:0;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-sizing:border-box}
+  .theme-btn{font-size:15px}
+  .lang-btn{font-size:10px;font-weight:700;letter-spacing:.5px}
 
   /* Hide desktop elements */
   .mob-toggle{display:none !important}
@@ -659,20 +661,35 @@ function buildEdges(){
     const a=meshMap[e.source],b=meshMap[e.target];
     if(!a||!b) return;
     const isLineage=e.type==='lineage';
-    // Start/end at node surface (not inside, not far away)
-    const dir=new THREE.Vector3().subVectors(b.position,a.position).normalize();
-    const start=new THREE.Vector3().copy(a.position).addScaledVector(dir, a._baseSize||0.08);
-    const end=new THREE.Vector3().copy(b.position).addScaledVector(dir, -(b._baseSize||0.08));
-    // Curved path following sphere surface
-    const mid=new THREE.Vector3().addVectors(start,end).multiplyScalar(0.5);
-    mid.normalize().multiplyScalar(RADIUS*1.08);
-    // Smoother curvature: CatmullRom with extra control points between start/mid/end
-    const q1=new THREE.Vector3().addVectors(start,mid).multiplyScalar(0.5).normalize().multiplyScalar(RADIUS*1.04);
-    const q2=new THREE.Vector3().addVectors(mid,end).multiplyScalar(0.5).normalize().multiplyScalar(RADIUS*1.04);
-    const curve=new THREE.CatmullRomCurve3([start,q1,mid,q2,end],false,'catmullrom',0.5);
+    // Great-circle arc: slerp between node surface points on the sphere.
+    // This guarantees a smooth, uniform-radius curve hugging the sphere surface.
+    const sA=a.position.clone().normalize();
+    const sB=b.position.clone().normalize();
+    const arcAngle=Math.acos(Math.max(-1,Math.min(1,sA.dot(sB))));
+    const sinA=Math.sin(arcAngle);
+    const nodeAngleA=(a._baseSize||0.08)/RADIUS;   // angular radius of node A
+    const nodeAngleB=(b._baseSize||0.08)/RADIUS;
+    const SEG=40;  // sample count for the curve
+    const pts=[];
+    for(let i=0;i<=SEG;i++){
+      const t=nodeAngleA/arcAngle + (i/SEG)*(1-(nodeAngleA+nodeAngleB)/arcAngle);
+      let v;
+      if(sinA<1e-6){
+        v=sA.clone().lerp(sB,t);
+      } else {
+        const w1=Math.sin((1-t)*arcAngle)/sinA;
+        const w2=Math.sin(t*arcAngle)/sinA;
+        v=sA.clone().multiplyScalar(w1).add(sB.clone().multiplyScalar(w2));
+      }
+      // Slight outward bulge peaking at the midpoint (sin profile) so edges don't clip the sphere
+      const bulge=1+0.025*Math.sin(Math.PI*(i/SEG));
+      v.multiplyScalar(RADIUS*bulge);
+      pts.push(v);
+    }
+    const curve=new THREE.CatmullRomCurve3(pts,false,'centripetal',0.5);
     const tubeR=isLineage?0.012:0.005;
     // High-density tessellation for smooth appearance at any zoom level
-    const geo=new THREE.TubeGeometry(curve,64,tubeR,8,false);
+    const geo=new THREE.TubeGeometry(curve,128,tubeR,12,false);
     const mat=new THREE.MeshBasicMaterial({
       color:isLineage?0x7799cc:0x556688,
       transparent:true, opacity:isLineage?0.3:0.08,
@@ -680,8 +697,11 @@ function buildEdges(){
     const tube=new THREE.Mesh(geo,mat);
     tube.userData=e;
     tube._baseOpacity=isLineage?0.3:0.08;
+    tube.renderOrder=-1;          // draw edges before nodes
+    mat.depthWrite=false;          // don't occlude nodes via depth
     edgeGroup.add(tube);
   });
+  edgeGroup.renderOrder=-1;
 }
 
 function animate(){
@@ -953,6 +973,37 @@ function doRaycast(e){
   return null;
 }
 
+
+// ── i18n globals (top-level so openPanel can access tr()) ──
+var currentLang=window.__PG_LANG__||'ko';
+function tr(key){
+  var tbl=(window.__PG_I18N__||{})[currentLang]||{};
+  return tbl[key]!==undefined?tbl[key]:key;
+}
+function applyI18n(){
+  document.documentElement.lang=currentLang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent=tr(el.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function(el){
+    el.setAttribute('title',tr(el.dataset.i18nTitle));
+  });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
+    el.setAttribute('aria-label',tr(el.dataset.i18nAriaLabel));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    el.setAttribute('placeholder',tr(el.dataset.i18nPlaceholder));
+  });
+  var pnl=document.getElementById('pnl');
+  if(pnl&&pnl.classList.contains('open')){
+    var cur=null;
+    if(typeof selected!=='undefined'&&selected&&selected.size>0){
+      var it=selected.values();var v;while(!(v=it.next()).done)cur=v.value;
+    }
+    if(cur&&typeof openPanel==='function')openPanel(cur);
+  }
+}
+
 function bindEvents(){
   // Prevent browser zoom/scroll on canvas
   renderer.domElement.addEventListener('touchstart',e=>{e.preventDefault()},{passive:false});
@@ -1173,38 +1224,7 @@ function bindEvents(){
   })();
 
   // Theme toggle
-  // ── i18n: tr() helper + applyI18n() + lang toggle ──
-  var currentLang=window.__PG_LANG__||'ko';
-  function tr(key){
-    var tbl=(window.__PG_I18N__||{})[currentLang]||{};
-    return tbl[key]!==undefined?tbl[key]:key;
-  }
-  function applyI18n(){
-    document.documentElement.lang=currentLang;
-    // textContent
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      el.textContent=tr(el.dataset.i18n);
-    });
-    // attributes
-    document.querySelectorAll('[data-i18n-title]').forEach(function(el){
-      el.setAttribute('title',tr(el.dataset.i18nTitle));
-    });
-    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
-      el.setAttribute('aria-label',tr(el.dataset.i18nAriaLabel));
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
-      el.setAttribute('placeholder',tr(el.dataset.i18nPlaceholder));
-    });
-    // If the detail panel is open, re-render its inner HTML with new strings
-    // (3D scene is untouched — only DOM textContent/innerHTML is swapped)
-    var pnl=document.getElementById('pnl');
-    if(pnl&&pnl.classList.contains('open')){
-      // Find currently open node: prefer last-added to selected set
-      var cur=null;
-      if(selected&&selected.size>0){var it=selected.values();var v;while(!(v=it.next()).done)cur=v.value;}
-      if(cur&&typeof openPanel==='function')openPanel(cur);
-    }
-  }
+  // ── i18n: bind lang-btn (helpers defined at top level) ──
   document.getElementById('lang-btn').addEventListener('click',function(){
     currentLang=(currentLang==='ko')?'en':'ko';
     try{localStorage.setItem('pg-lang',currentLang);}catch(e){}
