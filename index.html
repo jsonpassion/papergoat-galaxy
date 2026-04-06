@@ -206,47 +206,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
   .mob-reset-btn:active{color:var(--accent)}
   .mob-bar{right:80px;align-items:center;min-height:36px}
 
-/* ── Mobile ── */
-.mob-sheet{display:contents}
-.mob-toggle{display:none}
-.mob-bar{display:none}
-.mob-reset-btn{display:none}
-
-@media(max-width:1024px){
-  .hdr{padding:8px 12px;gap:6px;box-sizing:border-box}
-  .logo{font-size:13px;flex-shrink:0}
-  .search{width:auto;flex:1 1 0;min-width:0;font-size:16px;padding:7px 10px;border-radius:10px;height:34px;text-align:left}
-  .theme-btn,.lang-btn{padding:0;width:34px;height:34px;min-width:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-sizing:border-box}
-  .theme-btn{font-size:15px}
-  .lang-btn{font-size:10px;font-weight:700;letter-spacing:.5px}
-
-  /* Hide desktop elements */
-  .mob-toggle{display:none !important}
-  .info{display:none !important}
-  .tip{display:none !important}
-  .hint{display:none}
-
-  /* Top filter bar: below header */
-  .mob-bar{
-    display:flex;position:fixed;top:48px;left:8px;right:8px;z-index:13;
-    gap:4px;padding:4px;border-radius:10px;
-  }
-  .mob-bar-btn{
-    flex:1;padding:6px 0;border:none;border-radius:8px;font-size:11px;font-weight:600;
-    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
-  }
-  .mob-bar-btn.active{color:var(--accent);background:rgba(91,155,245,.1)}
-  .mob-reset-btn{
-    display:flex;align-items:center;justify-content:center;
-    position:fixed;top:48px;right:8px;z-index:14;
-    padding:0 12px;border:none;border-radius:10px;
-    font-size:11px;font-weight:600;line-height:1;
-    cursor:pointer;color:var(--muted);background:transparent;transition:all .15s;
-    height:36px;box-sizing:border-box;
-  }
-  .mob-reset-btn:active{color:var(--accent)}
-  .mob-bar{right:80px;align-items:center;min-height:36px}
-
   /* Panels: appear below bar */
   .mob-sheet{display:block !important;position:fixed;top:86px;left:8px;right:8px;z-index:12;pointer-events:none}
   .mob-sheet>*{pointer-events:auto}
@@ -326,7 +285,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
     </div>
   </div>
   <div class="filter-col">
-    <span class="filter-label">Score</span>
+    <span class="filter-label">Score <button class="score-info-btn" id="score-info-btn" aria-label="Scoring rubric" title="점수 산정 기준" data-i18n-title="score.tooltip" data-i18n-aria-label="score.tooltip">i</button></span>
     <span class="filter-val" id="sc-display">All</span>
     <div class="range-wrap-v">
       <div class="range-track-v"></div>
@@ -372,7 +331,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sy
 </div>
 <div class="stats" id="stats"></div>
 <div class="hint" id="hint">Drag to rotate · Scroll to zoom · Click a node · Shift+Click multi-select</div>
-<div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);opacity:.35;z-index:10">© PaperGoat Galaxy 2026</div>
+<div style="position:fixed;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);opacity:.35;z-index:10">© PaperGoat Galaxy 2026 · <a href="https://www.linkedin.com/in/json-lee" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px dotted currentColor">Jason Lee</a></div>
 
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
@@ -1229,7 +1188,6 @@ function bindEvents(){
     window.addEventListener('resize',()=>{if(pop.classList.contains('open'))positionPopover()});
   })();
 
-  // Theme toggle
   // ── i18n: bind lang-btn (helpers defined at top level) ──
   document.getElementById('lang-btn').addEventListener('click',function(){
     currentLang=(currentLang==='ko')?'en':'ko';
